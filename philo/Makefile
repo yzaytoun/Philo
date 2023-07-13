@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 17:16:01 by yzaytoun          #+#    #+#              #
-#    Updated: 2023/07/13 19:11:07 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/07/13 20:20:33 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,15 +62,15 @@ OBJDIR = obj
 PHILO_OBJ := $(SRC:%.c=$(OBJDIR)/%.o)
 
 $(OBJDIR)/%.o:%.c
+	@echo "\n"
 	@echo "$(LIGHTPURPLE)Creating Object Files"
 	@mkdir -p $(@D)
 	$(COMPILE.c) -o $@ $<
 	@echo "\n"
 
-all: $(BANNER) $(NAME)
+all: $(NAME)
 
-$(NAME): $(PHILO_OBJ)
-	@echo "\n\n"
+$(NAME): $(BANNER) $(PHILO_OBJ)
 	@echo "$(WHITE)Compiling" $@
 	@$(CC) $(PHILO_OBJ) -o $@
 	@chmod +x $@
@@ -78,13 +78,13 @@ $(NAME): $(PHILO_OBJ)
 
 fclean: clean
 	@$(RM) $(NAME)
-	@echo "$(BLUE)\n***************** 	DONE Cleaning 	********************\n\n"
+	@echo "$(BLUE)\n***************** DONE Cleaning 	********************\n\n"
 
 clean:
 	@echo "\n\n"
-	@echo "$(YELLOW)Cleaning Object files\n"
+	@echo "$(YELLOW)Cleaning Object files"
 	@$(RM) $(PHILO_OBJ) $(OBJDIR)
-	@echo "Cleaning PHILO\n"
+	@echo "Cleaning PHILO"
 
 re: fclean all
 
