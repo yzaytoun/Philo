@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mutex.c                                            :+:      :+:    :+:   */
+/*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/13 20:51:51 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/14 18:54:56 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/07/14 16:33:36 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/07/14 19:47:13 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-//SECTION - Mutex
-//ANCHOR - Unlock mutex
-void	ft_try_mutexfunc(int status)
+//SECTION - Routine Function
+//ANCHOR - Run
+void	ft_run(t_process *process)
 {
-	if (status)
-	{
-		ft_perror("pthread_mutex_unlock");
-		pthread_exit(NULL);
-	}
+	ft_threadcreate();
+	ft_threadjoin();
+}
+
+//ANCHOR - Routine
+void	ft_routine(t_process *process)
+{
+	
 }
 
 //!SECTION

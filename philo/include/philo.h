@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 17:19:37 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/13 20:51:17 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/14 19:46:34 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,32 @@ typedef struct s_status
 	int	wait;
 }				t_status;
 
-typedef struct s_mutex
-{
-	pthread	thread;
-}				t_mutex;
-
 typedef struct s_philo
 {
-	t_status	update_status;
-	t_mutex		mutex;
+	int			id;
+	t_status	status;
 }				t_philo;
 
+typedef struct s_process
+{
+	pthread_t		thread;
+	pthread_mutex_t	mutex;
+	t_philo			*philo;
+}				t_process;
 
 /*Functions*/
+//STUB - Basic Functions
+void		ft_putstr_fd(char *string, int fd);
 
+//STUB - Printer
+void		ft_perror(char *string);
+
+//STUB - Philo
+t_process	*ft_createprocess(int philo_num);
+void		ft_freeall(t_process **process);
+
+
+//STUB - Routine
+void		ft_routine(t_process *process);
+void		ft_run(t_process *process);
 #endif		/*End Philo.h*/

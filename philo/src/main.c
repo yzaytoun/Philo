@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 18:43:09 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/13 20:49:51 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/14 19:16:36 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,17 @@
 
 int	main(int argc, char **argv[])
 {
+	t_process		*process;
+
 	if (argc <= 5)
 	{
-		/*create philos*/
-		/**/
+		process = ft_createprocess(argc[1]);
+		process->thread = /*create thread*/
 		/*init mutex*/
-		/*timer function*/
-		/*free*/
+		ft_routine(prcoess);
+		ft_freeall(&process);
 	}
 	else
-	{
-		printf("Worng argument number\n");
-		return (EXIT_FAILURE);
-	}
+		ft_perror("Wrong Number of Arguments, 4 minimum");
 	return (EXIT_SUCCESS);
 }

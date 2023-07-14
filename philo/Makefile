@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 17:16:01 by yzaytoun          #+#    #+#              #
-#    Updated: 2023/07/13 20:20:33 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/07/14 19:20:16 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,12 +50,12 @@ endif
 # --------------------- Definitions ------------------------------------
 CC = gcc
 INC = include
-CFLAGS = -Wall -Wextra -Werror -I $(INC) -g3
+CFLAGS = -Wall -Wextra -Werror -I $(INC)
 RM = rm -fr
 SANITIAZE = -fsanitize=address -g3
-
+PTHREAD = -lpthread
 # ------------------------ philo ------------------------------
-SRC = main.c
+SRC = main.c basicfunc.c philo.c printer.c mutex.c routine.c timer.c
 
 OBJDIR = obj
 
@@ -72,7 +72,7 @@ all: $(NAME)
 
 $(NAME): $(BANNER) $(PHILO_OBJ)
 	@echo "$(WHITE)Compiling" $@
-	@$(CC) $(PHILO_OBJ) -o $@
+	@$(CC) $(PHILO_OBJ) -o $@ $(PTHREAD)
 	@chmod +x $@
 	@echo "$(PURPLE)************ 	DONE	 ****************\n"
 
