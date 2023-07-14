@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 17:19:37 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/14 19:46:34 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/14 19:52:56 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,22 @@ typedef struct s_philo
 	t_status	status;
 }				t_philo;
 
+typedef struct s_params
+{
+	int		philo_num;
+	int		time_to_die;
+	int		time_to_eat;
+	int		time_to_sleep;
+	int		repetition_num;
+}				t_params;
+
+
 typedef struct s_process
 {
 	pthread_t		thread;
 	pthread_mutex_t	mutex;
 	t_philo			*philo;
+	t_params		params;
 }				t_process;
 
 /*Functions*/

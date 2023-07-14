@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 16:48:34 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/14 16:52:34 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/14 19:50:07 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,7 @@ void	ft_putstr_fd(char *s, int fd)
 		s++;
 	}
 }
+
+//TODO - ATOI
 
 //!SECTION
