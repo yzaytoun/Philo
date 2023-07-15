@@ -14,7 +14,7 @@
 
 //SECTION - Mutex
 //ANCHOR - Unlock mutex
-void	ft_try_mutexfunc(int status)
+void	ft_check(int status)
 {
 	if (status)
 	{

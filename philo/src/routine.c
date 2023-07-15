@@ -13,17 +13,25 @@
 #include "philo.h"
 
 //SECTION - Routine Function
-//ANCHOR - Run
-void	ft_run(t_process *process)
+//ANCHOR - Create Threads
+void	ft_createthread(t_philo *philo)
 {
-	ft_threadcreate();
-	ft_threadjoin();
+	ft_check(pthread_create(&(philo->thread), NULL, ft_routine, &(philo->status)));
 }
 
 //ANCHOR - Routine
 void	ft_routine(t_process *process)
 {
 	
+}
+
+//ANCHOR - Run
+void	ft_run(t_process *process)
+{
+	if (!process)
+		return ;
+	ft_check(pthread_mutex_init(&process->mutex, NULL));
+	ft_philo_apply(process->philo, ft_createthread, process->params.philo_num);
 }
 
 //!SECTION

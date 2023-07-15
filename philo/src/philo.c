@@ -27,14 +27,17 @@ static t_philo	*ft_createphilo(size_t size)
 }
 
 //ANCHOR - Create Process
-t_process	*ft_createprocess(int philo_num)
+t_process	*ft_createprocess(t_params params)
 {
 	t_process	*process;
 
+	if (params.philo_num <= 0)
+		return (NULL);
 	process = malloc(sizeof(t_process));
 	if (!process)
 		ft_perror("No process");
-	process->philo = ft_createphilo(philo_num);
+	process->params = params;
+	process->philo = ft_createphilo(params.philo_num);
 	if (process->philo == NULL)
 		ft_perror("No philosophers");
 	return (process);

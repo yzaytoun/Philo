@@ -35,6 +35,7 @@ typedef struct s_philo
 {
 	int			id;
 	t_status	status;
+	pthread_t	thread;
 }				t_philo;
 
 typedef struct s_params
@@ -49,7 +50,6 @@ typedef struct s_params
 
 typedef struct s_process
 {
-	pthread_t		thread;
 	pthread_mutex_t	mutex;
 	t_philo			*philo;
 	t_params		params;
@@ -58,14 +58,19 @@ typedef struct s_process
 /*Functions*/
 //STUB - Basic Functions
 void		ft_putstr_fd(char *string, int fd);
+long		ft_atoi(const char *str);
+t_params	ft_getarguments(int argc, char *argv[]);
+void		ft_philo_apply(t_philo *philo, void (*f)(t_philo *), int philo_num)
 
 //STUB - Printer
 void		ft_perror(char *string);
 
 //STUB - Philo
-t_process	*ft_createprocess(int philo_num);
+t_process	*ft_createprocess(t_params params);
 void		ft_freeall(t_process **process);
 
+//STUB - Mutex
+void		ft_check(int status);
 
 //STUB - Routine
 void		ft_routine(t_process *process);

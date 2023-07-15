@@ -14,14 +14,14 @@
 
 int	main(int argc, char **argv[])
 {
-	t_process		*process;
+	t_process	*process;
+	t_params	params;
 
-	if (argc <= 5)
+	if (argc <= 6)
 	{
-		process = ft_createprocess(argc[1]);
-		process->thread = /*create thread*/
-		/*init mutex*/
-		ft_routine(prcoess);
+		params = ft_getarguments(argc, argv);
+		process = ft_createprocess(params);
+		ft_run(process);
 		ft_freeall(&process);
 	}
 	else
