@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 16:48:34 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/14 19:50:07 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/17 19:04:49 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,32 +51,58 @@ long	ft_atoi(const char *str)
 	return (result * sign);
 }
 
+//ANCHOR - Is digit string
+static int	ft_isstrdigit(const char *str)
+{
+	int	i;
+
+	if (!str)
+		return (FALSE);
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (!(str[i] >= '0' && str[i] <= '9'))
+			return (FALSE);
+		++i;
+	}
+	return (TRUE);
+}
+
 //ANCHOR - Get arguments
+static int	ft_validatergument(int argc, char *argv[])
+{
+	int	count;
+	int	input;
+
+	if (!argc || !argv)
+		return (FALSE);
+	count = 1;
+	while (count < argc)
+	{
+		input = ft_atoi(argv[count]);
+		if (ft_isstrdigit(argv[count]) == FALSE)
+			return (FALSE);
+		else if (input > INT_MAX || input < INT_MIN || input < 0)
+			return (FALSE);
+		count++;
+	}
+	return (TRUE);
+}
+
 t_params	ft_getarguments(int argc, char *argv[])
 {
 	t_params	params;
-	
-	params.philo_num = ft_atoi(argv[1]);	
-	params.time_to_die = ft_atoi(argv[2]);	
-	params.time_to_eat = ft_atoi(argv[3]);	
-	params.time_to_sleep = ft_atoi(argv[4]);	
+
+	if (ft_validatergument(argc, argv) == FALSE)
+		ft_perror("Wrong input");
+	params.philo_num = ft_atoi(argv[1]);
+	params.time_to_die = ft_atoi(argv[2]);
+	params.time_to_eat = ft_atoi(argv[3]);
+	params.time_to_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
 		params.repetition_num = ft_atoi(argv[5]);
 	return (params);
 }
 
-//ANCHOR - Philo apply
-void	ft_philo_apply(t_philo *philo, void (*f)(t_philo *), int philo_num)
-{
-	int	count;
-
-	count = 0;
-	while (count < philo_num)
-	{
-		(*f)(&(philo[count]));
-		++count;
-	}
-	
-}
 
 //!SECTION

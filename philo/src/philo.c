@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 16:56:07 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/14 17:15:16 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/17 18:57:17 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 //ANCHOR - Create Philos
 static t_philo	*ft_createphilo(size_t size)
 {
-	t_philo	philo;
+	t_philo	*philo;
 
 	if (!size)
 		return (NULL);
@@ -46,9 +46,22 @@ t_process	*ft_createprocess(t_params params)
 //ANCHOR - Free All
 void	ft_freeall(t_process **process)
 {
-	pthread_mutex_destroy(&(*process)->mutex);
+	//ft_check(pthread_mutex_destroy(&(*process)->mutex));
 	free((*process)->philo);
 	free((*process));
+}
+
+//ANCHOR - Philo apply
+void	ft_philo_apply(t_philo *philo, void (*f)(t_philo *), int philo_num)
+{
+	int	count;
+
+	count = 0;
+	while (count < philo_num)
+	{
+		(*f)(&(philo[count]));
+		++count;
+	}
 }
 
 //!SECTION

@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 17:16:01 by yzaytoun          #+#    #+#              #
-#    Updated: 2023/07/14 19:20:16 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/07/17 18:55:12 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,10 +50,10 @@ endif
 # --------------------- Definitions ------------------------------------
 CC = gcc
 INC = include
-CFLAGS = -Wall -Wextra -Werror -I $(INC)
-RM = rm -fr
+CFLAGS = -Wall -Wextra -Werror -I $(INC) -g
 SANITIAZE = -fsanitize=address -g3
 PTHREAD = -lpthread
+RM = rm -fr
 # ------------------------ philo ------------------------------
 SRC = main.c basicfunc.c philo.c printer.c mutex.c routine.c timer.c
 
@@ -62,23 +62,21 @@ OBJDIR = obj
 PHILO_OBJ := $(SRC:%.c=$(OBJDIR)/%.o)
 
 $(OBJDIR)/%.o:%.c
-	@echo "\n"
-	@echo "$(LIGHTPURPLE)Creating Object Files"
 	@mkdir -p $(@D)
 	$(COMPILE.c) -o $@ $<
-	@echo "\n"
 
 all: $(NAME)
 
 $(NAME): $(BANNER) $(PHILO_OBJ)
+	@echo "$(LIGHTPURPLE)Creating Object Files"
+	@$(CC) $(PHILO_OBJ) -o $@ $(PTHREAD) $(SANITIAZE)
 	@echo "$(WHITE)Compiling" $@
-	@$(CC) $(PHILO_OBJ) -o $@ $(PTHREAD)
 	@chmod +x $@
 	@echo "$(PURPLE)************ 	DONE	 ****************\n"
 
 fclean: clean
 	@$(RM) $(NAME)
-	@echo "$(BLUE)\n***************** DONE Cleaning 	********************\n\n"
+	@echo "$(BLUE)\n***************** DONE Cleaning ********************\n\n"
 
 clean:
 	@echo "\n\n"

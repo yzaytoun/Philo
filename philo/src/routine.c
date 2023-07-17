@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 16:33:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/14 19:47:13 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/17 17:57:45 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,15 @@
 //ANCHOR - Create Threads
 void	ft_createthread(t_philo *philo)
 {
-	ft_check(pthread_create(&(philo->thread), NULL, ft_routine, &(philo->status)));
+	ft_check(pthread_create(&(philo->thread), NULL,
+			(void *)ft_routine, &(philo->status)));
 }
 
 //ANCHOR - Routine
 void	ft_routine(t_process *process)
 {
-	
+	(void)process;
+	printf("Routine Function");
 }
 
 //ANCHOR - Run
