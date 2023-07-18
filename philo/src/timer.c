@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:51:35 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/17 20:43:29 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/18 19:27:55 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,24 @@ void	ft_delay(void)
 }
 
 //ANCHOR - Adjust
-void	ft_adjust(struct timeval *time)
+void	ft_printtime(void)
 {
-	(void)gettimeofday(time, NULL);
-	printf("%ld:", (time->tv_sec/1000000/60));
-	printf("%ld", (time->tv_sec%3600)/60);
-	printf(":%d\n", time->tv_usec % 60);
+	struct timeval	time;
+	struct timezone	timezone;
+	long			current_time;
+
+	if (gettimeofday(&time, &timezone) != 0)
+		ft_perror("Get time of day");
+	current_time
+		= time.tv_sec % SEC_PER_DAY
+		+ timezone.tz_dsttime * SEC_PER_HOUR
+		- timezone.tz_minuteswest * SEC_PER_MIN;
+	current_time = (current_time + SEC_PER_DAY) % SEC_PER_DAY;
+	printf("\U0001F570\t%ld:%ld:%ld:%d/t",
+		current_time / SEC_PER_HOUR,
+		(current_time % SEC_PER_HOUR) / SEC_PER_MIN,
+		(current_time % SEC_PER_HOUR) % SEC_PER_MIN,
+		time.tv_usec / 1000);
 }
 
 //!SECTION

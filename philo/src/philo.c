@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 16:56:07 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/17 18:57:17 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/18 20:36:20 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,14 @@ void	ft_freeall(t_process **process)
 }
 
 //ANCHOR - Philo apply
-void	ft_philo_apply(t_philo *philo, void (*f)(t_philo *), int philo_num)
+void	ft_philo_apply(t_philo *philo, int (*f)(t_philo *), int philo_num)
 {
 	int	count;
 
 	count = 0;
 	while (count < philo_num)
 	{
-		(*f)(&(philo[count]));
+		ft_check((*f)(&(philo[count])));
 		++count;
 	}
 }

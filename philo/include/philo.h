@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 17:19:37 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/17 20:27:15 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/18 20:28:06 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,19 @@
 # define TRUE 1
 # define FALSE !TRUE
 # define EATING 11
-# define TAKEN_FORK 12
-# define SLEEPING 13
-# define THINKING 14
-# define DIED 15
+# define TAKEN_FORK 22
+# define SLEEPING 33
+# define THINKING 44
+# define DIED 55
+# define SEC_PER_DAY 86400
+# define SEC_PER_HOUR 3600
+# define SEC_PER_MIN 60
 
 /*Structs*/
-typedef struct s_status
-{
-	int	died;
-	int	eat;
-	int	wait;
-}				t_status;
-
 typedef struct s_philo
 {
 	int			id;
-	t_status	status;
+	int			status;
 	pthread_t	thread;
 }				t_philo;
 
@@ -71,6 +67,7 @@ void		ft_philo_apply(t_philo *philo, void (*f)(t_philo *), int philo_num);
 
 //STUB - Printer
 void		ft_perror(char *string);
+void		ft_printstatus(t_philo philo);
 
 //STUB - Philo
 t_process	*ft_createprocess(t_params params);
@@ -84,5 +81,6 @@ void		ft_routine(t_process *process);
 void		ft_run(t_process *process);
 
 //STUB - Time
-void		ft_adjust(struct timeval *time);
+void		ft_printtime(void);
+void		ft_delay(void);
 #endif		/*End Philo.h*/

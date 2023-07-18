@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:52:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/17 20:32:52 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/18 20:30:20 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,26 @@ void	ft_perror(char *string)
 }
 
 //ANCHOR - Print Action
-static void	ft_print_action(int action)
+static void	ft_print_status(int status)
 {
-	if (action == EATING)
-		printf("is eating");
-	else if (action == TAKEN_FORK)
-		printf("has taken a fork");
-	else if (action == SLEEPING)
-		printf("is sleeping");
-	else if (action == THINKING)
-		printf("is thinking");
-	else if (action == DIED)
-		printf("died");
+	if (status == EATING)
+		ft_putstr_fd("is eating \U0001F35D", STDOUT_FILENO);
+	else if (status == TAKEN_FORK)
+		ft_putstr_fd("has taken a fork \U0001F374", STDOUT_FILENO);
+	else if (status == SLEEPING)
+		ft_putstr_fd("is sleeping \U0001F634", STDOUT_FILENO);
+	else if (status == THINKING)
+		ft_putstr_fd("is thinking \U0001F9D0", STDOUT_FILENO);
+	else if (status == DIED)
+		ft_putstr_fd("died \U0001F480", STDOUT_FILENO);
 }
 
 //ANCHOR - Print status
-void	ft_printstatus(struct timeval time, int philo_id, int action)
+void	ft_printstatus(t_philo philo)
 {
-	printf("%ld : %d -> philo %d\n", time.tv_sec, time.tv_usec, philo_id);
-	ft_print_action(action);
+	ft_printtime();
+	printf(" -> philo %d\t", philo.id);
+	ft_print_status(philo.status);
 }
 
 //!SECTION

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 18:43:09 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/17 20:26:42 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/18 19:19:21 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,10 @@ int	main(int argc, char *argv[])
 	{
 		params = ft_getarguments(argc, argv);
 		process = ft_createprocess(params);
-		struct timeval time;
-		ft_adjust(&time);
 		//ft_run(process);
 		ft_freeall(&process);
 	}
 	else
-		ft_perror("Wrong Number of Arguments, 4 minimum");
+		ft_perror("Wrong Number of Arguments \U0001F92F, 4 minimum");
 	return (EXIT_SUCCESS);
 }
