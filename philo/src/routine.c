@@ -6,33 +6,51 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 16:33:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/18 20:34:52 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/20 21:03:18 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 //SECTION - Routine Function
-//ANCHOR - Create Threads
-void	ft_createthread(t_philo *philo)
-{
-	ft_check(pthread_create(&(philo->thread), NULL,
-			(void *)ft_routine, &(philo->status)));
-}
-
-//ANCHOR - Routine
-void	ft_routine(t_process *process)
+//ANCHOR - Get forks
+static void	ft_getforks(t_philo *philo, int *forks)
 {
 	int	count;
 
 	count = 0;
-	while (count < process->params.philo_num)
+	while(count < philo_num)
 	{
-		ft_printtime();
-		ft_delay();
-		++count;
+		if (forks[count] == FALSE)
+			philo->fork_left = fork[count].id;
 	}
-	printf("Routine Function");
+}
+
+//ANCHOR - Routine
+static void	ft_lockthread(t_process *process, int philo_id)
+{
+	struct timeval	current_time;
+
+	gettimeofday(&current_time, NULL);
+	ft_check(pthread_mutex_lock(&(process->mutex)));
+	while (current_time.tv_sec < process->params.time_to_eat)
+	{
+		ft_printstatus(process->philo[philo_id]);
+		ft_delay(10);
+		++current_time.tv_sec;
+	}
+	ft_check(pthread_mutex_unlock(&(process->mutex)));
+	ft_check(pthread_detach(process->philo[philo_id].thread));
+}
+
+void	ft_routine(t_process *process)
+{
+	int	count;
+
+	ft_getforks(process->philo[num]);
+	if (process->philo[])
+		ft_lockthread()
+	++count;
 }
 
 //ANCHOR - Run
@@ -41,8 +59,8 @@ void	ft_run(t_process *process)
 	if (!process || process->philo == NULL)
 		return ;
 	ft_check(pthread_mutex_init(&process->mutex, NULL));
-	ft_philo_apply(process->philo, ft_createthread, process->params.philo_num);
-	ft_philo_apply(process->philo, ft_createthread, process->params.philo_num);
+	ft_philo_apply(process->philo, ft_createthread);
+	ft_philo_apply(process->philo, ft_threadjoin);
 }
 
 //!SECTION

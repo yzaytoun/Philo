@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 17:16:01 by yzaytoun          #+#    #+#              #
-#    Updated: 2023/07/17 18:55:12 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/07/20 19:50:22 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ SANITIAZE = -fsanitize=address -g3
 PTHREAD = -lpthread
 RM = rm -fr
 # ------------------------ philo ------------------------------
-SRC = main.c basicfunc.c philo.c printer.c mutex.c routine.c timer.c
+SRC = main.c basicfunc.c philo.c printer.c mutex.c routine.c timer.c threads.c
 
 OBJDIR = obj
 

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:51:35 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/18 19:27:55 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/20 19:44:39 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,18 @@
 
 //SECTION - Time Functions
 //ANCHOR - Delay Function
-void	ft_delay(void)
+void	ft_delay(int seconds)
 {
 	int	counter;
+	int	limit;
 
+	if (seconds == 0 || !seconds)
+		return ;
+	limit = seconds * 1000;
 	counter = 0;
-	while (counter < 50000)
+	while (counter < limit)
 	{
-		usleep(10);
+		usleep(seconds);
 		++counter;
 	}
 }
