@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:16:19 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/21 17:49:34 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/21 20:16:10 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ typedef struct s_philo
 	int			id;
 	int			status;
 	pthread_t	thread;
-	int			fork_left;
-	int			fork_right;
+	t_fork		left_fork;
+	t_fork		right_fork;
 	long		timer;
 }				t_philo;
 

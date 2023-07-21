@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 17:19:37 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/21 17:49:11 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/21 19:43:26 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void		ft_freeall(t_process **process);
 void		ft_check(int status);
 
 //STUB - Routine
-void		ft_routine(t_process *process);
+void		ft_routine(t_process *process, t_philo *philo);
 void		ft_run(t_process *process);
 
 //STUB - Time
