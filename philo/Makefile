@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 17:16:01 by yzaytoun          #+#    #+#              #
-#    Updated: 2023/07/20 19:50:22 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/07/21 18:03:23 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,11 +51,12 @@ endif
 CC = gcc
 INC = include
 CFLAGS = -Wall -Wextra -Werror -I $(INC) -g
-SANITIAZE = -fsanitize=address -g3
+SANITIAZE = -fsanitize=thread -g3
 PTHREAD = -lpthread
 RM = rm -fr
 # ------------------------ philo ------------------------------
-SRC = main.c basicfunc.c philo.c printer.c mutex.c routine.c timer.c threads.c
+SRC = main.c basicfunc.c philo.c printer.c mutex.c routine.c timer.c threads.c\
+	apply.c
 
 OBJDIR = obj
 

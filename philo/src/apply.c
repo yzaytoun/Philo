@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   apply.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/13 18:43:09 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/21 17:19:25 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/07/21 17:13:03 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/07/21 17:21:37 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int argc, char *argv[])
+//SECTION - Apply
+//ANCHOR - Assign ids
+int	ft_assign_ids(t_process *process, int philo_id)
 {
-	t_process	*process;
-	t_params	params;
-
-	if (argc >= 5 && argc <= 6)
-	{
-		params = ft_getarguments(argc, argv);
-		process = ft_createprocess(params);
-		ft_run(process);
-		ft_freeall(&process);
-	}
-	else
-		ft_perror("Wrong Number of Arguments \U0001F92F, 4 minimum");
-	return (EXIT_SUCCESS);
+	process->philo[philo_id].id = philo_id;
+	process->fork[philo_id].id = philo_id;
+	return (TRUE);
 }
+
+//!SECTION

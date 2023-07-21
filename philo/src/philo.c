@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 16:56:07 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/20 21:03:59 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/21 17:12:16 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,20 @@ static t_philo	*ft_createphilo(size_t size)
 	return (philo);
 }
 
+//ANCHOR - Create Forks
+static t_fork	*ft_createphilo(size_t size)
+{
+	t_fork	*fork;
+
+	if (!size)
+		return (NULL);
+	fork = malloc(sizeof(t_fork) * size);
+	if (!fork)
+		ft_perror("No Forks");
+	return (fork);
+}
+
 //ANCHOR - Create Process
-//TODO - 
 t_process	*ft_createprocess(t_params params)
 {
 	t_process	*process;
@@ -39,12 +51,8 @@ t_process	*ft_createprocess(t_params params)
 		ft_perror("No process");
 	process->params = params;
 	process->philo = ft_createphilo(params.philo_num);
-	if (process->philo == NULL)
-		ft_perror("No philosophers");
-	/*Create forks */
-	process->fork = malloc(sizeof(int) * params.philo_num);
-	if (!process->fork)
-		ft_perror("No Forks");
+	process->fork = ft_createforks(params.philo_num);
+	ft_apply(process, ft_assign_ids);
 	return (process);
 }
 
@@ -53,12 +61,13 @@ void	ft_freeall(t_process **process)
 {
 	ft_check(pfthread_mutex_destroy(&(*process)->mutex));
 	free((*process)->philo);
+	free((*process)->fork);
 	free((*process));
 	pthread_exit(NULL);
 }
 
 //ANCHOR - Philo apply
-void	ft_philo_apply(t_process *process, int (*f)(t_process *, int))
+void	ft_apply(t_process *process, int (*f)(t_process *, int))
 {
 	int	count;
 

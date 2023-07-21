@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:51:35 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/20 19:44:39 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/21 17:48:49 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,15 @@ void	ft_printtime(void)
 		(current_time % SEC_PER_HOUR) / SEC_PER_MIN,
 		(current_time % SEC_PER_HOUR) % SEC_PER_MIN,
 		time.tv_usec / 1000);
+}
+
+//ANCHOR - Set Timer
+long	ft_settimer(void)
+{
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
 //!SECTION

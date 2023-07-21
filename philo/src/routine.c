@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 16:33:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/20 21:03:18 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/21 18:05:46 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,40 @@
 
 //SECTION - Routine Function
 //ANCHOR - Get forks
-static void	ft_getforks(t_philo *philo, int *forks)
+static void	ft_getforks(t_philo *philo, t_process *process)
 {
 	int	count;
 
 	count = 0;
-	while(count < philo_num)
+	while (count < process->params.philo_num)
 	{
-		if (forks[count] == FALSE)
-			philo->fork_left = fork[count].id;
+		if (process->fork[count].is_used == FALSE)
+			philo->fork_left = process->fork[count].id;
 	}
 }
 
 //ANCHOR - Routine
-static void	ft_lockthread(t_process *process, int philo_id)
+static void	ft_lockthread(t_philo *philo, t_process *process)
 {
-	struct timeval	current_time;
-
-	gettimeofday(&current_time, NULL);
+	//philo->timer = ft_settimer();
 	ft_check(pthread_mutex_lock(&(process->mutex)));
-	while (current_time.tv_sec < process->params.time_to_eat)
+	while (philo->timer < process->params.time_to_eat)
 	{
-		ft_printstatus(process->philo[philo_id]);
+		ft_printstatus(*philo);
 		ft_delay(10);
-		++current_time.tv_sec;
+		++philo->timer;
 	}
 	ft_check(pthread_mutex_unlock(&(process->mutex)));
-	ft_check(pthread_detach(process->philo[philo_id].thread));
+	ft_check(pthread_detach(philo->thread));
 }
 
-void	ft_routine(t_process *process)
+void	ft_routine(t_process *process, t_philo *philo)
 {
 	int	count;
 
-	ft_getforks(process->philo[num]);
-	if (process->philo[])
-		ft_lockthread()
-	++count;
+	ft_getforks(philo, process);
+	if (philo->fork_left == TRUE && philo->fork_right == TRUE)
+		ft_lockthread(philo, process);
 }
 
 //ANCHOR - Run
@@ -59,8 +56,8 @@ void	ft_run(t_process *process)
 	if (!process || process->philo == NULL)
 		return ;
 	ft_check(pthread_mutex_init(&process->mutex, NULL));
-	ft_philo_apply(process->philo, ft_createthread);
-	ft_philo_apply(process->philo, ft_threadjoin);
+	ft_apply(process->philo, ft_createthread);
+	ft_apply(process->philo, ft_threadjoin);
 }
 
 //!SECTION
