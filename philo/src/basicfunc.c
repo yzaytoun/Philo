@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 16:48:34 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/17 19:04:49 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/22 11:53:58 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,10 @@ t_params	ft_getarguments(int argc, char *argv[])
 
 	if (ft_validatergument(argc, argv) == FALSE)
 		ft_perror("Wrong input");
-	params.philo_num = ft_atoi(argv[1]);
-	params.time_to_die = ft_atoi(argv[2]);
-	params.time_to_eat = ft_atoi(argv[3]);
-	params.time_to_sleep = ft_atoi(argv[4]);
+	params.philo_num = ft_atoi(argv[1]) * 1000;
+	params.time_to_die = ft_atoi(argv[2]) * 1000;
+	params.time_to_eat = ft_atoi(argv[3]) * 1000;
+	params.time_to_sleep = ft_atoi(argv[4]) * 1000;
 	if (argc == 6)
 		params.repetition_num = ft_atoi(argv[5]);
 	return (params);

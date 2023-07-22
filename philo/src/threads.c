@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 19:49:16 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/22 11:18:04 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/22 17:33:13 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 //ANCHOR - Create Threads
 int	ft_createthread(t_process *process, int philo_id)
 {
+	process->philo[philo_id].process = process;
 	ft_check(pthread_create(&(process->philo[philo_id].thread), NULL,
-			(void *)ft_routine, process));
+			ft_routine, &process->philo[philo_id]));
 	return (EXIT_SUCCESS);
 }
 
@@ -25,7 +26,7 @@ int	ft_createthread(t_process *process, int philo_id)
 int	ft_threadjoin(t_process *process, int philo_id)
 {
 	ft_check(pthread_join(process->philo[philo_id].thread,
-			(int) process->philo->status));
+			(void *)(uintptr_t) &process->philo->status));
 	if (process->philo->status == DIED)
 	{
 		ft_printstatus(philo_id, DIED);

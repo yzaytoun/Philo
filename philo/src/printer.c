@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:52:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/22 10:59:45 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/22 11:36:21 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@ void	ft_perror(char *string)
 static void	ft_print_status(int status)
 {
 	if (status == EATING)
-		ft_putstr_fd("is eating \U0001F35D", STDOUT_FILENO);
+		ft_putstr_fd("is eating \U0001F35D\n", STDOUT_FILENO);
 	else if (status == TAKEN_FORK)
-		ft_putstr_fd("has taken a fork \U0001F374", STDOUT_FILENO);
+		ft_putstr_fd("has taken a fork \U0001F374\n", STDOUT_FILENO);
 	else if (status == SLEEPING)
-		ft_putstr_fd("is sleeping \U0001F634", STDOUT_FILENO);
+		ft_putstr_fd("is sleeping \U0001F634\n", STDOUT_FILENO);
 	else if (status == THINKING)
-		ft_putstr_fd("is thinking \U0001F9D0", STDOUT_FILENO);
+		ft_putstr_fd("is thinking \U0001F9D0\n", STDOUT_FILENO);
 	else if (status == DIED)
-		ft_putstr_fd("died \U0001F480", STDOUT_FILENO);
+		ft_putstr_fd("died \U0001F480\n", STDOUT_FILENO);
 }
 
 //ANCHOR - Print status

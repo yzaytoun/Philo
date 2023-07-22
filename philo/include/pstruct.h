@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:16:19 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/21 20:16:10 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/22 17:35:22 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,14 @@
 # define SEC_PER_MIN 60
 
 /*Structs*/
+typedef struct s_fork
+{
+	int		id;
+	int		is_used;
+}			t_fork;
+
+typedef struct s_process	t_process;
+
 typedef struct s_philo
 {
 	int			id;
@@ -42,6 +50,7 @@ typedef struct s_philo
 	t_fork		left_fork;
 	t_fork		right_fork;
 	long		timer;
+	t_process	*process;
 }				t_philo;
 
 typedef struct s_params
@@ -53,18 +62,12 @@ typedef struct s_params
 	int			repetition_num;
 }				t_params;
 
-typedef struct s_fork
-{
-	int		id;
-	int		is_used;
-}			t_fork;
-
-typedef struct s_process
+struct s_process
 {
 	pthread_mutex_t	mutex;
 	t_philo			*philo;
 	t_params		params;
 	t_fork			*fork;
-}					t_process;
+};
 
 #endif		/* pstruct header */

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:13:03 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/22 11:19:29 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/22 17:17:02 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	*ft_check(int status)
 		ft_perror("Error");
 		printf("Status -> %d\n", status);
 	}
+	return (NULL);
 }
 
 //!SECTION
