@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:52:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/21 18:06:24 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/22 10:59:45 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ static void	ft_print_status(int status)
 }
 
 //ANCHOR - Print status
-void	ft_printstatus(t_philo philo)
+void	ft_printstatus(int philo_id, int status)
 {
 	ft_printtime();
-	printf(" -> philo %d\t", philo.id);
-	ft_print_status(philo.status);
+	printf(" -> philo %d\t", philo_id);
+	ft_print_status(status);
 }
 
 //!SECTION

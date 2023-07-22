@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 18:43:09 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/21 17:19:25 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/22 11:26:24 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,12 @@ int	main(int argc, char *argv[])
 	{
 		params = ft_getarguments(argc, argv);
 		process = ft_createprocess(params);
-		ft_run(process);
+		if (ft_run(process) == EXIT_FAILURE)
+		{
+			ft_freeall(&process);
+			ft_putstr_fd("Thread Died\n", STDOUT_FILENO);
+			return (EXIT_SUCCESS);
+		}
 		ft_freeall(&process);
 	}
 	else
