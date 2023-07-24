@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 16:56:07 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/22 17:09:49 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/24 20:58:14 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void	ft_freeall(t_process **process)
 	free((*process)->philo);
 	free((*process)->fork);
 	free((*process));
-	pthread_exit(NULL);
 }
 
 //ANCHOR - Philo apply

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 17:19:37 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/24 18:18:16 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/24 20:41:13 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void		ft_freeall(t_process **process);
 //STUB - Apply
 void		*ft_check(int status);
 int			ft_assign_ids(t_process *process, int philo_id);
+int			ft_updatetimer(t_process *process, int philo_id);
+
 
 //STUB - Routine
 void		*ft_routine(t_philo *philo);
@@ -41,12 +43,16 @@ int			ft_run(t_process *process);
 //STUB - Time
 void		ft_printtime(void);
 void		ft_delay(int seconds);
-long		ft_settimer(void);
+long		ft_gettime(void);
+void		ft_addcurrenttime(t_params *params);
+
 
 //STUB - Threads
 int			ft_createthread(t_process *process, int philo_id);
 int			ft_threadjoin(t_process *process, int philo_id);
 void		ft_threadexecute(t_process *process,
-				void (*f)(t_process *), int philo_id);
+				void (*f)(t_process *, int), int philo_id);
+void		ft_lockthread(t_process *process, int philo_id);
+
 
 #endif		/*End Philo.h*/

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:13:03 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/22 17:17:02 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/24 20:40:37 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,13 @@ void	*ft_check(int status)
 		printf("Status -> %d\n", status);
 	}
 	return (NULL);
+}
+
+//ANCHOR - Update timers and timelimits
+int	ft_updatetimer(t_process *process, int philo_id)
+{
+	process->philo[philo_id].timer = ft_gettime();
+	return (EXIT_SUCCESS);
 }
 
 //!SECTION

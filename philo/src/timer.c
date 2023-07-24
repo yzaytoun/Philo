@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:51:35 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/21 17:48:49 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/24 20:03:59 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,25 @@ void	ft_printtime(void)
 }
 
 //ANCHOR - Set Timer
-long	ft_settimer(void)
+long	ft_gettime(void)
 {
 	struct timeval	time;
 
 	gettimeofday(&time, NULL);
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+}
+
+//ANCHOR - Add current time to time limit
+void	ft_addcurrenttime(t_params *params)
+{
+	long	time;
+
+	time = params->time_to_die;
+	params->time_to_die = time + ft_gettime();
+	time = params->time_to_eat;
+	params->time_to_eat = time + ft_gettime();
+	time = params->time_to_sleep;
+	params->time_to_sleep = time + ft_gettime();
 }
 
 //!SECTION
