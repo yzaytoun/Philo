@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 16:33:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/22 17:36:11 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/24 18:19:00 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	*ft_routine(t_philo *philo)
 	t_process	*process;
 
 	process = philo->process;
-	ft_check(pthread_mutex_lock(&(process->mutex)));
 	ft_getforks(philo, process);
 	if (philo->left_fork.is_used == TRUE
 		&& philo->right_fork.is_used == TRUE)
