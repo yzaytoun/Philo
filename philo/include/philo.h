@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 17:19:37 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/24 20:41:13 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/25 19:21:31 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void		ft_freeall(t_process **process);
 void		*ft_check(int status);
 int			ft_assign_ids(t_process *process, int philo_id);
 int			ft_updatetimer(t_process *process, int philo_id);
+void		ft_assign_params(t_params *params, int count, long input);
 
 
 //STUB - Routine
@@ -43,7 +44,7 @@ int			ft_run(t_process *process);
 //STUB - Time
 void		ft_printtime(void);
 void		ft_delay(int seconds);
-long		ft_gettime(void);
+t_timeval	ft_gettimeofday(void);
 void		ft_addcurrenttime(t_params *params);
 
 

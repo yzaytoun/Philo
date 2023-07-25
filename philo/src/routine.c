@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 16:33:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/24 20:59:10 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/25 21:04:05 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,14 @@ static void	ft_getforks(t_process *process, int philo_id)
 	}
 }
 
-
+//ANCHOR - Routine
 void	*ft_routine(t_philo *philo)
 {
 	t_process	*process;
 
 	process = philo->process;
-	while (process->philo[philo->id].timer < process->params.time_to_die)
+	while (process->philo[philo->id].timer.currtime
+		< process->params.time_to_die.currtime * 1000)
 	{
 		ft_threadexecute(process, ft_getforks, philo->id);
 		if (philo->left_fork.is_used == TRUE

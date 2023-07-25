@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:13:03 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/24 20:40:37 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/25 20:49:12 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,15 @@ int	ft_assign_ids(t_process *process, int philo_id)
 	return (EXIT_SUCCESS);
 }
 
+
+//ANCHOR - Update timers and timelimits
+int	ft_updatetimer(t_process *process, int philo_id)
+{
+	process->philo[philo_id].timer = ft_gettimeofday();
+	return (EXIT_SUCCESS);
+}
+
+//NOTE - AUX functions
 //ANCHOR - check return value
 void	*ft_check(int status)
 {
@@ -41,11 +50,18 @@ void	*ft_check(int status)
 	return (NULL);
 }
 
-//ANCHOR - Update timers and timelimits
-int	ft_updatetimer(t_process *process, int philo_id)
+//ANCHOR - AUX Assign input
+void	ft_assign_params(t_params *params, int count, long input)
 {
-	process->philo[philo_id].timer = ft_gettime();
-	return (EXIT_SUCCESS);
+	if (count == 1)
+		params->philo_num = input;
+	else if (count == 2)
+		params->time_to_die.currtime = input * 1000;
+	else if (count == 3)
+		params->time_to_eat.currtime = input * 1000;
+	else if (count == 4)
+		params->time_to_sleep.currtime = input * 1000;
+	else if (count == 5)
+		params->repetition_num = input;
 }
-
 //!SECTION

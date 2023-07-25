@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:16:19 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/24 19:33:39 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/25 19:21:50 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@
 # define SEC_PER_MIN 60
 
 /*Structs*/
+typedef struct s_timeval
+{
+	long		currtime;
+	long		usec;
+}				t_timeval;
+
 typedef struct s_fork
 {
 	int		id;
@@ -49,16 +55,16 @@ typedef struct s_philo
 	pthread_t	thread;
 	t_fork		left_fork;
 	t_fork		right_fork;
-	long		timer;
+	t_timeval	timer;
 	t_process	*process;
 }				t_philo;
 
 typedef struct s_params
 {
 	int			philo_num;
-	int			time_to_die;
-	int			time_to_eat;
-	int			time_to_sleep;
+	t_timeval	time_to_die;
+	t_timeval	time_to_eat;
+	t_timeval	time_to_sleep;
 	int			repetition_num;
 }				t_params;
 

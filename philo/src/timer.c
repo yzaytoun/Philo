@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:51:35 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/24 20:03:59 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/25 20:53:39 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,34 +30,34 @@ void	ft_delay(int seconds)
 	}
 }
 
-//ANCHOR - Adjust
-void	ft_printtime(void)
+//ANCHOR - Set Timer
+t_timeval	ft_gettimeofday(void)
 {
 	struct timeval	time;
 	struct timezone	timezone;
-	long			current_time;
+	t_timeval		current_time;
 
 	if (gettimeofday(&time, &timezone) != 0)
 		ft_perror("Get time of day");
-	current_time
+	current_time.currtime
 		= time.tv_sec % SEC_PER_DAY
 		+ timezone.tz_dsttime * SEC_PER_HOUR
 		- timezone.tz_minuteswest * SEC_PER_MIN;
-	current_time = (current_time + SEC_PER_DAY) % SEC_PER_DAY;
-	printf("\U0001F570\t%ld:%ld:%ld:%d/t",
-		current_time / SEC_PER_HOUR,
-		(current_time % SEC_PER_HOUR) / SEC_PER_MIN,
-		(current_time % SEC_PER_HOUR) % SEC_PER_MIN,
-		time.tv_usec / 1000);
+	current_time.currtime = (current_time.currtime + SEC_PER_DAY) % SEC_PER_DAY;
+	return (current_time);
 }
 
-//ANCHOR - Set Timer
-long	ft_gettime(void)
+//ANCHOR - Adjust
+void	ft_printtime(void)
 {
-	struct timeval	time;
+	t_timeval	current_time;
 
-	gettimeofday(&time, NULL);
-	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+	current_time = ft_gettimeofday();
+	printf("\U0001F570 %ld:%ld:%ld:%d",
+		current_time.currtime / SEC_PER_HOUR,
+		(current_time.currtime % SEC_PER_HOUR) / SEC_PER_MIN,
+		(current_time.currtime % SEC_PER_HOUR) % SEC_PER_MIN,
+		(int)current_time.usec / 1000);
 }
 
 //ANCHOR - Add current time to time limit
@@ -65,12 +65,12 @@ void	ft_addcurrenttime(t_params *params)
 {
 	long	time;
 
-	time = params->time_to_die;
-	params->time_to_die = time + ft_gettime();
-	time = params->time_to_eat;
-	params->time_to_eat = time + ft_gettime();
-	time = params->time_to_sleep;
-	params->time_to_sleep = time + ft_gettime();
+	time = params->time_to_die.currtime;
+	params->time_to_die.currtime = time + ft_gettimeofday().currtime;
+	time = params->time_to_eat.currtime;
+	params->time_to_eat.currtime = time + ft_gettimeofday().currtime;
+	time = params->time_to_sleep.currtime;
+	params->time_to_sleep.currtime = time + ft_gettimeofday().currtime;
 }
 
 //!SECTION

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 19:49:16 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/24 20:59:33 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/25 21:04:54 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@
 //ANCHOR - Thread lock
 void	ft_lockthread(t_process *process, int philo_id)
 {
-	while (process->philo[philo_id].timer < process->params.time_to_eat)
+	while (process->philo[philo_id].timer.currtime
+		< process->params.time_to_eat.currtime)
 	{
 		ft_printstatus(process->philo[philo_id].id, EATING);
-		ft_delay(10);
-		process->philo[philo_id].timer = ft_gettime();
+		ft_delay(2);
+		process->philo[philo_id].timer = ft_gettimeofday();
 	}
 }
 
