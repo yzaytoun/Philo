@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 16:33:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/25 21:04:05 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/26 18:13:02 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,22 +44,11 @@ void	*ft_routine(t_philo *philo)
 	t_process	*process;
 
 	process = philo->process;
-	while (process->philo[philo->id].timer.currtime
-		< process->params.time_to_die.currtime * 1000)
-	{
-		ft_threadexecute(process, ft_getforks, philo->id);
-		if (philo->left_fork.is_used == TRUE
-			&& philo->right_fork.is_used == TRUE)
-		{
-			ft_lockthread(process, philo->id);
-			ft_printstatus(philo->id, SLEEPING);
-			philo->left_fork.is_used = FALSE;
-			philo->right_fork.is_used = FALSE;
-		}
-		else
-			ft_printstatus(philo->id, THINKING);
-	}
-	return ((void *)(uintptr_t)philo->status);
+	ft_threadexecute(process, ft_getforks, philo->id);
+	ft_threadexecute(process, ft_eat, philo->id);
+	ft_threadexecute(process, ft_sleep, philo->id);
+	ft_threadexecute(process, ft_isalive, philo->id);
+	return ((void *)(uintptr_t)philo->laststatus);
 }
 
 //ANCHOR - Run
@@ -67,7 +56,7 @@ int	ft_run(t_process *process)
 {
 	if (!process || process->philo == NULL)
 		return (EXIT_FAILURE);
-	ft_check(pthread_mutex_init(&process->mutex, NULL));
+	ft_try(pthread_mutex_init(&process->mutex, NULL));
 	ft_apply(process, ft_updatetimer);
 	ft_addcurrenttime(&process->params);
 	ft_apply(process, ft_createthread);

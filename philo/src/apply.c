@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:13:03 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/25 20:49:12 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/26 17:59:39 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ int	ft_updatetimer(t_process *process, int philo_id)
 
 //NOTE - AUX functions
 //ANCHOR - check return value
-void	*ft_check(int status)
+void	*ft_try(int laststatus)
 {
-	if (status == DIED)
+	if (laststatus == DIED)
 		return ((void *)DIED);
-	else if (status && status != DIED)
+	else if (laststatus && laststatus != DIED)
 	{
 		ft_perror("Error");
-		printf("Status -> %d\n", status);
+		printf("Status -> %d\n", laststatus);
 	}
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:16:19 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/25 19:21:50 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/26 17:59:39 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,14 @@ typedef struct s_timeval
 	long		usec;
 }				t_timeval;
 
+typedef struct s_meta /*Meta data about the philo*/
+{
+	int	eat_count;
+	int	sleep_count;
+	int	think_count;
+}				t_meta;
+
+
 typedef struct s_fork
 {
 	int		id;
@@ -51,7 +59,8 @@ typedef struct s_process	t_process;
 typedef struct s_philo
 {
 	int			id;
-	int			status;
+	t_meta		data;
+	int			laststatus;
 	pthread_t	thread;
 	t_fork		left_fork;
 	t_fork		right_fork;

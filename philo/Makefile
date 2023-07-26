@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 17:16:01 by yzaytoun          #+#    #+#              #
-#    Updated: 2023/07/21 20:01:13 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/07/26 17:55:21 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,12 +51,13 @@ endif
 CC = gcc
 INC = include
 CFLAGS = -Wall -Wextra -Werror -I $(INC) -g
+SANITIAZE_ADD = -fsanitize=address -g3
 SANITIAZE = -fsanitize=thread -g3
 PTHREAD = -lpthread
 RM = rm -fr
 # ------------------------ philo ------------------------------
 SRC = main.c basicfunc.c philo.c printer.c routine.c timer.c threads.c\
-		apply.c
+		apply.c execute.c
 
 OBJDIR = obj
 
@@ -70,7 +71,7 @@ all: $(NAME)
 
 $(NAME): $(BANNER) $(PHILO_OBJ)
 	@echo "$(LIGHTPURPLE)Creating Object Files"
-	@$(CC) $(PHILO_OBJ) -o $@ $(PTHREAD) $(SANITIAZE)
+	@$(CC) $(PHILO_OBJ) -o $@ $(PTHREAD) $(SANITIAZE_ADD)
 	@echo "$(WHITE)Compiling" $@
 	@chmod +x $@
 	@echo "$(PURPLE)************ 	DONE	 ****************\n"

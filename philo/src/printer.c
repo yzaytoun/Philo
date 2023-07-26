@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:52:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/25 20:58:23 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/26 17:59:39 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,26 @@ void	ft_perror(char *string)
 }
 
 //ANCHOR - Print Action
-static void	ft_print_status(int status)
+static void	ft_print_status(int laststatus)
 {
-	if (status == EATING)
+	if (laststatus == EATING)
 		ft_putstr_fd("is eating \U0001F35D\n", STDOUT_FILENO);
-	else if (status == TAKEN_FORK)
+	else if (laststatus == TAKEN_FORK)
 		ft_putstr_fd("has taken a fork \U0001F374\n", STDOUT_FILENO);
-	else if (status == SLEEPING)
+	else if (laststatus == SLEEPING)
 		ft_putstr_fd("is sleeping \U0001F634\n", STDOUT_FILENO);
-	else if (status == THINKING)
+	else if (laststatus == THINKING)
 		ft_putstr_fd("is thinking \U0001F9D0\n", STDOUT_FILENO);
-	else if (status == DIED)
+	else if (laststatus == DIED)
 		ft_putstr_fd("died \U0001F480\n", STDOUT_FILENO);
 }
 
-//ANCHOR - Print status
-void	ft_printstatus(int philo_id, int status)
+//ANCHOR - Print laststatus
+void	ft_printstatus(int philo_id, int laststatus)
 {
 	ft_printtime();
 	printf(" -> philo %d \n", philo_id);
-	ft_print_status(status);
+	ft_print_status(laststatus);
 }
 
 //!SECTION
