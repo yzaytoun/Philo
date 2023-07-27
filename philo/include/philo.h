@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 17:19:37 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/26 18:13:20 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/27 18:58:03 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,8 @@ void		ft_threadexecute(t_process *process,
 void		ft_eat(t_process *process, int philo_id);
 void		ft_sleep(t_process *process, int philo_id);
 void		ft_isalive(t_process *process, int philo_id);
+
+//STUB - Auxiliary Functions
+void		ft_bzero(void *pointer, size_t n);
 
 #endif		/*End Philo.h*/

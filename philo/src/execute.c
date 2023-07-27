@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 17:45:56 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/26 18:14:55 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/27 20:49:54 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,36 +16,37 @@
 //ANCHOR - Eat
 void	ft_eat(t_process *process, int philo_id)
 {
-	if (process->philo->left_fork.is_used == TRUE
-		&& process->philo->right_fork.is_used == TRUE)
+	if (process->philo[philo_id].left_fork.is_used == TRUE
+		&& process->philo[philo_id].right_fork.is_used == TRUE)
 	{
 		ft_printstatus(philo_id, EATING);
-		while (process->philo[philo_id].timer.currtime
-			< process->params.time_to_eat.currtime)
+		while (process->philo[philo_id].timer.usec
+			< process->params.time_to_eat.usec)
 		{
 			ft_delay(5);
-			process->philo[philo_id].timer.currtime++;
+			process->philo[philo_id].timer.usec++;
 		}
 		process->philo[philo_id].data.eat_count++;
+		process->philo[philo_id].laststatus = EATING;
 	}
 }
 
 //ANCHOR - Sleep
 void	ft_sleep(t_process *process, int philo_id)
 {
-	if (process->philo->left_fork.is_used == TRUE
-		&& process->philo->right_fork.is_used == TRUE
+	if (process->philo[philo_id].left_fork.is_used == TRUE
+		&& process->philo[philo_id].right_fork.is_used == TRUE
 		&& process->philo[philo_id].laststatus == EATING)
 	{
-		ft_printstatus(process->philo->id, SLEEPING);
-		while (process->philo[philo_id].timer.currtime
-			< process->params.time_to_sleep.currtime)
+		ft_printstatus(process->philo[philo_id].id, SLEEPING);
+		while (process->philo[philo_id].timer.usec
+			< process->params.time_to_sleep.usec)
 		{
 			ft_delay(5);
-			process->philo[philo_id].timer.currtime++;
+			process->philo[philo_id].timer.usec++;
 		}
-		process->philo->left_fork.is_used = FALSE;
-		process->philo->right_fork.is_used = FALSE;
+		process->philo[philo_id].left_fork.is_used = FALSE;
+		process->philo[philo_id].right_fork.is_used = FALSE;
 	}
 	else
 		ft_printstatus(philo_id, THINKING);
@@ -55,8 +56,8 @@ void	ft_sleep(t_process *process, int philo_id)
 //ANCHOR - Is alive
 void	ft_isalive(t_process *process, int philo_id)
 {
-	if (process->philo[philo_id].timer.currtime
-		< process->params.time_to_die.currtime * 1000)
+	if (process->philo[philo_id].timer.usec
+		< (process->params.time_to_die.usec))
 		process->philo[philo_id].laststatus = DIED;
 }
 

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 16:33:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/26 18:13:02 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/27 20:56:33 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,20 @@ static void	ft_getforks(t_process *process, int philo_id)
 void	*ft_routine(t_philo *philo)
 {
 	t_process	*process;
+	int			philo_id;
 
 	process = philo->process;
-	ft_threadexecute(process, ft_getforks, philo->id);
-	ft_threadexecute(process, ft_eat, philo->id);
-	ft_threadexecute(process, ft_sleep, philo->id);
-	ft_threadexecute(process, ft_isalive, philo->id);
+	philo_id = philo->id;
+	while (philo[philo_id].timer.usec
+		< (process->params.time_to_die.usec))
+	{
+		ft_delay(2);
+		ft_threadexecute(process, ft_getforks, philo->id);
+		ft_threadexecute(process, ft_eat, philo->id);
+		ft_threadexecute(process, ft_sleep, philo->id);
+		ft_threadexecute(process, ft_isalive, philo->id);
+		philo[philo_id].timer = ft_gettimeofday();
+	}
 	return ((void *)(uintptr_t)philo->laststatus);
 }
 

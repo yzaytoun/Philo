@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 16:56:07 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/26 17:42:56 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/27 19:03:54 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static t_philo	*ft_createphilo(size_t size)
 	philo = malloc(sizeof(t_philo) * size);
 	if (!philo)
 		ft_perror("No philo was created");
+	ft_bzero(philo, sizeof(t_philo) * size);
 	return (philo);
 }
 
@@ -36,6 +37,7 @@ static t_fork	*ft_createforks(size_t size)
 	fork = malloc(sizeof(t_fork) * size);
 	if (!fork)
 		ft_perror("No Forks");
+	ft_bzero(fork, sizeof(t_fork) * size);
 	return (fork);
 }
 

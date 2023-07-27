@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:51:35 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/25 20:53:39 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/27 21:01:23 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,17 @@ t_timeval	ft_gettimeofday(void)
 		+ timezone.tz_dsttime * SEC_PER_HOUR
 		- timezone.tz_minuteswest * SEC_PER_MIN;
 	current_time.currtime = (current_time.currtime + SEC_PER_DAY) % SEC_PER_DAY;
+	current_time.usec
+		= time.tv_usec % SEC_PER_DAY
+		+ timezone.tz_dsttime * SEC_PER_HOUR
+		- timezone.tz_minuteswest * SEC_PER_MIN;
 	return (current_time);
 }
 
-//ANCHOR - Adjust
+//ANCHOR - printtime
 void	ft_printtime(void)
 {
-	t_timeval	current_time;
-
-	current_time = ft_gettimeofday();
-	printf("\U0001F570 %ld:%ld:%ld:%d",
-		current_time.currtime / SEC_PER_HOUR,
-		(current_time.currtime % SEC_PER_HOUR) / SEC_PER_MIN,
-		(current_time.currtime % SEC_PER_HOUR) % SEC_PER_MIN,
-		(int)current_time.usec / 1000);
+	printf("\U0001F570 %d", (int)ft_gettimeofday().usec / 2000);
 }
 
 //ANCHOR - Add current time to time limit
@@ -65,12 +62,12 @@ void	ft_addcurrenttime(t_params *params)
 {
 	long	time;
 
-	time = params->time_to_die.currtime;
-	params->time_to_die.currtime = time + ft_gettimeofday().currtime;
-	time = params->time_to_eat.currtime;
-	params->time_to_eat.currtime = time + ft_gettimeofday().currtime;
-	time = params->time_to_sleep.currtime;
-	params->time_to_sleep.currtime = time + ft_gettimeofday().currtime;
+	time = params->time_to_die.usec;
+	params->time_to_die.usec = time + ft_gettimeofday().usec;
+	time = params->time_to_eat.usec;
+	params->time_to_eat.usec = time + ft_gettimeofday().usec;
+	time = params->time_to_sleep.usec;
+	params->time_to_sleep.usec = time + ft_gettimeofday().usec;
 }
 
 //!SECTION

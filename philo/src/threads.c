@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 19:49:16 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/26 17:59:39 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/27 20:46:03 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int	ft_createthread(t_process *process, int philo_id)
 int	ft_threadjoin(t_process *process, int philo_id)
 {
 	ft_try(pthread_join(process->philo[philo_id].thread, (void *)
-			(uintptr_t) &process->philo->laststatus));
-	if (process->philo->laststatus == DIED)
+			(uintptr_t) &process->philo[philo_id].laststatus));
+	if (process->philo[philo_id].laststatus == DIED)
 	{
 		ft_printstatus(philo_id, DIED);
 		return (DIED);
