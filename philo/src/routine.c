@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 16:33:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/27 20:56:33 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/28 18:22:50 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ void	*ft_routine(t_philo *philo)
 
 	process = philo->process;
 	philo_id = philo->id;
+	ft_delay(5);
 	while (philo[philo_id].timer.usec
 		< (process->params.time_to_die.usec))
 	{
-		ft_delay(2);
 		ft_threadexecute(process, ft_getforks, philo->id);
 		ft_threadexecute(process, ft_eat, philo->id);
 		ft_threadexecute(process, ft_sleep, philo->id);

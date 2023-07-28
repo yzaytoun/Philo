@@ -6,23 +6,13 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 18:51:14 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/27 20:52:18 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/28 16:50:05 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 //SECTION - Auxiliary functions
-//ANCHOR - Bzero
-void	ft_bzero(void *pointer, size_t n)
-{
-	unsigned char	*p;
-
-	p = pointer;
-	while (n--)
-		*p++ = 0;
-}
-
 //ANCHOR - check return value
 void	*ft_try(int laststatus)
 {

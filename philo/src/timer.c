@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:51:35 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/27 21:01:23 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/28 16:52:02 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_timeval	ft_gettimeofday(void)
 //ANCHOR - printtime
 void	ft_printtime(void)
 {
-	printf("\U0001F570 %d", (int)ft_gettimeofday().usec / 2000);
+	printf("[\U0001F570 %d]", (int)ft_gettimeofday().usec / 1000);
 }
 
 //ANCHOR - Add current time to time limit

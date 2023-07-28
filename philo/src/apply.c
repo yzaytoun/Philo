@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:13:03 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/27 19:08:06 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/28 18:17:39 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,46 @@
 
 //SECTION - Apply
 //ANCHOR - Assign ids
-int	ft_assign_ids(t_process *process, int philo_id)
+int	ft_assign_ids(t_process *process, int count)
 {
-	process->philo[philo_id].id = philo_id;
-	process->fork[philo_id].id = philo_id;
-	process->philo[philo_id].left_fork.id = philo_id;
-	if (philo_id == 1)
-		process->philo[philo_id].right_fork.id = process->params.philo_num;
+	process->philo[count].id = count + 1;
+	process->fork[count].id = count + 1;
+	process->philo[count].left_fork.id = count + 1;
+	if (count == 0)
+		process->philo[count].right_fork.id = process->params.philo_num;
 	else
-		process->philo[philo_id].right_fork.id
-			= (process->params.philo_num + philo_id - 1)
+		process->philo[count].right_fork.id
+			= (process->params.philo_num + count)
 			- process->params.philo_num;
 	return (EXIT_SUCCESS);
 }
 
+//ANCHOR - Create Threads
+int	ft_createthread(t_process *process, int count)
+{
+	process->philo[count].process = process;
+	ft_try(pthread_create(&(process->philo[count].thread), NULL,
+			(void *)ft_routine, &process->philo[count]));
+	return (EXIT_SUCCESS);
+}
+
+//ANCHOR - Detach threads
+int	ft_threadjoin(t_process *process, int count)
+{
+	ft_try(pthread_join(process->philo[count].thread, (void *)
+			(uintptr_t) &process->philo[count].laststatus));
+	if (process->philo[count].laststatus == DIED)
+	{
+		ft_printstatus(process->philo[count].id, DIED);
+		return (DIED);
+	}
+	return (EXIT_SUCCESS);
+}
 
 //ANCHOR - Update timers and timelimits
-int	ft_updatetimer(t_process *process, int philo_id)
+int	ft_updatetimer(t_process *process, int count)
 {
-	process->philo[philo_id].timer = ft_gettimeofday();
+	process->philo[count].timer = ft_gettimeofday();
 	return (EXIT_SUCCESS);
 }
 

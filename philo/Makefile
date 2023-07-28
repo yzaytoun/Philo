@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 17:16:01 by yzaytoun          #+#    #+#              #
-#    Updated: 2023/07/27 18:57:09 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/07/28 17:47:12 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,7 +71,7 @@ all: $(NAME)
 
 $(NAME): $(BANNER) $(PHILO_OBJ)
 	@echo "$(LIGHTPURPLE)Creating Object Files"
-	@$(CC) $(PHILO_OBJ) -o $@ $(PTHREAD) $(SANITIAZE_ADD)
+	@$(CC) $(PHILO_OBJ) -o $@ $(PTHREAD) $(SANITIAZE)
 	@echo "$(WHITE)Compiling" $@
 	@chmod +x $@
 	@echo "$(PURPLE)************ 	DONE	 ****************\n"
