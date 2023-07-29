@@ -44,7 +44,7 @@ int			ft_run(t_process *process);
 //STUB - Time
 void		ft_printtime(void);
 void		ft_delay(int seconds);
-t_timeval	ft_gettimeofday(void);
+long		ft_gettimeofday(void);
 void		ft_addcurrenttime(t_params *params);
 
 
@@ -58,8 +58,5 @@ void		ft_threadexecute(t_process *process,
 void		ft_eat(t_process *process, int philo_id);
 void		ft_sleep(t_process *process, int philo_id);
 void		ft_isalive(t_process *process, int philo_id);
-
-//STUB - Auxiliary Functions
-void		ft_bzero(void *pointer, size_t n);
 
 #endif		/*End Philo.h*/

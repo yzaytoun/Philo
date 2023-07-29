@@ -75,7 +75,7 @@ void	*ft_apply(t_process *process, int (*f)(t_process *, int))
 	count = 0;
 	while (count < process->params.philo_num)
 	{
-		if ((int)ft_try((*f)(process, count)) == DIED)
+		if ((size_t)ft_try((*f)(process, count)) == DIED)
 			return ((void *)DIED);
 		++count;
 	}

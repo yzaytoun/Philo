@@ -20,11 +20,11 @@ void	ft_eat(t_process *process, int philo_id)
 		&& process->philo[philo_id].right_fork.is_used == TRUE)
 	{
 		ft_printstatus(philo_id, EATING);
-		while (process->philo[philo_id].timer.usec
-			< process->params.time_to_eat.usec)
+		while (process->philo[philo_id].timer
+			< process->params.time_to_eat)
 		{
 			ft_delay(5);
-			process->philo[philo_id].timer.usec++;
+			process->philo[philo_id].timer++;
 		}
 		process->philo[philo_id].data.eat_count++;
 		process->philo[philo_id].laststatus = EATING;
@@ -39,11 +39,11 @@ void	ft_sleep(t_process *process, int philo_id)
 		&& process->philo[philo_id].laststatus == EATING)
 	{
 		ft_printstatus(process->philo[philo_id].id, SLEEPING);
-		while (process->philo[philo_id].timer.usec
-			< process->params.time_to_sleep.usec)
+		while (process->philo[philo_id].timer
+			< process->params.time_to_sleep)
 		{
 			ft_delay(5);
-			process->philo[philo_id].timer.usec++;
+			process->philo[philo_id].timer++;
 		}
 		process->philo[philo_id].left_fork.is_used = FALSE;
 		process->philo[philo_id].right_fork.is_used = FALSE;
@@ -56,8 +56,8 @@ void	ft_sleep(t_process *process, int philo_id)
 //ANCHOR - Is alive
 void	ft_isalive(t_process *process, int philo_id)
 {
-	if (process->philo[philo_id].timer.usec
-		< (process->params.time_to_die.usec))
+	if (process->philo[philo_id].timer
+		< (process->params.time_to_die))
 		process->philo[philo_id].laststatus = DIED;
 }
 

@@ -42,19 +42,16 @@ static void	ft_getforks(t_process *process, int philo_id)
 void	*ft_routine(t_philo *philo)
 {
 	t_process	*process;
-	int			philo_id;
 
 	process = philo->process;
-	philo_id = philo->id;
-	ft_delay(5);
-	while (philo[philo_id].timer.usec
-		< (process->params.time_to_die.usec))
+	while (philo->timer < process->params.time_to_die)
 	{
+		ft_printstatus(philo->id, philo->laststatus);
 		ft_threadexecute(process, ft_getforks, philo->id);
-		ft_threadexecute(process, ft_eat, philo->id);
-		ft_threadexecute(process, ft_sleep, philo->id);
-		ft_threadexecute(process, ft_isalive, philo->id);
-		philo[philo_id].timer = ft_gettimeofday();
+		//ft_threadexecute(process, ft_eat, philo->id);
+		//ft_threadexecute(process, ft_sleep, philo->id);
+		//ft_threadexecute(process, ft_isalive, philo->id);
+		philo->timer++;
 	}
 	return ((void *)(uintptr_t)philo->laststatus);
 }
@@ -65,11 +62,9 @@ int	ft_run(t_process *process)
 	if (!process || process->philo == NULL)
 		return (EXIT_FAILURE);
 	ft_try(pthread_mutex_init(&process->mutex, NULL));
-	ft_apply(process, ft_updatetimer);
 	ft_addcurrenttime(&process->params);
+	ft_apply(process, ft_updatetimer);
 	ft_apply(process, ft_createthread);
-	if ((int)ft_apply(process, ft_threadjoin) == DIED)
-		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 

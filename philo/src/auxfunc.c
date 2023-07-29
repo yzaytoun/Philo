@@ -32,11 +32,11 @@ void	ft_assign_params(t_params *params, int count, long input)
 	if (count == 1)
 		params->philo_num = input;
 	else if (count == 2)
-		params->time_to_die.usec = input;
+		params->time_to_die = input;
 	else if (count == 3)
-		params->time_to_eat.usec = input;
+		params->time_to_eat = input;
 	else if (count == 4)
-		params->time_to_sleep.usec = input;
+		params->time_to_sleep = input;
 	else if (count == 5)
 		params->repetition_num = input;
 }

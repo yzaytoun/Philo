@@ -32,8 +32,10 @@ int	ft_assign_ids(t_process *process, int count)
 int	ft_createthread(t_process *process, int count)
 {
 	process->philo[count].process = process;
-	ft_try(pthread_create(&(process->philo[count].thread), NULL,
+	ft_try(pthread_create(&process->philo[count].thread, NULL,
 			(void *)ft_routine, &process->philo[count]));
+	ft_try(pthread_join(process->philo[count].thread, (void *)
+			(uintptr_t) &process->philo[count].laststatus));
 	return (EXIT_SUCCESS);
 }
 
@@ -53,7 +55,7 @@ int	ft_threadjoin(t_process *process, int count)
 //ANCHOR - Update timers and timelimits
 int	ft_updatetimer(t_process *process, int count)
 {
-	process->philo[count].timer = ft_gettimeofday();
+	process->philo[count].timer = process->params.start_time;
 	return (EXIT_SUCCESS);
 }
 

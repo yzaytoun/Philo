@@ -35,12 +35,6 @@
 # define SEC_PER_MIN 60
 
 /*Structs*/
-typedef struct s_timeval
-{
-	long		currtime;
-	long		usec;
-}				t_timeval;
-
 typedef struct s_meta /*Meta data about the philo*/
 {
 	int	eat_count;
@@ -65,17 +59,18 @@ typedef struct s_philo
 	pthread_t	thread;
 	t_fork		left_fork;
 	t_fork		right_fork;
-	t_timeval	timer;
+	long		timer;
 	t_process	*process;
 }				t_philo;
 
 typedef struct s_params
 {
 	int			philo_num;
-	t_timeval	time_to_die;
-	t_timeval	time_to_eat;
-	t_timeval	time_to_sleep;
+	long		time_to_die;
+	long		time_to_eat;
+	long		time_to_sleep;
 	int			repetition_num;
+	long		start_time;
 }				t_params;
 
 struct s_process

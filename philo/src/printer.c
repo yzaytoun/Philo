@@ -39,8 +39,9 @@ static void	ft_print_status(int laststatus)
 //ANCHOR - Print laststatus
 void	ft_printstatus(int philo_id, int laststatus)
 {
-	ft_printtime();
-	printf("\tphilo %d \t", philo_id);
+
+	ft_delay(2);
+	printf("[\U0001F570 %ld] \tphilo %d ", ft_gettimeofday(), philo_id);
 	ft_print_status(laststatus);
 }
 

@@ -31,43 +31,28 @@ void	ft_delay(int seconds)
 }
 
 //ANCHOR - Set Timer
-t_timeval	ft_gettimeofday(void)
+long	ft_gettimeofday(void)
 {
 	struct timeval	time;
 	struct timezone	timezone;
-	t_timeval		current_time;
+	long			current_time;
 
 	if (gettimeofday(&time, &timezone) != 0)
 		ft_perror("Get time of day");
-	current_time.currtime
-		= time.tv_sec % SEC_PER_DAY
-		+ timezone.tz_dsttime * SEC_PER_HOUR
-		- timezone.tz_minuteswest * SEC_PER_MIN;
-	current_time.currtime = (current_time.currtime + SEC_PER_DAY) % SEC_PER_DAY;
-	current_time.usec
+	current_time
 		= time.tv_usec % SEC_PER_DAY
 		+ timezone.tz_dsttime * SEC_PER_HOUR
 		- timezone.tz_minuteswest * SEC_PER_MIN;
 	return (current_time);
 }
 
-//ANCHOR - printtime
-void	ft_printtime(void)
-{
-	printf("[\U0001F570 %d]", (int)ft_gettimeofday().usec / 1000);
-}
-
 //ANCHOR - Add current time to time limit
 void	ft_addcurrenttime(t_params *params)
 {
-	long	time;
-
-	time = params->time_to_die.usec;
-	params->time_to_die.usec = time + ft_gettimeofday().usec;
-	time = params->time_to_eat.usec;
-	params->time_to_eat.usec = time + ft_gettimeofday().usec;
-	time = params->time_to_sleep.usec;
-	params->time_to_sleep.usec = time + ft_gettimeofday().usec;
+	params->start_time = ft_gettimeofday();
+	params->time_to_die += params->start_time;
+	params->time_to_eat += params->start_time;
+	params->time_to_sleep += params->start_time;
 }
 
 //!SECTION
