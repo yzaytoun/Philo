@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:51:35 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/28 16:52:02 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/31 18:13:46 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ long	ft_gettimeofday(void)
 //ANCHOR - Add current time to time limit
 void	ft_addcurrenttime(t_params *params)
 {
-	params->start_time = ft_gettimeofday();
+	params->start_time = ft_gettimeofday() / 1000;
 	params->time_to_die += params->start_time;
 	params->time_to_eat += params->start_time;
 	params->time_to_sleep += params->start_time;

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:13:03 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/28 18:17:39 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/31 19:03:56 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,7 @@ int	ft_createthread(t_process *process, int count)
 			(void *)ft_routine, &process->philo[count]));
 	ft_try(pthread_join(process->philo[count].thread, (void *)
 			(uintptr_t) &process->philo[count].laststatus));
-	return (EXIT_SUCCESS);
-}
-
-//ANCHOR - Detach threads
-int	ft_threadjoin(t_process *process, int count)
-{
-	ft_try(pthread_join(process->philo[count].thread, (void *)
-			(uintptr_t) &process->philo[count].laststatus));
-	if (process->philo[count].laststatus == DIED)
-	{
-		ft_printstatus(process->philo[count].id, DIED);
-		return (DIED);
-	}
-	return (EXIT_SUCCESS);
+	return (process->philo[count].laststatus);
 }
 
 //ANCHOR - Update timers and timelimits
@@ -59,4 +46,15 @@ int	ft_updatetimer(t_process *process, int count)
 	return (EXIT_SUCCESS);
 }
 
+//ANCHOR - Initiate Fork mutexes
+int	ft_initmutex(t_process *process, int count)
+{
+	return (pthread_mutex_init(&process->fork[count].mutex, NULL));
+}
+
+//ANCHOR - Destroy fork mutexes
+int	ft_destroymutex(t_process *process, int count)
+{
+	return (pthread_mutex_destroy(&process->fork[count].mutex));
+}
 //!SECTION

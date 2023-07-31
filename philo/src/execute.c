@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 17:45:56 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/27 20:49:54 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/31 18:18:35 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_eat(t_process *process, int philo_id)
 	if (process->philo[philo_id].left_fork.is_used == TRUE
 		&& process->philo[philo_id].right_fork.is_used == TRUE)
 	{
-		ft_printstatus(philo_id, EATING);
+		ft_printstatus(process->philo[philo_id], EATING);
 		while (process->philo[philo_id].timer
 			< process->params.time_to_eat)
 		{
@@ -38,7 +38,7 @@ void	ft_sleep(t_process *process, int philo_id)
 		&& process->philo[philo_id].right_fork.is_used == TRUE
 		&& process->philo[philo_id].laststatus == EATING)
 	{
-		ft_printstatus(process->philo[philo_id].id, SLEEPING);
+		ft_printstatus(process->philo[philo_id], SLEEPING);
 		while (process->philo[philo_id].timer
 			< process->params.time_to_sleep)
 		{
@@ -49,7 +49,7 @@ void	ft_sleep(t_process *process, int philo_id)
 		process->philo[philo_id].right_fork.is_used = FALSE;
 	}
 	else
-		ft_printstatus(philo_id, THINKING);
+		ft_printstatus(process->philo[philo_id], THINKING);
 	process->philo[philo_id].data.sleep_count++;
 }
 

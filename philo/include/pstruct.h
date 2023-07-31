@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:16:19 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/28 17:45:06 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/31 19:13:43 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 # define SEC_PER_DAY 86400
 # define SEC_PER_HOUR 3600
 # define SEC_PER_MIN 60
+# define LEFT 0
+# define RIGHT 1
 
 /*Structs*/
 typedef struct s_meta /*Meta data about the philo*/
@@ -45,8 +47,9 @@ typedef struct s_meta /*Meta data about the philo*/
 
 typedef struct s_fork
 {
-	int		id;
-	int		is_used;
+	int				id;
+	int				is_used;
+	pthread_mutex_t	mutex;
 }			t_fork;
 
 typedef struct s_process	t_process;

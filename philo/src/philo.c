@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 16:56:07 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/28 18:11:17 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/07/31 17:57:08 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ t_process	*ft_createprocess(t_params params)
 void	ft_freeall(t_process **process)
 {
 	ft_try(pthread_mutex_destroy(&(*process)->mutex));
+	ft_apply((*process), ft_destroymutex);
 	free((*process)->philo);
 	free((*process)->fork);
 	free((*process));
