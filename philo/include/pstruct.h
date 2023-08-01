@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:16:19 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/31 19:13:43 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/01 17:37:33 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ typedef struct s_meta /*Meta data about the philo*/
 	int	sleep_count;
 	int	think_count;
 }				t_meta;
-
 
 typedef struct s_fork
 {
@@ -82,6 +81,7 @@ struct s_process
 	t_philo			*philo;
 	t_params		params;
 	t_fork			*fork;
+	int				counter;
 };
 
 #endif		/* pstruct header */
