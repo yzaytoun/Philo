@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:13:03 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/31 19:03:56 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/05 16:42:44 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,10 @@ int	ft_assign_ids(t_process *process, int count)
 int	ft_createthread(t_process *process, int count)
 {
 	process->philo[count].process = process;
-	ft_try(pthread_create(&process->philo[count].thread, NULL,
-			(void *)ft_routine, &process->philo[count]));
-	ft_try(pthread_join(process->philo[count].thread, (void *)
-			(uintptr_t) &process->philo[count].laststatus));
-	return (process->philo[count].laststatus);
-}
-
-//ANCHOR - Update timers and timelimits
-int	ft_updatetimer(t_process *process, int count)
-{
-	process->philo[count].timer = process->params.start_time;
-	return (EXIT_SUCCESS);
+	return (
+		pthread_create(&process->philo[count].thread, NULL,
+			(void *)ft_routine, (void *)(&process->philo[count]))
+	);
 }
 
 //ANCHOR - Initiate Fork mutexes

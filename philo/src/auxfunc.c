@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 18:51:14 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/28 16:50:05 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/05 17:38:03 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,40 @@
 //ANCHOR - check return value
 void	*ft_try(int laststatus)
 {
-	if (laststatus == DIED)
-		return ((void *)DIED);
-	else if (laststatus && laststatus != DIED)
-	{
-		ft_perror("Error");
-		printf("Status -> %d\n", laststatus);
-	}
+	if (laststatus)
+		return ((void *)(uintptr_t) laststatus);
 	return (NULL);
+}
+
+//ANCHOR - Catch errors
+void	ft_catch(t_process *process)
+{
+	if (process->catch_status != EXIT_SUCCESS)
+	{
+		printf("Last status %zu\n", process->catch_status);
+		ft_apply(process, ft_threadjoin);
+		ft_freeall(&process);
+		ft_perror("Error");
+	}
+}
+
+//ANCHOR - Check status
+void	ft_checkstatus(t_process *process)
+{
+	process->counter = 0;
+	ft_try(pthread_mutex_lock(&process->main_mutex));
+	while (process->counter < process->params.philo_num)
+	{
+		if (process->philo[process->counter].laststatus == DIED)
+		{
+			printf("Last status %zu\n", process->catch_status);
+			ft_apply(process, ft_threadjoin);
+			ft_freeall(&process);
+			exit(EXIT_SUCCESS);
+		}
+		process->counter++;
+	}
+	ft_try(pthread_mutex_unlock(&process->main_mutex));
 }
 
 //ANCHOR - AUX Assign input
