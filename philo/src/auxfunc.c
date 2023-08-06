@@ -34,10 +34,10 @@ void	ft_catch(t_process *process)
 }
 
 //ANCHOR - Check status
-void	ft_checkstatus(t_process *process)
+/*void	ft_checkstatus(t_process *process)
 {
 	process->counter = 0;
-	ft_try(pthread_mutex_lock(&process->main_mutex));
+	ft_try(pthread_mutex_lock(&process->mainhthread.mutex));
 	while (process->counter < process->params.philo_num)
 	{
 		if (process->philo[process->counter].laststatus == DIED)
@@ -49,14 +49,14 @@ void	ft_checkstatus(t_process *process)
 		}
 		process->counter++;
 	}
-	ft_try(pthread_mutex_unlock(&process->main_mutex));
+	ft_try(pthread_mutex_unlock(&process->mainhthread.mutex));
 }
-
+*/
 //ANCHOR - AUX Assign input
 void	ft_assign_params(t_params *params, int count, long input)
 {
 	if (count == 1)
-		params->philo_num = input;
+		params->philo_num = input + 1;
 	else if (count == 2)
 		params->time_to_die = input;
 	else if (count == 3)

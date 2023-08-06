@@ -37,15 +37,26 @@ int	ft_threadjoin(t_process *process, int count)
 	void	*status;
 
 	ft_try(pthread_join(process->philo[count].thread, &status));
-	if ((size_t)status == DIED)
-		process->catch_status = DIED;
+	if (status)
+		if ((size_t)status == DIED)
+			process->catch_status = DIED;
 	return (EXIT_SUCCESS);
 }
 
-//ANCHOR - Thread detach
-int	ft_detachthread(t_process *process, int count)
+//ANCHOR - Check lock
+void	ft_checklock(t_process *process, t_philo *philo)
 {
-	return (pthread_detach(process->philo[count].thread));
+	ft_try(pthread_mutex_lock(&process->main_mutex));
+	if (process->lock == FALSE)
+		ft_routine(process, philo);
+	ft_try(pthread_mutex_unlock(&process->main_mutex));
 }
 
+//ANCHOR - initthread
+void	ft_init_thread(t_process *process, t_philo *philo)
+{
+	(void)process;
+	philo->laststatus = STARTED;
+	ft_printstatus(*philo);
+}
 //!SECTION

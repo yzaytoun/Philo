@@ -33,13 +33,13 @@ int	ft_createthread(t_process *process, int count)
 {
 	process->philo[count].process = process;
 	return (
-		pthread_create(&process->philo[count].thread, NULL,
-			(void *)ft_routine, (void *)(&process->philo[count]))
+		pthread_create(&process->philo[count].thread, NULL
+			, ft_mainthread_loop, &process->philo[count])
 	);
 }
 
 //ANCHOR - Initiate Fork mutexes
-int	ft_initmutex(t_process *process, int count)
+int	ft_initforkmutex(t_process *process, int count)
 {
 	return (pthread_mutex_init(&process->fork[count].mutex, NULL));
 }

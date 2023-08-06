@@ -36,6 +36,8 @@ static void	ft_print_status(int laststatus)
 		printf("is thinking \U0001F9D0 \n");
 	else if (laststatus == DIED)
 		printf("died \U0001F480 \n");
+	else if (laststatus == STARTED)
+		printf("Thread Started !!! \n");
 }
 
 //ANCHOR - Print laststatus

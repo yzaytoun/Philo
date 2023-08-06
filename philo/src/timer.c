@@ -47,7 +47,7 @@ long	ft_gettimeofday(void)
 }
 
 //ANCHOR - Add current time to time limit
-void	ft_addcurrenttime(t_params *params)
+void	ft_marktime(t_params *params)
 {
 	params->start_time = ft_gettimeofday() / 1000;
 	params->time_to_die += params->start_time;

@@ -25,6 +25,7 @@
 /*Macros*/
 # define TRUE 1
 # define FALSE !TRUE
+# define STARTED 10
 # define EATING 11
 # define TAKEN_FORK 22
 # define SLEEPING 33
@@ -73,6 +74,7 @@ typedef struct s_params
 	long		time_to_sleep;
 	int			repetition_num;
 	long		start_time;
+	int			philo_status;
 }				t_params;
 
 struct s_process
@@ -84,6 +86,7 @@ struct s_process
 	t_fork			*fork;
 	int				counter;
 	size_t			catch_status;
+	int				lock;
 };
 
 #endif		/* pstruct header */

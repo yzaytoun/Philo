@@ -62,6 +62,7 @@ t_process	*ft_createprocess(t_params params)
 void	ft_freeall(t_process **process)
 {
 	ft_try(pthread_mutex_destroy(&(*process)->mutex));
+	ft_try(pthread_mutex_destroy(&(*process)->main_mutex));
 	ft_apply((*process), ft_destroymutex);
 	free((*process)->philo);
 	free((*process)->fork);

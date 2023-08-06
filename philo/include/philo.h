@@ -34,24 +34,24 @@ void		ft_freeall(t_process **process);
 void		*ft_try(int laststatus);
 void		ft_assign_params(t_params *params, int count, long input);
 void		ft_catch(t_process *process);
-void		ft_checkstatus(t_process *process);
 
 //STUB - Apply
 int			ft_assign_ids(t_process *process, int philo_id);
-int			ft_initmutex(t_process *process, int count);
+int			ft_initforkmutex(t_process *process, int count);
 int			ft_destroymutex(t_process *process, int count);
 int			ft_createthread(t_process *process, int philo_id);
 
 
 //STUB - Routine
-void		*ft_routine(t_philo *philo);
+void		ft_routine(t_process *process, t_philo *philo);
 void		ft_run(t_process *process);
+void		*ft_mainthread_loop(void *args);
 
 
 //STUB - Time
 void		ft_delay(int seconds);
 long		ft_gettimeofday(void);
-void		ft_addcurrenttime(t_params *params);
+void		ft_marktime(t_params *params);
 
 
 //STUB - Threads
@@ -59,11 +59,16 @@ void		ft_threadexecute(t_process *process,
 				void (*f)(t_process *, t_philo *), t_philo *philo);
 int			ft_threadlimit(t_process *process, t_philo *philo);
 int			ft_threadjoin(t_process *process, int philo_id);
-int			ft_detachthread(t_process *process, int count);
+void		ft_checklock(t_process *process, t_philo *philo);
+void		ft_init_thread(t_process *process, t_philo *philo);
+
 
 //STUB - Execute
 void		ft_eat(t_process *process, t_philo *philo);
 void		ft_sleep(t_process *process, t_philo *philo);
 void		ft_isalive(t_process *process, t_philo *philo);
+
+//STUB - Forks
+void		ft_getforks(t_process *process, t_philo *philo);
 
 #endif		/*End Philo.h*/
