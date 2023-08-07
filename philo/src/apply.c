@@ -31,11 +31,15 @@ int	ft_assign_ids(t_process *process, int count)
 //ANCHOR - Create Threads
 int	ft_createthread(t_process *process, int count)
 {
+	int	status;
+
 	process->philo[count].process = process;
-	return (
-		pthread_create(&process->philo[count].thread, NULL
-			, ft_mainthread_loop, &process->philo[count])
-	);
+	status = pthread_create(&process->philo[count].thread, NULL
+			, ft_mainthread_loop, &process->philo[count]);
+	if (status)
+		pthread_detach(process->philo[count].thread);
+	return (status);
+	
 }
 
 //ANCHOR - Initiate Fork mutexes

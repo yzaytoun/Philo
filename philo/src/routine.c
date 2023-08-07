@@ -23,6 +23,12 @@ static void	ft_philo_statusupdate(t_process *process)
 	{
 		if (process->philo[process->counter].laststatus == STARTED)
 			process->params.philo_status++;
+		else if (process->philo[process->counter].laststatus == DIED)
+		{
+			process->catch_status = DIED;
+			ft_try(pthread_mutex_unlock(&process->main_mutex));
+			return ;
+		}
 		process->counter++;
 	}
 	if (process->params.philo_status == process->params.philo_num)
@@ -41,11 +47,10 @@ void	ft_routine(t_process *process, t_philo *philo)
 		ft_threadexecute(process, ft_getforks, philo);
 		ft_threadexecute(process, ft_eat, philo);
 		ft_threadexecute(process, ft_sleep, philo);
-		philo->timer++;
+		ft_threadexecute(process, ft_addtime, philo);
 	}
 }
 
-//FIXME - Pending: Add break condition and catch status
 //ANCHOR - Mainthread loop
 void	*ft_mainthread_loop(void *args)
 {
@@ -55,15 +60,9 @@ void	*ft_mainthread_loop(void *args)
 	philo = (t_philo *)args;
 	process = philo->process;
 	ft_threadexecute(process, ft_init_thread, philo);
-	while (TRUE)
-	{
-		ft_checklock(process, philo);
+	while (process->lock != FALSE)
 		ft_philo_statusupdate(process);
-		//Check dead
-	}
-	//ft_routine(process, philo);
-	//ft_try(pthread_mutex_unlock(&process->main_mutex));
-	//ft_threadexecute(process, ft_isalive, philo);
+	ft_checklock(process, philo);
 	return ((void *)(uintptr_t)philo->laststatus);
 }
 
@@ -79,6 +78,7 @@ void	ft_run(t_process *process)
 	ft_apply(process, ft_initforkmutex);
 	ft_apply(process, ft_createthread);
 	ft_apply(process, ft_threadjoin);
+	ft_checkstatus(process);
 }
 
 //!SECTION

@@ -34,6 +34,7 @@ void		ft_freeall(t_process **process);
 void		*ft_try(int laststatus);
 void		ft_assign_params(t_params *params, int count, long input);
 void		ft_catch(t_process *process);
+void		ft_checkstatus(t_process *process);
 
 //STUB - Apply
 int			ft_assign_ids(t_process *process, int philo_id);
@@ -67,6 +68,7 @@ void		ft_init_thread(t_process *process, t_philo *philo);
 void		ft_eat(t_process *process, t_philo *philo);
 void		ft_sleep(t_process *process, t_philo *philo);
 void		ft_isalive(t_process *process, t_philo *philo);
+void		ft_addtime(t_process *process, t_philo *philo);
 
 //STUB - Forks
 void		ft_getforks(t_process *process, t_philo *philo);

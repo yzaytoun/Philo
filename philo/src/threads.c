@@ -48,7 +48,12 @@ void	ft_checklock(t_process *process, t_philo *philo)
 {
 	ft_try(pthread_mutex_lock(&process->main_mutex));
 	if (process->lock == FALSE)
+	{
+		printf("philo = %d\n", philo->id);
+		ft_try(pthread_mutex_unlock(&process->main_mutex));
 		ft_routine(process, philo);
+		return ;
+	}
 	ft_try(pthread_mutex_unlock(&process->main_mutex));
 }
 

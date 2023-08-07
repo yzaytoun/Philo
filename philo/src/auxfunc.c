@@ -34,24 +34,17 @@ void	ft_catch(t_process *process)
 }
 
 //ANCHOR - Check status
-/*void	ft_checkstatus(t_process *process)
+void	ft_checkstatus(t_process *process)
 {
-	process->counter = 0;
-	ft_try(pthread_mutex_lock(&process->mainhthread.mutex));
-	while (process->counter < process->params.philo_num)
+	if (process->catch_status == DIED)
 	{
-		if (process->philo[process->counter].laststatus == DIED)
-		{
-			printf("Last status %zu\n", process->catch_status);
-			ft_apply(process, ft_threadjoin);
-			ft_freeall(&process);
-			exit(EXIT_SUCCESS);
-		}
-		process->counter++;
+		printf("Last status %zu\n", process->catch_status);
+		ft_apply(process, ft_threadjoin);
+		ft_freeall(&process);
+		exit(EXIT_SUCCESS);
 	}
-	ft_try(pthread_mutex_unlock(&process->mainhthread.mutex));
 }
-*/
+
 //ANCHOR - AUX Assign input
 void	ft_assign_params(t_params *params, int count, long input)
 {

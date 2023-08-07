@@ -80,7 +80,7 @@ void	*ft_apply(t_process *process, int (*f)(t_process *, int))
 	{
 		status = (size_t)ft_try((*f)(process, count));
 		if (status)
-			process->catch_status = status;
+			ft_catch(process);
 		++count;
 	}
 	return (NULL);

@@ -35,7 +35,7 @@ void	ft_eat(t_process *process, t_philo *philo)
 	{
 		philo->laststatus = EATING;
 		ft_printstatus(*philo);
-		ft_delay(2);
+		ft_delay(10);
 		philo->data.eat_count++;
 		ft_dropforks(process, philo);
 	}
@@ -49,7 +49,7 @@ void	ft_sleep(t_process *process, t_philo *philo)
 	{
 		philo->laststatus = SLEEPING;
 		ft_printstatus(*philo);
-		ft_delay(2);
+		ft_delay(20);
 		philo->data.sleep_count++;
 	}
 }
@@ -64,4 +64,11 @@ void	ft_isalive(t_process *process, t_philo *philo)
 	}
 }
 
+//ANCHOR - Increment loop
+void	ft_addtime(t_process *process, t_philo *philo)
+{
+	(void)process;
+	philo->timer += 20;
+	ft_delay(10);
+}
 //!SECTION
