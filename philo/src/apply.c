@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:13:03 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/05 16:42:44 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/08 20:49:14 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int	ft_createthread(t_process *process, int count)
 	if (status)
 		pthread_detach(process->philo[count].thread);
 	return (status);
-	
 }
 
 //ANCHOR - Initiate Fork mutexes

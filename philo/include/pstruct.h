@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:16:19 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/05 17:25:44 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/08 20:00:56 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ typedef struct s_params
 	long		time_to_sleep;
 	int			repetition_num;
 	long		start_time;
-	int			philo_status;
+	int			philo_status_counter;
 }				t_params;
 
 struct s_process

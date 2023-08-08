@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 18:51:14 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/05 17:38:03 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/08 20:18:16 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_checkstatus(t_process *process)
 void	ft_assign_params(t_params *params, int count, long input)
 {
 	if (count == 1)
-		params->philo_num = input + 1;
+		params->philo_num = input;
 	else if (count == 2)
 		params->time_to_die = input;
 	else if (count == 3)

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 19:49:16 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/05 17:11:17 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/08 21:08:15 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,21 @@ int	ft_threadlimit(t_process *process, t_philo *philo)
 //ANCHOR - Thread join
 int	ft_threadjoin(t_process *process, int count)
 {
-	void	*status;
+	size_t	status;
 
-	ft_try(pthread_join(process->philo[count].thread, &status));
+	ft_try(pthread_join(process->philo[count].thread, (void *)(&status)));
 	if (status)
-		if ((size_t)status == DIED)
+		if (status == DIED)
 			process->catch_status = DIED;
 	return (EXIT_SUCCESS);
 }
 
 //ANCHOR - Check lock
-void	ft_checklock(t_process *process, t_philo *philo)
+void	ft_startroutine(t_process *process, t_philo *philo)
 {
 	ft_try(pthread_mutex_lock(&process->main_mutex));
 	if (process->lock == FALSE)
 	{
-		printf("philo = %d\n", philo->id);
 		ft_try(pthread_mutex_unlock(&process->main_mutex));
 		ft_routine(process, philo);
 		return ;

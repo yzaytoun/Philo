@@ -6,48 +6,27 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 16:33:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/05 17:38:38 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/08 21:07:50 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 //SECTION - Routine Section
-//ANCHOR - Update status
-static void	ft_philo_statusupdate(t_process *process)
-{
-	ft_try(pthread_mutex_lock(&process->main_mutex));
-	process->counter = 0;
-	process->params.philo_status = 0;
-	while (process->counter < process->params.philo_num)
-	{
-		if (process->philo[process->counter].laststatus == STARTED)
-			process->params.philo_status++;
-		else if (process->philo[process->counter].laststatus == DIED)
-		{
-			process->catch_status = DIED;
-			ft_try(pthread_mutex_unlock(&process->main_mutex));
-			return ;
-		}
-		process->counter++;
-	}
-	if (process->params.philo_status == process->params.philo_num)
-		process->lock = FALSE;
-	ft_try(pthread_mutex_unlock(&process->main_mutex));
-}
-
 //ANCHOR - Routine
 void	ft_routine(t_process *process, t_philo *philo)
 {
 	philo->timer = process->params.start_time;
 	while (philo->timer < process->params.time_to_die
+		&& philo->laststatus != DIED
 		&& ft_threadlimit(process, philo) == FALSE)
 	{
-		ft_threadexecute(process, ft_isalive, philo);
 		ft_threadexecute(process, ft_getforks, philo);
 		ft_threadexecute(process, ft_eat, philo);
 		ft_threadexecute(process, ft_sleep, philo);
 		ft_threadexecute(process, ft_addtime, philo);
+		ft_threadexecute(process, ft_isalive, philo);
+		ft_updatestatus(process, ft_check_deadthread);
 	}
 }
 
@@ -61,8 +40,8 @@ void	*ft_mainthread_loop(void *args)
 	process = philo->process;
 	ft_threadexecute(process, ft_init_thread, philo);
 	while (process->lock != FALSE)
-		ft_philo_statusupdate(process);
-	ft_checklock(process, philo);
+		ft_updatestatus(process, ft_all_threadsactive);
+	ft_startroutine(process, philo);
 	return ((void *)(uintptr_t)philo->laststatus);
 }
 

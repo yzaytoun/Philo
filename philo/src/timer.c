@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:51:35 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/31 18:13:46 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/08 19:42:55 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,15 @@ long	ft_gettimeofday(void)
 		= time.tv_usec % SEC_PER_DAY
 		+ timezone.tz_dsttime * SEC_PER_HOUR
 		- timezone.tz_minuteswest * SEC_PER_MIN;
-	return (current_time);
+	return (current_time / 1000);
 }
 
 //ANCHOR - Add current time to time limit
 void	ft_marktime(t_params *params)
 {
-	params->start_time = ft_gettimeofday() / 1000;
+	params->start_time = ft_gettimeofday();
 	params->time_to_die += params->start_time;
 	params->time_to_eat += params->start_time;
 	params->time_to_sleep += params->start_time;
 }
-
 //!SECTION

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 17:45:56 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/05 13:09:52 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/08 20:16:45 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,18 @@ static void	ft_dropforks(t_process *process, t_philo *philo)
 
 void	ft_eat(t_process *process, t_philo *philo)
 {
+	const int	timelimit = philo->timer + process->params.time_to_eat;
+
 	if (philo->left_fork.is_used == TRUE
 		&& philo->right_fork.is_used == TRUE)
 	{
 		philo->laststatus = EATING;
 		ft_printstatus(*philo);
-		ft_delay(10);
+		while (philo->timer < timelimit)
+		{
+			philo->timer = ft_gettimeofday();
+			ft_delay(5);
+		}
 		philo->data.eat_count++;
 		ft_dropforks(process, philo);
 	}
@@ -44,12 +50,17 @@ void	ft_eat(t_process *process, t_philo *philo)
 //ANCHOR - Sleep
 void	ft_sleep(t_process *process, t_philo *philo)
 {
-	(void)process;
+	const int	timelimit = philo->timer + process->params.time_to_sleep;
+
 	if (philo->laststatus == EATING)
 	{
 		philo->laststatus = SLEEPING;
 		ft_printstatus(*philo);
-		ft_delay(20);
+		while (philo->timer < timelimit)
+		{
+			philo->timer = ft_gettimeofday();
+			ft_delay(5);
+		}
 		philo->data.sleep_count++;
 	}
 }
@@ -68,7 +79,6 @@ void	ft_isalive(t_process *process, t_philo *philo)
 void	ft_addtime(t_process *process, t_philo *philo)
 {
 	(void)process;
-	philo->timer += 20;
-	ft_delay(10);
+	philo->timer += ft_gettimeofday();
 }
 //!SECTION

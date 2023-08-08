@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 17:19:37 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/05 17:38:59 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/08 20:11:33 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void		ft_threadexecute(t_process *process,
 				void (*f)(t_process *, t_philo *), t_philo *philo);
 int			ft_threadlimit(t_process *process, t_philo *philo);
 int			ft_threadjoin(t_process *process, int philo_id);
-void		ft_checklock(t_process *process, t_philo *philo);
+void		ft_startroutine(t_process *process, t_philo *philo);
 void		ft_init_thread(t_process *process, t_philo *philo);
 
 
@@ -73,4 +73,8 @@ void		ft_addtime(t_process *process, t_philo *philo);
 //STUB - Forks
 void		ft_getforks(t_process *process, t_philo *philo);
 
+//STUB - Update status
+void		ft_updatestatus(t_process *process, int (*func)(t_process *, int));
+int			ft_check_deadthread(t_process *process, int counter);
+int			ft_all_threadsactive(t_process *process, int counter);
 #endif		/*End Philo.h*/
