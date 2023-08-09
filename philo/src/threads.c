@@ -34,8 +34,8 @@ int	ft_threadlimit(t_process *process, t_philo *philo)
 //ANCHOR - Thread join
 int	ft_threadjoin(t_process *process, int count)
 {
-	size_t	status;
-
+	size_t	status = 0;
+	
 	ft_try(pthread_join(process->philo[count].thread, (void *)(&status)));
 	if (status)
 		if (status == DIED)
@@ -46,14 +46,11 @@ int	ft_threadjoin(t_process *process, int count)
 //ANCHOR - Check lock
 void	ft_startroutine(t_process *process, t_philo *philo)
 {
-	ft_try(pthread_mutex_lock(&process->main_mutex));
-	if (process->lock == FALSE)
-	{
-		ft_try(pthread_mutex_unlock(&process->main_mutex));
 		ft_routine(process, philo);
+	if (process->lock == FALSE)
+	{	
 		return ;
 	}
-	ft_try(pthread_mutex_unlock(&process->main_mutex));
 }
 
 //ANCHOR - initthread

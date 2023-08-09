@@ -23,11 +23,13 @@ void	ft_routine(t_process *process, t_philo *philo)
 	{
 		ft_threadexecute(process, ft_getforks, philo);
 		ft_threadexecute(process, ft_eat, philo);
-		ft_threadexecute(process, ft_sleep, philo);
-		ft_threadexecute(process, ft_addtime, philo);
-		ft_threadexecute(process, ft_isalive, philo);
+		//ft_threadexecute(process, ft_sleep, philo);
+		//ft_threadexecute(process, ft_addtime, philo);
+		//ft_threadexecute(process, ft_isalive, philo);
 		ft_updatestatus(process, ft_check_deadthread);
+		philo->timer++;
 	}
+	ft_delay(5);
 }
 
 //ANCHOR - Mainthread loop
@@ -39,16 +41,10 @@ void	*ft_mainthread_loop(void *args)
 	philo = (t_philo *)args;
 	process = philo->process;
 	ft_threadexecute(process, ft_init_thread, philo);
-	while (process->lock != FALSE)
-		ft_updatestatus(process, ft_all_threadsactive);
+	//while (process->lock != FALSE)
+	//	ft_updatestatus(process, ft_all_threadsactive);
 	ft_startroutine(process, philo);
 	return ((void *)(uintptr_t)philo->laststatus);
-}
-
-int	printphilo(t_process *process, int count)
-{
-	ft_printstatus(process->philo[count]);
-	return (EXIT_SUCCESS);
 }
 
 //ANCHOR - Run
@@ -62,7 +58,6 @@ void	ft_run(t_process *process)
 	ft_marktime(&process->params);
 	ft_apply(process, ft_initforkmutex);
 	ft_apply(process, ft_createthread);
-	ft_apply(process, printphilo);
 	ft_apply(process, ft_threadjoin);
 	ft_checkstatus(process);
 }

@@ -38,10 +38,8 @@ void	ft_eat(t_process *process, t_philo *philo)
 		philo->laststatus = EATING;
 		ft_printstatus(*philo);
 		while (philo->timer < timelimit)
-		{
-			philo->timer = ft_gettimeofday();
-			ft_delay(5);
-		}
+			philo->timer += ft_gettimeofday();
+		
 		philo->data.eat_count++;
 		ft_dropforks(process, philo);
 	}
