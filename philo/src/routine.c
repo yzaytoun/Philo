@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 16:33:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/08 21:07:50 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/09 18:21:47 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,12 @@ void	*ft_mainthread_loop(void *args)
 	return ((void *)(uintptr_t)philo->laststatus);
 }
 
+int	printphilo(t_process *process, int count)
+{
+	ft_printstatus(process->philo[count]);
+	return (EXIT_SUCCESS);
+}
+
 //ANCHOR - Run
 void	ft_run(t_process *process)
 {
@@ -56,6 +62,7 @@ void	ft_run(t_process *process)
 	ft_marktime(&process->params);
 	ft_apply(process, ft_initforkmutex);
 	ft_apply(process, ft_createthread);
+	ft_apply(process, printphilo);
 	ft_apply(process, ft_threadjoin);
 	ft_checkstatus(process);
 }

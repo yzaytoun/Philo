@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 18:51:14 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/08 20:18:16 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/09 18:10:56 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@
 void	*ft_try(int laststatus)
 {
 	if (laststatus)
-		return ((void *)(uintptr_t) laststatus);
+	{
+		printf("status = %d\n", laststatus);
+		ft_perror("Error");
+	}
 	return (NULL);
 }
 
