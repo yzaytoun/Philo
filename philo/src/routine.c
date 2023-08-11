@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 16:33:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/09 18:21:47 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/11 18:22:11 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	*ft_mainthread_loop(void *args)
 	philo = (t_philo *)args;
 	process = philo->process;
 	ft_threadexecute(process, ft_init_thread, philo);
-	//while (process->lock != FALSE)
-	//	ft_updatestatus(process, ft_all_threadsactive);
+	while (process->lock != FALSE)
+		ft_updatestatus(process, ft_all_threadsactive);
 	ft_startroutine(process, philo);
 	return ((void *)(uintptr_t)philo->laststatus);
 }

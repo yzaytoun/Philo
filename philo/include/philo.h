@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 17:19:37 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/08 20:11:33 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/11 18:14:21 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_process	*ft_createprocess(t_params params);
 void		ft_freeall(t_process **process);
 
 //STUB - AUX functions
-void		*ft_try(int laststatus);
+void		ft_try(int status);
 void		ft_assign_params(t_params *params, int count, long input);
 void		ft_catch(t_process *process);
 void		ft_checkstatus(t_process *process);

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 18:51:14 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/09 18:10:56 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/11 18:37:48 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,18 @@
 
 //SECTION - Auxiliary functions
 //ANCHOR - check return value
-void	*ft_try(int laststatus)
+void	ft_try(int status)
 {
-	if (laststatus)
+	if (status)
 	{
-		printf("status = %d\n", laststatus);
-		ft_perror("Error");
+		printf("status = %d\n", status);
+		if (status == 16)
+			ft_perror("Resource busy");
+		else if (status == 11)
+			ft_perror("Resource deadlock avoided");
+		else
+			ft_perror("Error");
 	}
-	return (NULL);
 }
 
 //ANCHOR - Catch errors

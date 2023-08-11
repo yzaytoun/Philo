@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 16:56:07 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/09 18:14:14 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/11 18:19:43 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ static t_philo	*ft_createphilo(size_t size)
 {
 	t_philo	*philo;
 
-	if (!size)
+	if (!size || size == 0)
 		return (NULL);
 	philo = malloc(sizeof(t_philo) * size);
 	if (!philo)
-		ft_perror("No philo was created");
+		ft_perror("Philos");
 	memset(philo, 0, sizeof(t_philo) * size);
 	return (philo);
 }
@@ -32,11 +32,11 @@ static t_fork	*ft_createforks(size_t size)
 {
 	t_fork	*fork;
 
-	if (!size)
+	if (!size || size == 0)
 		return (NULL);
 	fork = malloc(sizeof(t_fork) * size);
 	if (!fork)
-		ft_perror("No Forks");
+		ft_perror("Forks");
 	memset(fork, 0, sizeof(t_fork) * size);
 	return (fork);
 }
@@ -50,7 +50,8 @@ t_process	*ft_createprocess(t_params params)
 		return (NULL);
 	process = malloc(sizeof(t_process));
 	if (!process)
-		ft_perror("No process");
+		ft_perror("Process structure");
+	memset(process, 0, sizeof(t_process));
 	process->params = params;
 	process->philo = ft_createphilo(params.philo_num);
 	process->fork = ft_createforks(params.philo_num);
@@ -73,14 +74,11 @@ void	ft_freeall(t_process **process)
 void	*ft_apply(t_process *process, int (*f)(t_process *, int))
 {
 	int		count;
-	size_t	status;
 
 	count = 0;
 	while (count < process->params.philo_num)
 	{
-		status = (size_t)ft_try((*f)(process, count));
-		if (status)
-			ft_catch(process);
+		ft_try((*f)(process, count));
 		++count;
 	}
 	return (NULL);

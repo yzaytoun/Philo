@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:16:19 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/08 20:00:56 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/11 18:38:15 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@
 /*Macros*/
 # define TRUE 1
 # define FALSE !TRUE
-# define STARTED 10
-# define EATING 11
-# define TAKEN_FORK 22
-# define SLEEPING 33
-# define THINKING 44
-# define DIED 55
+# define STARTED 1000
+# define EATING 1100
+# define TAKEN_FORK 2200
+# define SLEEPING 3300
+# define THINKING 4400
+# define DIED 5500
 # define SEC_PER_DAY 86400
 # define SEC_PER_HOUR 3600
 # define SEC_PER_MIN 60

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 16:48:34 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/07/28 18:10:11 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/11 18:21:02 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 void	ft_putstr_fd(char *s, int fd)
 {
 	if (!s)
-		return ;
+		write(fd, "(null)", 6);
 	while (*s)
 	{
 		if (write(fd, &(*s), 1) < 0)
@@ -70,46 +70,25 @@ static int	ft_isstrdigit(const char *str)
 }
 
 //ANCHOR - Get arguments
-static int	ft_validatergument(int argc, char *argv[])
-{
-	int	count;
-	int	input;
-
-	if (!argc || !argv)
-		return (FALSE);
-	count = 1;
-	while (count < argc)
-	{
-		input = ft_atoi(argv[count]);
-		if (ft_isstrdigit(argv[count]) == FALSE)
-			return (FALSE);
-		else if (input > INT_MAX || input < INT_MIN || input < 0)
-			return (FALSE);
-		count++;
-	}
-	return (TRUE);
-}
-
 t_params	ft_getarguments(int argc, char *argv[])
 {
 	t_params	params;
 	long		input;
 	int			count;
 
-	if (ft_validatergument(argc, argv) == FALSE)
-		ft_perror("Wrong input");
 	count = 1;
-	while (count <= argc)
+	while (count < argc)
 	{
+		printf("arg = %s\n" ,argv[count]);
+		if (ft_isstrdigit(argv[count]) == FALSE)
+			ft_perror("Wrong number format");
 		input = ft_atoi(argv[count]);
-		if (input < INT_MIN || input > INT_MAX)
-			ft_perror("Large number");
+		if (input > INT_MAX || input < INT_MIN || input < 0)
+			ft_perror("Cannot handle a very Large number");
 		else
 			ft_assign_params(&params, count, input);
 		++count;
 	}
 	return (params);
 }
-
-
 //!SECTION
