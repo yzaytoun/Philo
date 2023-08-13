@@ -45,10 +45,7 @@ int	ft_threadjoin(t_process *process, int count)
 void	ft_startroutine(t_process *process, t_philo *philo)
 {
 	if (process->lock == FALSE)
-	{	
 		ft_routine(process, philo);
-		return ;
-	}
 }
 
 //ANCHOR - initthread

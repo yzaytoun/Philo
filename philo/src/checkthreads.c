@@ -37,8 +37,19 @@ int	ft_check_deadthread(t_process *process, int counter)
 	return (FALSE);
 }
 
+//ANCHOR - Check fork locks
+int	ft_check_forklocks(t_process *process, int counter)
+{
+	if (process->fork[counter].is_used == TRUE)
+	{
+		process->fork[counter].is_used = FALSE;
+		ft_try(pthread_mutex_unlock(&process->fork[counter].mutex));
+	}
+	return (FALSE);
+}
+
 //ANCHOR - Update status main
-void	ft_updatestatus(t_process *process, int (*func)(t_process *, int))
+void	ft_threadchecker(t_process *process, int (*func)(t_process *, int))
 {
 	ft_try(pthread_mutex_lock(&process->main_mutex));
 	process->counter = 0;

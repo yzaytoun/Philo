@@ -57,7 +57,7 @@ PTHREAD = -lpthread
 RM = rm -fr
 # ------------------------ philo ------------------------------
 SRC = main.c basicfunc.c philo.c printer.c routine.c timer.c threads.c\
-		apply.c execute.c auxfunc.c forks.c updatestatus.c
+		apply.c execute.c auxfunc.c forks.c checkthreads.c
 
 OBJDIR = obj
 

@@ -26,10 +26,9 @@ void	ft_routine(t_process *process, t_philo *philo)
 		//ft_threadexecute(process, ft_sleep, philo);
 		//ft_threadexecute(process, ft_addtime, philo);
 		//ft_threadexecute(process, ft_isalive, philo);
-		ft_updatestatus(process, ft_check_deadthread);
+		ft_threadchecker(process, ft_check_deadthread);
 		philo->timer++;
 	}
-	ft_delay(5);
 }
 
 //ANCHOR - Mainthread loop
@@ -42,8 +41,9 @@ void	*ft_mainthread_loop(void *args)
 	process = philo->process;
 	ft_threadexecute(process, ft_init_thread, philo);
 	while (process->lock != FALSE)
-		ft_updatestatus(process, ft_all_threadsactive);
+		ft_threadchecker(process, ft_all_threadsactive);
 	ft_startroutine(process, philo);
+	ft_threadchecker(process, ft_check_forklocks);
 	return ((void *)(uintptr_t)philo->laststatus);
 }
 

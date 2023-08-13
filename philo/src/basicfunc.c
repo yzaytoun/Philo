@@ -79,7 +79,6 @@ t_params	ft_getarguments(int argc, char *argv[])
 	count = 1;
 	while (count < argc)
 	{
-		printf("arg = %s\n" ,argv[count]);
 		if (ft_isstrdigit(argv[count]) == FALSE)
 			ft_perror("Wrong number format");
 		input = ft_atoi(argv[count]);

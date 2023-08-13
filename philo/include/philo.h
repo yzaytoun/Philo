@@ -73,8 +73,10 @@ void		ft_addtime(t_process *process, t_philo *philo);
 //STUB - Forks
 void		ft_getforks(t_process *process, t_philo *philo);
 
-//STUB - Update status
-void		ft_updatestatus(t_process *process, int (*func)(t_process *, int));
+//STUB - Thread checker
+void		ft_threadchecker(t_process *process, int (*func)(t_process *, int));
 int			ft_check_deadthread(t_process *process, int counter);
 int			ft_all_threadsactive(t_process *process, int counter);
+int			ft_check_forklocks(t_process *process, int counter);
+
 #endif		/*End Philo.h*/
