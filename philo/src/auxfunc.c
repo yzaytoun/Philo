@@ -40,18 +40,6 @@ void	ft_catch(t_process *process)
 	}
 }
 
-//ANCHOR - Check status
-void	ft_checkstatus(t_process *process)
-{
-	if (process->catch_status == DIED)
-	{
-		printf("Last status %zu\n", process->catch_status);
-		ft_apply(process, ft_threadjoin);
-		ft_freeall(&process);
-		exit(EXIT_SUCCESS);
-	}
-}
-
 //ANCHOR - AUX Assign input
 void	ft_assign_params(t_params *params, int count, long input)
 {

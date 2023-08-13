@@ -23,11 +23,12 @@ void	ft_routine(t_process *process, t_philo *philo)
 	{
 		ft_threadexecute(process, ft_getforks, philo);
 		ft_threadexecute(process, ft_eat, philo);
-		//ft_threadexecute(process, ft_sleep, philo);
-		//ft_threadexecute(process, ft_addtime, philo);
-		//ft_threadexecute(process, ft_isalive, philo);
+		ft_threadexecute(process, ft_sleep, philo);
+		ft_threadexecute(process, ft_addtime, philo);
+		ft_threadexecute(process, ft_isalive, philo);
+		if (philo->laststatus == DIED)
+			break ;
 		ft_threadchecker(process, ft_check_deadthread);
-		philo->timer++;
 	}
 }
 
@@ -59,7 +60,6 @@ void	ft_run(t_process *process)
 	ft_apply(process, ft_initforkmutex);
 	ft_apply(process, ft_createthread);
 	ft_apply(process, ft_threadjoin);
-	ft_checkstatus(process);
 }
 
 //!SECTION

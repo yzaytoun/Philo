@@ -55,10 +55,7 @@ void	ft_sleep(t_process *process, t_philo *philo)
 		philo->laststatus = SLEEPING;
 		ft_printstatus(*philo);
 		while (philo->timer < timelimit)
-		{
-			philo->timer = ft_gettimeofday();
-			ft_delay(5);
-		}
+			philo->timer += ft_gettimeofday();
 		philo->data.sleep_count++;
 	}
 }
@@ -66,7 +63,7 @@ void	ft_sleep(t_process *process, t_philo *philo)
 //ANCHOR - Is alive
 void	ft_isalive(t_process *process, t_philo *philo)
 {
-	if (philo->timer == process->params.time_to_die)
+	if (philo->timer >= process->params.time_to_die)
 	{
 		philo->laststatus = DIED;
 		ft_printstatus(*philo);

@@ -40,7 +40,11 @@ long	ft_gettimeofday(void)
 	if (gettimeofday(&time, &timezone) != 0)
 		ft_perror("Get time of day");
 	current_time
-		= time.tv_usec % SEC_PER_DAY
+		= time.tv_sec % SEC_PER_DAY
+		+ timezone.tz_dsttime * SEC_PER_HOUR
+		- timezone.tz_minuteswest * SEC_PER_MIN;
+	current_time
+		+= time.tv_usec % SEC_PER_DAY
 		+ timezone.tz_dsttime * SEC_PER_HOUR
 		- timezone.tz_minuteswest * SEC_PER_MIN;
 	return (current_time / 1000);
