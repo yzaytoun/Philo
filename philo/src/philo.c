@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 16:56:07 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/11 18:19:43 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/14 19:01:51 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,24 +64,10 @@ void	ft_freeall(t_process **process)
 {
 	ft_try(pthread_mutex_destroy(&(*process)->mutex));
 	ft_try(pthread_mutex_destroy(&(*process)->main_mutex));
-	ft_apply((*process), ft_destroymutex);
+	ft_apply((*process), ft_destroyforkmutex);
 	free((*process)->philo);
 	free((*process)->fork);
 	free((*process));
-}
-
-//ANCHOR - Philo apply
-void	*ft_apply(t_process *process, int (*f)(t_process *, int))
-{
-	int		count;
-
-	count = 0;
-	while (count < process->params.philo_num)
-	{
-		ft_try((*f)(process, count));
-		++count;
-	}
-	return (NULL);
 }
 
 //!SECTION

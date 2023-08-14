@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 17:19:37 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/11 18:14:21 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/14 19:25:17 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,26 +34,20 @@ void		ft_freeall(t_process **process);
 void		ft_try(int status);
 void		ft_assign_params(t_params *params, int count, long input);
 void		ft_catch(t_process *process);
-void		ft_checkstatus(t_process *process);
 
 //STUB - Apply
 int			ft_assign_ids(t_process *process, int philo_id);
 int			ft_initforkmutex(t_process *process, int count);
-int			ft_destroymutex(t_process *process, int count);
+int			ft_destroyforkmutex(t_process *process, int count);
 int			ft_createthread(t_process *process, int philo_id);
 
-
 //STUB - Routine
-void		ft_routine(t_process *process, t_philo *philo);
 void		ft_run(t_process *process);
-void		*ft_mainthread_loop(void *args);
-
 
 //STUB - Time
 void		ft_delay(int seconds);
 long		ft_gettimeofday(void);
 void		ft_marktime(t_params *params);
-
 
 //STUB - Threads
 void		ft_threadexecute(t_process *process,
@@ -62,7 +56,6 @@ int			ft_threadlimit(t_process *process, t_philo *philo);
 int			ft_threadjoin(t_process *process, int philo_id);
 void		ft_startroutine(t_process *process, t_philo *philo);
 void		ft_init_thread(t_process *process, t_philo *philo);
-
 
 //STUB - Execute
 void		ft_eat(t_process *process, t_philo *philo);
@@ -78,5 +71,4 @@ void		ft_threadchecker(t_process *process, int (*func)(t_process *, int));
 int			ft_check_deadthread(t_process *process, int counter);
 int			ft_all_threadsactive(t_process *process, int counter);
 int			ft_check_forklocks(t_process *process, int counter);
-
 #endif		/*End Philo.h*/

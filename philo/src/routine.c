@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 16:33:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/11 18:22:11 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/14 19:24:28 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //SECTION - Routine Section
 //ANCHOR - Routine
-void	ft_routine(t_process *process, t_philo *philo)
+static void	ft_routine(t_process *process, t_philo *philo)
 {
 	philo->timer = process->params.start_time;
 	while (philo->timer < process->params.time_to_die
@@ -33,13 +33,14 @@ void	ft_routine(t_process *process, t_philo *philo)
 }
 
 //ANCHOR - Mainthread loop
-void	*ft_mainthread_loop(void *args)
+static void	*ft_mainthread_loop(void *args)
 {
 	t_philo		*philo;
 	t_process	*process;
 
 	philo = (t_philo *)args;
 	process = philo->process;
+	process->func = ft_routine;
 	ft_threadexecute(process, ft_init_thread, philo);
 	while (process->lock != FALSE)
 		ft_threadchecker(process, ft_all_threadsactive);
@@ -58,6 +59,7 @@ void	ft_run(t_process *process)
 	process->lock = TRUE;
 	ft_marktime(&process->params);
 	ft_apply(process, ft_initforkmutex);
+	process->main_loop = ft_mainthread_loop;
 	ft_apply(process, ft_createthread);
 	ft_apply(process, ft_threadjoin);
 }

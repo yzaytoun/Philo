@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 18:43:09 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/05 17:21:28 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/14 19:18:59 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	main(int argc, char *argv[])
 	{
 		params = ft_getarguments(argc, argv);
 		process = ft_createprocess(params);
+		ft_run
 		ft_freeall(&process);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:13:03 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/11 18:15:12 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/14 19:15:38 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	ft_createthread(t_process *process, int count)
 	process->philo[count].process = process;
 	return (
 		pthread_create(&process->philo[count].thread, NULL,
-			ft_mainthread_loop, &process->philo[count])
+			process->main_loop, &process->philo[count])
 	);
 }
 
@@ -45,8 +45,23 @@ int	ft_initforkmutex(t_process *process, int count)
 }
 
 //ANCHOR - Destroy fork mutexes
-int	ft_destroymutex(t_process *process, int count)
+int	ft_destroyforkmutex(t_process *process, int count)
 {
 	return (pthread_mutex_destroy(&process->fork[count].mutex));
 }
+
+//ANCHOR - Philo apply
+void	*ft_apply(t_process *process, int (*f)(t_process *, int))
+{
+	int		count;
+
+	count = 0;
+	while (count < process->params.philo_num)
+	{
+		ft_try((*f)(process, count));
+		++count;
+	}
+	return (NULL);
+}
+
 //!SECTION

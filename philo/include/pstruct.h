@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:16:19 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/11 18:38:15 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/14 19:13:25 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,15 @@ typedef struct s_params
 struct s_process
 {
 	pthread_mutex_t	mutex;
-	pthread_mutex_t main_mutex;
+	pthread_mutex_t	main_mutex;
 	t_philo			*philo;
 	t_params		params;
 	t_fork			*fork;
 	int				counter;
 	size_t			catch_status;
 	int				lock;
+	void			(*func)(t_process *, t_philo *philo);
+	void			*(*main_loop)(void *);
 };
 
 #endif		/* pstruct header */

@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_bonus.h                                      :+:      :+:    :+:   */
+/*   main_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/14 18:59:32 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/14 20:26:03 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/08/14 19:19:47 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/08/14 19:26:30 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_BONUS_H
-# define PHILO_BONUS_H
+#include "philo_bonus.h"
 
-# include "philo.h"
-# include <sys/stat.h>
-# include <sys/sem.h>
-# include <sys/types.h>
+//SECTION - Main Bonus Loop
+//ANCHOR - Routine
+static void	ft_routine(void)
+{
+	/*Do nothting*/
+}
 
-#endif
+//ANCHOR - Run loop
+void	ft_run(t_process *process)
+{
+	if (!process || process->params.philo_num <= 0)
+		return ;
+	process->main_loop = ft_routine;
+	ft_apply(process, ft_createthread);
+}
+//!SECTION
