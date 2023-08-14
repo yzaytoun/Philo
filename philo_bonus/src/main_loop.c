@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 19:19:47 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/14 19:26:30 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/14 20:31:44 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ void	ft_run(t_process *process)
 		return ;
 	process->main_loop = ft_routine;
 	ft_apply(process, ft_createthread);
+	ft_apply(process, ft_threadjoin);
 }
 //!SECTION

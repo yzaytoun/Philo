@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:16:19 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/14 19:13:25 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/14 21:08:09 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,6 @@
 /*Macros*/
 # define TRUE 1
 # define FALSE !TRUE
-# define STARTED 1000
-# define EATING 1100
-# define TAKEN_FORK 2200
-# define SLEEPING 3300
-# define THINKING 4400
-# define DIED 5500
 # define SEC_PER_DAY 86400
 # define SEC_PER_HOUR 3600
 # define SEC_PER_MIN 60
@@ -38,6 +32,16 @@
 # define RIGHT 1
 
 /*Structs*/
+typedef enum s_status
+{
+	STARTED = 1000,
+	EATING = 1100,
+	TAKEN_FORK = 2200,
+	SLEEPING = 3300,
+	THINKING = 4400,
+	DIED = 5500
+}			t_status;
+
 typedef struct s_meta /*Meta data about the philo*/
 {
 	int	eat_count;
@@ -58,7 +62,7 @@ typedef struct s_philo
 {
 	int			id;
 	t_meta		data;
-	int			laststatus;
+	t_status	laststatus;
 	pthread_t	thread;
 	t_fork		left_fork;
 	t_fork		right_fork;
@@ -77,10 +81,16 @@ typedef struct s_params
 	int			philo_status_counter;
 }				t_params;
 
-struct s_process
+typedef struct s_mutex
 {
 	pthread_mutex_t	mutex;
-	pthread_mutex_t	main_mutex;
+	pthread_mutex_t	main_mutex;	
+}				t_mutex;
+
+
+struct s_process
+{
+	void			*synchronizer;
 	t_philo			*philo;
 	t_params		params;
 	t_fork			*fork;

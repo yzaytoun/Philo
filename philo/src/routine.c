@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 16:33:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/14 19:24:28 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/14 21:13:23 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,21 @@ static void	*ft_mainthread_loop(void *args)
 	return ((void *)(uintptr_t)philo->laststatus);
 }
 
+//FIXME - Needs review
 //ANCHOR - Run
 void	ft_run(t_process *process)
 {
 	if (!process || process->philo == NULL)
 		return ;
-	ft_try(pthread_mutex_init(&process->mutex, NULL));
-	ft_try(pthread_mutex_init(&process->main_mutex, NULL));
+	process->synchronizer = malloc(sizeof(t_mutex));
+	if (!process->synchronizer)
+		return ;
 	process->lock = TRUE;
+	process->main_loop = ft_mainthread_loop;
+	ft_try(pthread_mutex_init(&(process->synchronizer->mutex), NULL));
+	ft_try(pthread_mutex_init(&(process->synchronizer->main_mutex), NULL));
 	ft_marktime(&process->params);
 	ft_apply(process, ft_initforkmutex);
-	process->main_loop = ft_mainthread_loop;
 	ft_apply(process, ft_createthread);
 	ft_apply(process, ft_threadjoin);
 }
