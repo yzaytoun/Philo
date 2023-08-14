@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 16:33:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/14 21:13:23 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/14 21:15:06 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void	ft_run(t_process *process)
 		return ;
 	process->lock = TRUE;
 	process->main_loop = ft_mainthread_loop;
-	ft_try(pthread_mutex_init(&(process->synchronizer->mutex), NULL));
-	ft_try(pthread_mutex_init(&(process->synchronizer->main_mutex), NULL));
+	ft_try(pthread_mutex_init(&(process->(*synchronizer).mutex), NULL));
+	ft_try(pthread_mutex_init(&(process->(*synchronizer).main_mutex), NULL));
 	ft_marktime(&process->params);
 	ft_apply(process, ft_initforkmutex);
 	ft_apply(process, ft_createthread);
