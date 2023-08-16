@@ -17,9 +17,9 @@
 void	ft_threadexecute(t_process *process,
 	void (*f)(t_process *, t_philo *), t_philo *philo)
 {
-	ft_try(pthread_mutex_lock(&process->mutex));
+	ft_try(pthread_mutex_lock(&((t_mutex *)process->synchronizer)->mutex));
 	(*f)(process, philo);
-	ft_try(pthread_mutex_unlock(&process->mutex));
+	ft_try(pthread_mutex_unlock(&((t_mutex *)process->synchronizer)->mutex));
 }
 
 //ANCHOR - Thread limit

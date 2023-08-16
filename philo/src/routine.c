@@ -49,7 +49,6 @@ static void	*ft_mainthread_loop(void *args)
 	return ((void *)(uintptr_t)philo->laststatus);
 }
 
-//FIXME - Needs review
 //ANCHOR - Run
 void	ft_run(t_process *process)
 {
@@ -60,8 +59,8 @@ void	ft_run(t_process *process)
 		return ;
 	process->lock = TRUE;
 	process->main_loop = ft_mainthread_loop;
-	ft_try(pthread_mutex_init(&(process->(*synchronizer).mutex), NULL));
-	ft_try(pthread_mutex_init(&(process->(*synchronizer).main_mutex), NULL));
+	ft_try(pthread_mutex_init(&((t_mutex *)process->synchronizer)->mutex, NULL));
+	ft_try(pthread_mutex_init(&((t_mutex *)process->synchronizer)->main_mutex, NULL));
 	ft_marktime(&process->params);
 	ft_apply(process, ft_initforkmutex);
 	ft_apply(process, ft_createthread);

@@ -51,19 +51,19 @@ int	ft_check_forklocks(t_process *process, int counter)
 //ANCHOR - Update status main
 void	ft_threadchecker(t_process *process, int (*func)(t_process *, int))
 {
-	ft_try(pthread_mutex_lock(&process->main_mutex));
+	ft_try(pthread_mutex_lock(&((t_mutex *)process->synchronizer)->main_mutex));
 	process->counter = 0;
 	process->params.philo_status_counter = 0;
 	while (process->counter < process->params.philo_num)
 	{
 		if ((*func)(process, process->counter) == TRUE)
 		{
-			ft_try(pthread_mutex_unlock(&process->main_mutex));
+			ft_try(pthread_mutex_unlock(&((t_mutex *)process->synchronizer)->main_mutex));
 			return ;
 		}
 		process->counter++;
 	}
-	ft_try(pthread_mutex_unlock(&process->main_mutex));
+	ft_try(pthread_mutex_unlock(&((t_mutex *)process->synchronizer)->main_mutex));
 }
 
 //!SECTION
