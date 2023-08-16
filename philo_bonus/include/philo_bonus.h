@@ -17,5 +17,12 @@
 # include <sys/stat.h>
 # include <sys/sem.h>
 # include <sys/types.h>
+# include <semaphore.h>
+
+typedef struct s_semaphor
+{
+    sem_t     main_semaphor;
+    sem_t     semaphor;
+}               t_semaphor;
 
 #endif

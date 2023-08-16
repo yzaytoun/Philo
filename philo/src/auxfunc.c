@@ -16,6 +16,8 @@
 //ANCHOR - check return value
 void	ft_try(int status)
 {
+	const int	errornum = errno;
+
 	if (status)
 	{
 		printf("status = %d\n", status);
@@ -23,6 +25,11 @@ void	ft_try(int status)
 			ft_perror("Resource busy");
 		else if (status == 11)
 			ft_perror("Resource deadlock avoided");
+		else if (status == SEM_FAILED)
+		{
+			printf("errno = %d\n", errornum);
+			ft_perror("Semaphore Error");
+		}
 		else
 			ft_perror("Error");
 	}

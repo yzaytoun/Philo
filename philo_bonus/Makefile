@@ -67,7 +67,7 @@ INC_philo = ../philo/include
 CFLAGS = -Wall -Wextra -Werror -I$(INC) -I$(INC_philo) 
 SANITIAZE_ADD = -fsanitize=address -g3
 SANITIAZE = -fsanitize=thread -g3
-PTHREAD = -lpthread
+PTHREAD = -lpthread -lrt
 RM = rm -fr
 # ------------------------ philo ------------------------------
 SRC = main.c apply.c basicfunc.c auxfunc.c philo.c printer.c timer.c threads.c\

@@ -65,6 +65,8 @@ void	ft_run(t_process *process)
 	ft_apply(process, ft_initforkmutex);
 	ft_apply(process, ft_createthread);
 	ft_apply(process, ft_threadjoin);
+	ft_try(pthread_mutex_destroy(&((t_mutex *)process->synchronizer)->mutex));
+	ft_try(pthread_mutex_destroy(&((t_mutex *)process->synchronizer)->main_mutex));
 }
 
 //!SECTION

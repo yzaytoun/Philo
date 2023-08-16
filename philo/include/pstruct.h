@@ -30,6 +30,9 @@
 # define SEC_PER_MIN 60
 # define LEFT 0
 # define RIGHT 1
+# ifndef SEM_FAILED
+#  define SEM_FAILED -1
+# endif
 
 /*Structs*/
 typedef enum s_status
