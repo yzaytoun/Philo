@@ -18,6 +18,7 @@
 # include <sys/sem.h>
 # include <sys/types.h>
 # include <semaphore.h>
+# include <fcntl.h>
 
 typedef struct s_semaphor
 {
