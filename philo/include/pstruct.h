@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:16:19 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/14 21:08:09 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/19 18:06:25 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_philo
 	t_fork		right_fork;
 	long		timer;
 	t_process	*process;
+	pid_t		pid;
 }				t_philo;
 
 typedef struct s_params
@@ -100,8 +101,9 @@ struct s_process
 	int				counter;
 	size_t			catch_status;
 	int				lock;
-	void			(*func)(t_process *, t_philo *philo);
+	void			(*func)(t_process *, t_philo *);
 	void			*(*main_loop)(void *);
+	void			(*dropforks)(t_process *, t_philo *);
 };
 
 #endif		/* pstruct header */

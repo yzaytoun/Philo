@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 17:16:01 by yzaytoun          #+#    #+#              #
-#    Updated: 2023/08/14 20:29:24 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/08/19 17:54:01 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,7 +71,7 @@ PTHREAD = -lpthread -lrt
 RM = rm -fr
 # ------------------------ philo ------------------------------
 SRC = main.c apply.c basicfunc.c auxfunc.c philo.c printer.c timer.c threads.c\
-	main_loop.c
+	run_bonus.c child_process.c sem_execute.c
 
 OBJDIR = obj
 

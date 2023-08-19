@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 17:19:37 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/14 19:25:17 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/19 18:09:06 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void		ft_isalive(t_process *process, t_philo *philo);
 void		ft_addtime(t_process *process, t_philo *philo);
 
 //STUB - Forks
+void		ft_dropforks(t_process *process, t_philo *philo);
 void		ft_getforks(t_process *process, t_philo *philo);
 
 //STUB - Thread checker

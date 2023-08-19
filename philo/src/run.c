@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine.c                                          :+:      :+:    :+:   */
+/*   run.c  	                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 16:33:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/14 21:15:06 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/19 17:40:59 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,20 @@ void	ft_run(t_process *process)
 		return ;
 	process->lock = TRUE;
 	process->main_loop = ft_mainthread_loop;
-	ft_try(pthread_mutex_init(&((t_mutex *)process->synchronizer)->mutex, NULL));
-	ft_try(pthread_mutex_init(&((t_mutex *)process->synchronizer)->main_mutex, NULL));
+	process->dropforks = ft_dropforks;
+	ft_try(
+		pthread_mutex_init(&((t_mutex *)process->synchronizer)->mutex, NULL));
+	ft_try(
+		pthread_mutex_init(
+			&((t_mutex *)process->synchronizer)->main_mutex, NULL)
+		);
 	ft_marktime(&process->params);
 	ft_apply(process, ft_initforkmutex);
 	ft_apply(process, ft_createthread);
 	ft_apply(process, ft_threadjoin);
 	ft_try(pthread_mutex_destroy(&((t_mutex *)process->synchronizer)->mutex));
-	ft_try(pthread_mutex_destroy(&((t_mutex *)process->synchronizer)->main_mutex));
+	ft_try(
+		pthread_mutex_destroy(&((t_mutex *)process->synchronizer)->main_mutex));
 }
 
 //!SECTION

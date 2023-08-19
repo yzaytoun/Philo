@@ -6,13 +6,28 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 19:49:16 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/05 17:11:17 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/19 18:08:39 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 //SECTION - Routine Function
+//ANCHOR - Drop forks
+void	ft_dropforks(t_process *process, t_philo *philo)
+{
+	ft_try(
+		pthread_mutex_unlock(&process->fork[philo->left_fork.id - 1].mutex)
+		);
+	ft_try(
+		pthread_mutex_unlock(&process->fork[philo->right_fork.id - 1].mutex)
+		);
+	process->fork[philo->left_fork.id - 1].is_used = FALSE;
+	process->fork[philo->right_fork.id - 1].is_used = FALSE;
+	philo->left_fork.is_used = FALSE;
+	philo->right_fork.is_used = FALSE;
+}
+
 //ANCHOR - Take Fork
 static void	ft_takefork(t_process *process, t_philo *philo, int fork_side)
 {
