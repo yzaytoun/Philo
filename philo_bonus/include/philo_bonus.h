@@ -29,11 +29,18 @@ typedef struct s_semaphor
 }				t_semaphor;
 
 /*Bonus Functions*/
+//STUB - Process managemente functions
 int		ft_create_childprocess(t_process *process, int count);
 int		ft_wait_childprocess(t_process *process, int count);
 
-void	ft_semexecute(t_process *process, t_philo *philo,
-			void (*function)(t_process *, t_philo *));
+//STUB - Semaphore execution
+void	ft_semexecute(t_process *process, void (*function)(t_process *));
 void	ft_dropforks_sem(t_process *process, t_philo *philo);
+void	ft_getforks_sem(t_process *process, t_philo *philo);
 
+//STUB - Semaphores
+void    ft_increment_semaphore(t_process *process);
+void	ft_get_semvalue(t_process *process);
+void    ft_decrement_semaphore(t_process *process);
+void    ft_open_semaphore(t_process *process);
 #endif

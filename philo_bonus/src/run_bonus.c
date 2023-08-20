@@ -21,11 +21,11 @@ static void	ft_routine(t_process *process, t_philo *philo)
 		&& philo->laststatus != DIED
 		&& ft_threadlimit(process, philo) == FALSE)
 	{
-		ft_semexecute(process, ft_getforks_from_table, philo);
-		ft_semexecute(process, ft_eat, philo);
-		ft_semexecute(process, ft_sleep, philo);
-		ft_semexecute(process, ft_addtime, philo);
-		ft_semexecute(process, ft_isalive, philo);
+		ft_getforks_sem(process, philo);
+		ft_eat(process, philo);
+		ft_sleep(process, philo);
+		ft_addtime(process, philo);
+		ft_isalive(process, philo);
 		if (philo->laststatus == DIED)
 			break ;
 	}
@@ -40,7 +40,8 @@ static void	*ft_mainprocess_loop(void *args)
 	philo = (t_philo *)args;
 	process = philo->process;
 	process->func = ft_routine;
-	ft_startroutine(process, philo);
+	ft_semexecute(process, ft_checkall_processes);
+		ft_startroutine(process, philo);
 	exit(EXIT_SUCCESS);
 }
 
@@ -54,9 +55,8 @@ void	ft_run(t_process *process)
 		return ;
 	process->main_loop = ft_mainprocess_loop;
 	process->dropforks = ft_dropforks_sem;
-	((t_semaphor *)process->synchronizer)->main_semaphor
-		= sem_open("/philo_sem", O_CREAT | O_EXCL, 0644,
-			process->params.philo_num);
+	process->lock = TRUE;
+	ft_open_semaphores(process);
 	ft_marktime(&process->params);
 	ft_apply(process, ft_create_childprocess);
 	ft_apply(process, ft_wait_childprocess);

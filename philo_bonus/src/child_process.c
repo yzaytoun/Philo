@@ -47,8 +47,8 @@ int	ft_create_childprocess(t_process *process, int count)
 		process->main_loop;
 	else if (process->philo[count].pid < 0)
 	{
-		ft_try(sem_close(((t_semaphor *)process->synchronizer)->semaphor));
-		ft_try(sem_unlink(((t_semaphor *)process->synchronizer)->semaphor));
+		ft_try(sem_close(((t_semaphor *)process->synchronizer)->main_semaphor));
+		ft_try(sem_unlink(((t_semaphor *)process->synchronizer)->main_semaphor));
 		ft_perror(__func__);
 	}
 	return (EXIT_SUCCESS);
