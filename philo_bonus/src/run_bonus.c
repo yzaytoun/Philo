@@ -40,7 +40,7 @@ static void	*ft_mainprocess_loop(void *args)
 	philo = (t_philo *)args;
 	process = philo->process;
 	process->func = ft_routine;
-	ft_semexecute(process, ft_checkall_processes);
+	ft_semexecute(process, ft_check_allprocesses);
 		ft_startroutine(process, philo);
 	exit(EXIT_SUCCESS);
 }
@@ -56,11 +56,10 @@ void	ft_run(t_process *process)
 	process->main_loop = ft_mainprocess_loop;
 	process->dropforks = ft_dropforks_sem;
 	process->lock = TRUE;
-	ft_open_semaphores(process);
+	ft_open_semaphore(process);
 	ft_marktime(&process->params);
 	ft_apply(process, ft_create_childprocess);
 	ft_apply(process, ft_wait_childprocess);
-	ft_try(sem_close(((t_semaphor *)process->synchronizer)->main_semaphor));
-	ft_try(sem_unlink(((t_semaphor *)process->synchronizer)->main_semaphor));
+	ft_close_semaphore(process);
 }
 //!SECTION

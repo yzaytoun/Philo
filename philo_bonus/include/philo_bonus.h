@@ -37,10 +37,13 @@ int		ft_wait_childprocess(t_process *process, int count);
 void	ft_semexecute(t_process *process, void (*function)(t_process *));
 void	ft_dropforks_sem(t_process *process, t_philo *philo);
 void	ft_getforks_sem(t_process *process, t_philo *philo);
+void	ft_check_allprocesses(t_process *process);
 
 //STUB - Semaphores
 void    ft_increment_semaphore(t_process *process);
 void	ft_get_semvalue(t_process *process);
 void    ft_decrement_semaphore(t_process *process);
 void    ft_open_semaphore(t_process *process);
+void    ft_close_semaphore(t_process *process);
+
 #endif

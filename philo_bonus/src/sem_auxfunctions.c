@@ -41,4 +41,12 @@ void    ft_open_semaphore(t_process *process)
 		= sem_open("/forks_sem", O_CREAT | O_EXCL, 0644,
 			process->params.philo_num);
 }
+
+void    ft_close_semaphore(t_process *process)
+{
+	ft_try(sem_close(&((t_semaphor *)process->synchronizer)->main_semaphor));
+	ft_try(sem_unlink("/philo_sem"));
+	ft_try(sem_close(&((t_semaphor *)process->synchronizer)->forks_semaphor));
+	ft_try(sem_unlink("/forks_sem"));
+}
 //!SECTION
