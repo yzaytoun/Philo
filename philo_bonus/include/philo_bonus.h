@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 18:59:32 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/19 18:30:20 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/21 18:20:01 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@
 
 typedef struct s_semaphor
 {
-	sem_t		main_semaphor;
-	sem_t		forks_semaphor;
-	int			sem_value;
+	sem_t		*main_semaphor;
+	int			main_sem_value;
+	sem_t		*forks_semaphor;
+	int			fork_sem_value;
 }				t_semaphor;
 
 /*Bonus Functions*/
@@ -40,10 +41,9 @@ void	ft_getforks_sem(t_process *process, t_philo *philo);
 void	ft_check_allprocesses(t_process *process);
 
 //STUB - Semaphores
-void    ft_increment_semaphore(t_process *process);
-void	ft_get_semvalue(t_process *process);
-void    ft_decrement_semaphore(t_process *process);
-void    ft_open_semaphore(t_process *process);
-void    ft_close_semaphore(t_process *process);
+void	ft_increment_semaphore(t_process *process);
+void	ft_decrement_semaphore(t_process *process);
+void	ft_open_semaphore(t_process *process);
+void	ft_close_semaphore(t_process *process);
 
 #endif

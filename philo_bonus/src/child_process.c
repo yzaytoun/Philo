@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 13:52:29 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/19 17:37:12 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/21 19:21:52 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,15 @@ static void	ft_evaluatestatus(int status)
 //ANCHOR - Wait child process
 int	ft_wait_childprocess(t_process *process, int count)
 {
-	ft_try(
-		waitpid(process->philo[count].pid, &process->catch_status,
-			EXIT_SUCCESS)
-		);
+	if (
+		waitpid(
+			process->philo[count].pid, (int *) &process->catch_status,
+			EXIT_SUCCESS) < 0)
+	{
+		ft_close_semaphore(process);
+		ft_freeall(&process);
+		ft_perror("Waitpid");
+	}
 	ft_evaluatestatus(process->catch_status);
 	return (EXIT_SUCCESS);
 }
@@ -42,13 +47,14 @@ int	ft_wait_childprocess(t_process *process, int count)
 //ANCHOR - Create Process
 int	ft_create_childprocess(t_process *process, int count)
 {
+	process->philo[count].process = process;
 	process->philo[count].pid = fork();
 	if (process->philo[count].pid == 0)
-		process->main_loop;
+		process->main_loop((void *)&process->philo[count]);
 	else if (process->philo[count].pid < 0)
 	{
-		ft_try(sem_close(((t_semaphor *)process->synchronizer)->main_semaphor));
-		ft_try(sem_unlink(((t_semaphor *)process->synchronizer)->main_semaphor));
+		ft_close_semaphore(process);
+		ft_freeall(&process);
 		ft_perror(__func__);
 	}
 	return (EXIT_SUCCESS);

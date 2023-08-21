@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:54:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/19 18:37:26 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/21 18:21:03 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 //ANCHOR - SEM Execute
 void	ft_semexecute(t_process *process, void (*function)(t_process *))
 {
-	ft_increment_semaphore(process);
 	process->counter = 0;
 	process->params.philo_status_counter = 0;
 	while (process->counter < process->params.philo_num)
@@ -24,7 +23,6 @@ void	ft_semexecute(t_process *process, void (*function)(t_process *))
 		(*function)(process);
 		process->counter++;
 	}
-	ft_decrement_semaphore(process);
 }
 
 //ANCHOR - Check all processes
@@ -39,18 +37,18 @@ void	ft_check_allprocesses(t_process *process)
 //ANCHOR - Drop Forks
 void	ft_dropforks_sem(t_process *process, t_philo *philo)
 {
-	ft_get_semvalue(process);
-	if (((t_semaphor *)process->synchronizer)->sem_value < SEM_VALUE_MAX)
+	if (((t_semaphor *)process->synchronizer)->fork_sem_value < SEM_VALUE_MAX)
 	{
+		((t_semaphor *)process->synchronizer)->fork_sem_value++;
 		ft_try(
-			sem_post(&((t_semaphor *)process->synchronizer)->forks_semaphor));	
+			sem_post(((t_semaphor *)process->synchronizer)->forks_semaphor));
 	}
 	philo->left_fork.is_used = FALSE;
-	ft_get_semvalue(process);
-	if (((t_semaphor *)process->synchronizer)->sem_value < SEM_VALUE_MAX)
+	if (((t_semaphor *)process->synchronizer)->fork_sem_value < SEM_VALUE_MAX)
 	{
+		((t_semaphor *)process->synchronizer)->fork_sem_value++;
 		ft_try(
-			sem_post(&((t_semaphor *)process->synchronizer)->forks_semaphor));	
+			sem_post(((t_semaphor *)process->synchronizer)->forks_semaphor));
 	}
 	philo->right_fork.is_used = FALSE;
 }
@@ -60,18 +58,21 @@ void	ft_getforks_sem(t_process *process, t_philo *philo)
 {
 	if (philo->left_fork.is_used == FALSE)
 	{
-		ft_get_semvalue(process);
-		if (((t_semaphor *)process->synchronizer)->sem_value > 0)
-			ft_try(sem_wait(&((t_semaphor *)process->synchronizer)->forks_semaphor));
+		((t_semaphor *)process->synchronizer)->fork_sem_value--;
+		ft_try(sem_wait(
+				((t_semaphor *)process->synchronizer)->forks_semaphor));
 		philo->left_fork.is_used = TRUE;
 		philo->laststatus = TAKEN_FORK;
 		ft_printstatus(*philo);
 	}
-	else if (philo->right_fork.is_used == FALSE)
+	if (philo->right_fork.is_used == FALSE)
 	{
-		ft_get_semvalue(process);
-		if (((t_semaphor *)process->synchronizer)->sem_value > 0)
-			ft_try(sem_wait(&((t_semaphor *)process->synchronizer)->forks_semaphor));
+		if (((t_semaphor *)process->synchronizer)->fork_sem_value > 0) 
+		{
+			((t_semaphor *)process->synchronizer)->fork_sem_value--;
+			ft_try(sem_wait(
+					((t_semaphor *)process->synchronizer)->forks_semaphor));
+		}
 		philo->right_fork.is_used = TRUE;
 		philo->laststatus = TAKEN_FORK;
 		ft_printstatus(*philo);
