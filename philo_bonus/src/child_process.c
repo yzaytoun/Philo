@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 13:52:29 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/21 19:21:52 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/21 20:22:18 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ft_create_childprocess(t_process *process, int count)
 	process->philo[count].process = process;
 	process->philo[count].pid = fork();
 	if (process->philo[count].pid == 0)
-		process->main_loop((void *)&process->philo[count]);
+		process->main_loop(&process->philo[count]);
 	else if (process->philo[count].pid < 0)
 	{
 		ft_close_semaphore(process);

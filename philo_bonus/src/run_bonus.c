@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 19:19:47 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/21 19:14:24 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/21 20:41:47 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,10 @@ static void	*ft_mainprocess_loop(void *args)
 	if (args == NULL)
 		return (NULL);
 	philo = (t_philo *)args;
-	process = philo->process;
-	process->func = ft_routine;
-	ft_semexecute(process, ft_check_allprocesses);
-	if (process->lock == TRUE)
-		((t_semaphor *)process->synchronizer)->main_sem_value--;
-	else
-		ft_increment_semaphore(process);
+	process = NULL;
+	ft_initprocess(process, philo, ft_routine);
+	while (process->lock != FALSE)
+		ft_semexecute(process, ft_check_allprocesses);
 	ft_startroutine(process, philo);
 	exit(EXIT_SUCCESS);
 }
