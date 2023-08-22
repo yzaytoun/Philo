@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 18:51:14 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/11 18:37:48 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/21 20:10:47 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,15 @@ void	ft_try(int status)
 			ft_perror("Resource busy");
 		else if (status == 11)
 			ft_perror("Resource deadlock avoided");
+		else if (status == 22)
+			ft_perror("Invalid argument");
 		else if (status == SEM_FAILED)
 		{
 			printf("errno = %d\n", errornum);
-			ft_perror("Semaphore Error");
+			if (errornum == 9)
+				ft_perror("No such device or address");
+			else
+				ft_perror("Semaphore Error");
 		}
 		else
 			ft_perror("Error");

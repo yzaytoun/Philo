@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:52:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/05 11:48:54 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/22 18:31:43 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //SECTION - Printer
 //ANCHOR - Aux error printer
-void	ft_perror(char *string)
+void	ft_perror(const char *string)
 {
 	ft_putstr_fd(string, STDERR_FILENO);
 	write(1, "\n", 1);

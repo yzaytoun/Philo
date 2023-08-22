@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 18:59:32 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/21 18:20:01 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/22 19:32:11 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,9 @@ int		ft_create_childprocess(t_process *process, int count);
 int		ft_wait_childprocess(t_process *process, int count);
 
 //STUB - Semaphore execution
-void	ft_semexecute(t_process *process, void (*function)(t_process *));
 void	ft_dropforks_sem(t_process *process, t_philo *philo);
 void	ft_getforks_sem(t_process *process, t_philo *philo);
-void	ft_check_allprocesses(t_process *process);
+int		ft_check_allprocesses(t_process *process, int count);
 
 //STUB - Semaphores
 void	ft_increment_semaphore(t_process *process);

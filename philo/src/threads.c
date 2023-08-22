@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 19:49:16 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/14 19:08:32 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/22 18:21:31 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,11 @@ void	ft_startroutine(t_process *process, t_philo *philo)
 }
 
 //ANCHOR - initthread
-void	ft_init_thread(t_process *process, t_philo *philo)
+void	ft_initprocess(t_process **process, t_philo *philo,
+	void (*routine)(t_process *, t_philo *))
 {
-	(void)process;
+	(*process) = philo->process;
+	(*process)->func = routine;
 	philo->laststatus = STARTED;
 	ft_printstatus(*philo);
 }

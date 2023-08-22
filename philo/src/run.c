@@ -41,7 +41,7 @@ static void	*ft_mainthread_loop(void *args)
 	philo = (t_philo *)args;
 	process = philo->process;
 	process->func = ft_routine;
-	ft_threadexecute(process, ft_init_thread, philo);
+	ft_initprocess(&process, philo, ft_routine);
 	while (process->lock != FALSE)
 		ft_threadchecker(process, ft_all_threadsactive);
 	ft_startroutine(process, philo);
@@ -70,9 +70,11 @@ void	ft_run(t_process *process)
 	ft_apply(process, ft_initforkmutex);
 	ft_apply(process, ft_createthread);
 	ft_apply(process, ft_threadjoin);
-	ft_try(pthread_mutex_destroy(&((t_mutex *)process->synchronizer)->mutex));
+	ft_try(
+		pthread_mutex_destroy(&((t_mutex *)process->synchronizer)->mutex));
 	ft_try(
 		pthread_mutex_destroy(&((t_mutex *)process->synchronizer)->main_mutex));
+	ft_apply(process, ft_destroyforkmutex);
 }
 
 //!SECTION

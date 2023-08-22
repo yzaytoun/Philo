@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:13:03 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/14 19:15:38 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/22 19:22:11 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,15 @@ int	ft_destroyforkmutex(t_process *process, int count)
 }
 
 //ANCHOR - Philo apply
-void	*ft_apply(t_process *process, int (*f)(t_process *, int))
+void	ft_apply(t_process *process, int (*f)(t_process *, int))
 {
-	int		count;
-
-	count = 0;
-	while (count < process->params.philo_num)
+	process->counter = 0;
+	process->params.philo_status_counter = 0;
+	while (process->counter < process->params.philo_num)
 	{
-		ft_try((*f)(process, count));
-		++count;
+		ft_try((*f)(process, process->counter));
+		++process->counter;
 	}
-	return (NULL);
 }
 
 //!SECTION

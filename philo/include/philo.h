@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 17:19:37 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/19 18:09:06 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/22 19:27:06 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@
 
 /*Functions*/
 //STUB - Basic Functions
-void		ft_putstr_fd(char *string, int fd);
+void		ft_putstr_fd(const char *string, int fd);
 long		ft_atoi(const char *str);
 t_params	ft_getarguments(int argc, char *argv[]);
-void		*ft_apply(t_process *process, int (*f)(t_process *, int));
+void		ft_apply(t_process *process, int (*f)(t_process *, int));
 
 //STUB - Printer
-void		ft_perror(char *string);
+void		ft_perror(const char *string);
 void		ft_printstatus(t_philo philo);
 
 //STUB - Philo
@@ -55,8 +55,8 @@ void		ft_threadexecute(t_process *process,
 int			ft_threadlimit(t_process *process, t_philo *philo);
 int			ft_threadjoin(t_process *process, int philo_id);
 void		ft_startroutine(t_process *process, t_philo *philo);
-void		ft_init_thread(t_process *process, t_philo *philo);
-
+void		ft_initprocess(t_process **process, t_philo *philo,
+				void (*routine)(t_process *, t_philo *));
 //STUB - Execute
 void		ft_eat(t_process *process, t_philo *philo);
 void		ft_sleep(t_process *process, t_philo *philo);

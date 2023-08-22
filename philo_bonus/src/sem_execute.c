@@ -6,34 +6,21 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:54:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/21 20:42:16 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/22 19:23:00 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
 //SECTION - Semaphores safe execution
-//ANCHOR - SEM Execute
-void	ft_semexecute(t_process *process, void (*function)(t_process *))
-{
-	ft_decrement_semaphore(process);
-	process->counter = 0;
-	process->params.philo_status_counter = 0;
-	while (process->counter < process->params.philo_num)
-	{
-		(*function)(process);
-		process->counter++;
-	}
-	ft_increment_semaphore(process);
-}
-
 //ANCHOR - Check all processes
-void	ft_check_allprocesses(t_process *process)
+int	ft_check_allprocesses(t_process *process, int count)
 {
-	if (process->philo[process->counter].laststatus == STARTED)
+	if (process->philo[count].laststatus == STARTED)
 		process->params.philo_status_counter++;
 	if (process->params.philo_status_counter == process->params.philo_num)
 		process->lock = FALSE;
+	return (EXIT_SUCCESS);
 }
 
 //ANCHOR - Drop Forks
@@ -60,7 +47,7 @@ void	ft_getforks_sem(t_process *process, t_philo *philo)
 {
 	if (philo->left_fork.is_used == FALSE)
 	{
-		if (((t_semaphor *)process->synchronizer)->fork_sem_value > 0) 
+		if (((t_semaphor *)process->synchronizer)->fork_sem_value > 0)
 		{
 			((t_semaphor *)process->synchronizer)->fork_sem_value--;
 			ft_try(sem_wait(
@@ -72,7 +59,7 @@ void	ft_getforks_sem(t_process *process, t_philo *philo)
 	}
 	if (philo->right_fork.is_used == FALSE)
 	{
-		if (((t_semaphor *)process->synchronizer)->fork_sem_value > 0) 
+		if (((t_semaphor *)process->synchronizer)->fork_sem_value > 0)
 		{
 			((t_semaphor *)process->synchronizer)->fork_sem_value--;
 			ft_try(sem_wait(

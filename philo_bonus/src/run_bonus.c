@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 19:19:47 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/21 20:41:47 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/22 19:34:17 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,8 @@ static void	*ft_mainprocess_loop(void *args)
 	if (args == NULL)
 		return (NULL);
 	philo = (t_philo *)args;
-	process = NULL;
-	ft_initprocess(process, philo, ft_routine);
-	while (process->lock != FALSE)
-		ft_semexecute(process, ft_check_allprocesses);
+	ft_initprocess(&process, philo, ft_routine);
+	ft_delay(1);
 	ft_startroutine(process, philo);
 	exit(EXIT_SUCCESS);
 }
@@ -58,7 +56,7 @@ void	ft_run(t_process *process)
 		return ;
 	process->main_loop = ft_mainprocess_loop;
 	process->dropforks = ft_dropforks_sem;
-	process->lock = TRUE;
+	process->lock = FALSE;
 	ft_open_semaphore(process);
 	ft_marktime(&process->params);
 	ft_apply(process, ft_create_childprocess);

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 17:45:56 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/19 18:08:04 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/21 18:23:40 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_eat(t_process *process, t_philo *philo)
 		while (philo->timer < timelimit)
 			philo->timer += ft_gettimeofday();
 		philo->data.eat_count++;
-		process->dropforks;
+		process->dropforks(process, philo);
 	}
 }
 

@@ -6,13 +6,14 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 13:52:29 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/21 20:22:18 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/22 19:32:06 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
 //SECTION - Child Processes manager
+//ANCHOR - Evaluate status
 static void	ft_evaluatestatus(int status)
 {
 	int	exitstatus;
