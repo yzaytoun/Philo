@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 19:49:16 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/22 18:21:31 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/22 19:45:12 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,9 @@ int	ft_threadjoin(t_process *process, int count)
 {
 	ft_try(
 		pthread_join(process->philo[count].thread,
-			(void *)(&process->catch_status))
+			(void *)&process->catch_status)
 		);
 	return (EXIT_SUCCESS);
-}
-
-//ANCHOR - Check lock
-void	ft_startroutine(t_process *process, t_philo *philo)
-{
-	if (process->lock == FALSE)
-		process->func(process, philo);
 }
 
 //ANCHOR - initthread

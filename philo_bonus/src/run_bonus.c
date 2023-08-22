@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 19:19:47 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/22 19:34:17 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/22 19:42:23 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	*ft_mainprocess_loop(void *args)
 	philo = (t_philo *)args;
 	ft_initprocess(&process, philo, ft_routine);
 	ft_delay(1);
-	ft_startroutine(process, philo);
+	process->func(process, philo);
 	exit(EXIT_SUCCESS);
 }
 
