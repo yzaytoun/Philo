@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 18:51:14 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/22 20:35:10 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/23 17:28:33 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	ft_try(int status)
 			ft_perror("Resource deadlock avoided");
 		else if (status == 22)
 			ft_perror("Invalid argument");
+		else if (status == 3)
+			ft_perror("No such process");
 		else if (status == SEM_FAILED)
 		{
 			printf("errno = %d\n", errornum);
@@ -43,7 +45,7 @@ void	ft_try(int status)
 //ANCHOR - Catch errors
 void	ft_catch(t_process *process)
 {
-	if (process->catch_status != EXIT_SUCCESS)
+	if (process->catch_status == DIED)
 	{
 		ft_freeall(&process);
 		ft_perror("Thread Died");

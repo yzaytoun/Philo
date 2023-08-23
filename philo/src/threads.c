@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 19:49:16 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/22 19:45:12 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/23 18:14:03 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,29 @@ int	ft_threadlimit(t_process *process, t_philo *philo)
 	return (FALSE);
 }
 
+//ANCHOR - Create Threads
+int	ft_createthread(t_process *process, int count)
+{
+	process->philo[count].process = process;
+	return (
+		pthread_create(&process->philo[count].thread, NULL,
+			process->main_loop, &process->philo[count])
+	);
+}
+
 //ANCHOR - Thread join
 int	ft_threadjoin(t_process *process, int count)
 {
-	ft_try(
+	return (
 		pthread_join(process->philo[count].thread,
 			(void *)&process->catch_status)
-		);
-	return (EXIT_SUCCESS);
+	);
 }
 
 //ANCHOR - initthread
-void	ft_initprocess(t_process **process, t_philo *philo,
-	void (*routine)(t_process *, t_philo *))
+void	ft_initprocess(t_process **process, t_philo *philo)
 {
 	(*process) = philo->process;
-	(*process)->func = routine;
 	philo->laststatus = STARTED;
 	ft_printstatus(*philo);
 }

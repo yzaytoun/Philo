@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 17:19:37 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/22 19:27:06 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/23 18:15:05 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@ int			ft_initforkmutex(t_process *process, int count);
 int			ft_destroyforkmutex(t_process *process, int count);
 int			ft_createthread(t_process *process, int philo_id);
 
+//STUB - Mutexes
+void		ft_initmutexes(t_process *process);
+void		ft_destroy_allmutexes(t_process *process);
+
 //STUB - Routine
 void		ft_run(t_process *process);
 
@@ -54,9 +58,7 @@ void		ft_threadexecute(t_process *process,
 				void (*f)(t_process *, t_philo *), t_philo *philo);
 int			ft_threadlimit(t_process *process, t_philo *philo);
 int			ft_threadjoin(t_process *process, int philo_id);
-void		ft_startroutine(t_process *process, t_philo *philo);
-void		ft_initprocess(t_process **process, t_philo *philo,
-				void (*routine)(t_process *, t_philo *));
+void		ft_initprocess(t_process **process, t_philo *philo);
 //STUB - Execute
 void		ft_eat(t_process *process, t_philo *philo);
 void		ft_sleep(t_process *process, t_philo *philo);

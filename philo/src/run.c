@@ -21,14 +21,15 @@ static void	ft_routine(t_process *process, t_philo *philo)
 		&& philo->laststatus != DIED
 		&& ft_threadlimit(process, philo) == FALSE)
 	{
+		philo->timer++;
 		ft_threadexecute(process, ft_getforks, philo);
 		ft_threadexecute(process, ft_eat, philo);
-		ft_threadexecute(process, ft_sleep, philo);
-		ft_threadexecute(process, ft_addtime, philo);
-		ft_threadexecute(process, ft_isalive, philo);
+		//ft_threadexecute(process, ft_sleep, philo);
+		//ft_threadexecute(process, ft_addtime, philo);
+		//ft_threadexecute(process, ft_isalive, philo);
 		if (philo->laststatus == DIED)
 			break ;
-		ft_threadchecker(process, ft_check_deadthread);
+		//ft_threadchecker(process, ft_check_deadthread);
 	}
 }
 
@@ -40,10 +41,11 @@ static void	*ft_mainthread_loop(void *args)
 
 	philo = (t_philo *)args;
 	process = philo->process;
-	ft_initprocess(&process, philo, ft_routine);
-	ft_delay(4);
+	ft_initprocess(&process, philo);
+	while (process->lock != FALSE)
+		ft_threadchecker(process, ft_all_threadsactive);
 	process->func(process, philo);
-	ft_threadchecker(process, ft_check_forklocks);
+	//ft_threadchecker(process, ft_check_forklocks);
 	return ((void *)(uintptr_t)philo->laststatus);
 }
 
@@ -55,27 +57,17 @@ void	ft_run(t_process *process)
 	process->synchronizer = malloc(sizeof(t_mutex));
 	if (!process->synchronizer)
 		return ;
-	process->lock = TRUE;
 	process->main_loop = ft_mainthread_loop;
 	process->dropforks = ft_dropforks;
-	ft_try(
-		pthread_mutex_init(&((t_mutex *)process->synchronizer)->mutex, NULL));
-	ft_try(
-		pthread_mutex_init(
-			&((t_mutex *)process->synchronizer)->main_mutex, NULL)
-		);
+	process->func = ft_routine;
+	process->lock = TRUE;
+	ft_initmutexes(process);
 	ft_marktime(&process->params);
-	ft_apply(process, ft_initforkmutex);
 	ft_apply(process, ft_createthread);
-	while (process->lock != FALSE)
-		ft_threadchecker(process, ft_all_threadsactive);
+	ft_delay(16);
 	ft_apply(process, ft_threadjoin);
 	ft_catch(process);
-	ft_try(
-		pthread_mutex_destroy(&((t_mutex *)process->synchronizer)->mutex));
-	ft_try(
-		pthread_mutex_destroy(&((t_mutex *)process->synchronizer)->main_mutex));
-	ft_apply(process, ft_destroyforkmutex);
+	ft_destroy_allmutexes(process);
 }
 
 //!SECTION

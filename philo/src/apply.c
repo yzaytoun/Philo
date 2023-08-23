@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:13:03 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/22 19:22:11 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/23 17:29:57 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,6 @@ int	ft_assign_ids(t_process *process, int count)
 			= (process->params.philo_num + count)
 			- process->params.philo_num;
 	return (EXIT_SUCCESS);
-}
-
-//ANCHOR - Create Threads
-int	ft_createthread(t_process *process, int count)
-{
-	process->philo[count].process = process;
-	return (
-		pthread_create(&process->philo[count].thread, NULL,
-			process->main_loop, &process->philo[count])
-	);
-}
-
-//ANCHOR - Initiate Fork mutexes
-int	ft_initforkmutex(t_process *process, int count)
-{
-	return (pthread_mutex_init(&process->fork[count].mutex, NULL));
-}
-
-//ANCHOR - Destroy fork mutexes
-int	ft_destroyforkmutex(t_process *process, int count)
-{
-	return (pthread_mutex_destroy(&process->fork[count].mutex));
 }
 
 //ANCHOR - Philo apply
