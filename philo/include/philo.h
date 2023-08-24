@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 17:19:37 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/23 18:15:05 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/24 19:27:07 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@
 void		ft_putstr_fd(const char *string, int fd);
 long		ft_atoi(const char *str);
 t_params	ft_getarguments(int argc, char *argv[]);
-void		ft_apply(t_process *process, int (*f)(t_process *, int));
+void		ft_apply(t_process *process, int (*f)(t_process *, int), int lock);
 
 //STUB - Printer
 void		ft_perror(const char *string);
-void		ft_printstatus(t_philo philo);
+void		ft_printstatus(t_philo philo, long time);
 
 //STUB - Philo
 t_process	*ft_createprocess(t_params params);
@@ -49,9 +49,9 @@ void		ft_destroy_allmutexes(t_process *process);
 void		ft_run(t_process *process);
 
 //STUB - Time
-void		ft_delay(int seconds);
+long		ft_delaymil(int miliseconds);
 long		ft_gettimeofday(void);
-void		ft_marktime(t_params *params);
+long		ft_timediff(t_process *process, t_philo *philo);
 
 //STUB - Threads
 void		ft_threadexecute(t_process *process,
@@ -63,14 +63,12 @@ void		ft_initprocess(t_process **process, t_philo *philo);
 void		ft_eat(t_process *process, t_philo *philo);
 void		ft_sleep(t_process *process, t_philo *philo);
 void		ft_isalive(t_process *process, t_philo *philo);
-void		ft_addtime(t_process *process, t_philo *philo);
 
 //STUB - Forks
 void		ft_dropforks(t_process *process, t_philo *philo);
 void		ft_getforks(t_process *process, t_philo *philo);
 
 //STUB - Thread checker
-void		ft_threadchecker(t_process *process, int (*func)(t_process *, int));
 int			ft_check_deadthread(t_process *process, int counter);
 int			ft_all_threadsactive(t_process *process, int counter);
 int			ft_check_forklocks(t_process *process, int counter);

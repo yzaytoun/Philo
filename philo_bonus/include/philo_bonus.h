@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 18:59:32 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/22 19:32:11 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/23 16:49:38 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_semaphor
 //STUB - Process managemente functions
 int		ft_create_childprocess(t_process *process, int count);
 int		ft_wait_childprocess(t_process *process, int count);
+int		ft_killprocess(t_process *process, int count);
 
 //STUB - Semaphore execution
 void	ft_dropforks_sem(t_process *process, t_philo *philo);

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 16:48:34 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/21 17:50:39 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/24 18:51:05 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ t_params	ft_getarguments(int argc, char *argv[])
 			ft_assign_params(&params, count, input);
 		++count;
 	}
+	params.start_time = ft_gettimeofday();
 	return (params);
 }
 //!SECTION

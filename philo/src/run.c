@@ -13,23 +13,27 @@
 #include "philo.h"
 
 //SECTION - Routine Section
+//ANCHOR - Block thread until all threads are active
+static void	ft_blockthread(t_process *process)
+{
+	while (process->lock == TRUE)
+		ft_delaymil(5);
+}
+
 //ANCHOR - Routine
 static void	ft_routine(t_process *process, t_philo *philo)
 {
 	philo->timer = process->params.start_time;
-	while (philo->timer < process->params.time_to_die
+	while (ft_timediff(process, philo) < process->params.time_to_die
 		&& philo->laststatus != DIED
+		&& process->catch_status != DIED
 		&& ft_threadlimit(process, philo) == FALSE)
 	{
-		philo->timer++;
 		ft_threadexecute(process, ft_getforks, philo);
 		ft_threadexecute(process, ft_eat, philo);
-		//ft_threadexecute(process, ft_sleep, philo);
-		//ft_threadexecute(process, ft_addtime, philo);
-		//ft_threadexecute(process, ft_isalive, philo);
-		if (philo->laststatus == DIED)
-			break ;
-		//ft_threadchecker(process, ft_check_deadthread);
+		ft_threadexecute(process, ft_sleep, philo);
+		ft_threadexecute(process, ft_isalive, philo);
+		ft_apply(process, ft_check_deadthread, APPLY_LOCK);
 	}
 }
 
@@ -42,10 +46,8 @@ static void	*ft_mainthread_loop(void *args)
 	philo = (t_philo *)args;
 	process = philo->process;
 	ft_initprocess(&process, philo);
-	while (process->lock != FALSE)
-		ft_threadchecker(process, ft_all_threadsactive);
+	ft_blockthread(process);
 	process->func(process, philo);
-	//ft_threadchecker(process, ft_check_forklocks);
 	return ((void *)(uintptr_t)philo->laststatus);
 }
 
@@ -62,10 +64,11 @@ void	ft_run(t_process *process)
 	process->func = ft_routine;
 	process->lock = TRUE;
 	ft_initmutexes(process);
-	ft_marktime(&process->params);
-	ft_apply(process, ft_createthread);
-	ft_delay(16);
-	ft_apply(process, ft_threadjoin);
+	ft_apply(process, ft_createthread, APPLY_NO_LOCK);
+	while (process->lock == TRUE)
+		ft_apply(process, ft_all_threadsactive, APPLY_NO_LOCK);
+	ft_delaymil(process->params.time_to_die * 10);
+	ft_apply(process, ft_threadjoin, APPLY_NO_LOCK);
 	ft_catch(process);
 	ft_destroy_allmutexes(process);
 }

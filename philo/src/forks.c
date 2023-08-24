@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 19:49:16 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/19 18:08:39 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/24 19:15:48 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	ft_getforks(t_process *process, t_philo *philo)
 		{
 			ft_takefork(process, philo, LEFT);
 			ft_try(pthread_mutex_lock(&process->fork[process->counter].mutex));
-			ft_printstatus(*philo);
+			ft_printstatus(*philo, ft_timediff(process, philo));
 		}
 		else if (process->fork[process->counter].is_used == FALSE
 			&& ft_validfork(process, philo->id, process->counter, RIGHT)
@@ -81,7 +81,7 @@ void	ft_getforks(t_process *process, t_philo *philo)
 		{
 			ft_takefork(process, philo, RIGHT);
 			ft_try(pthread_mutex_lock(&process->fork[process->counter].mutex));
-			ft_printstatus(*philo);
+			ft_printstatus(*philo, ft_timediff(process, philo));
 		}
 		process->counter++;
 	}

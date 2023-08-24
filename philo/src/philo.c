@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 16:56:07 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/21 20:19:33 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/24 18:50:26 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_process	*ft_createprocess(t_params params)
 	process->params = params;
 	process->philo = ft_createphilo(params.philo_num);
 	process->fork = ft_createforks(params.philo_num);
-	ft_apply(process, ft_assign_ids);
+	ft_apply(process, ft_assign_ids, APPLY_NO_LOCK);
 	return (process);
 }
 

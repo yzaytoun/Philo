@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:54:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/22 19:23:00 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/24 19:33:44 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_getforks_sem(t_process *process, t_philo *philo)
 		}	
 		philo->left_fork.is_used = TRUE;
 		philo->laststatus = TAKEN_FORK;
-		ft_printstatus(*philo);
+		ft_printstatus(*philo, ft_timediff(process, philo));
 	}
 	if (philo->right_fork.is_used == FALSE)
 	{
@@ -67,7 +67,7 @@ void	ft_getforks_sem(t_process *process, t_philo *philo)
 		}
 		philo->right_fork.is_used = TRUE;
 		philo->laststatus = TAKEN_FORK;
-		ft_printstatus(*philo);
+		ft_printstatus(*philo, ft_timediff(process, philo));
 	}
 }
 //!SECTION

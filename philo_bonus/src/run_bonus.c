@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 19:19:47 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/22 19:42:23 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/24 19:32:27 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static void	ft_routine(t_process *process, t_philo *philo)
 		ft_getforks_sem(process, philo);
 		ft_eat(process, philo);
 		ft_sleep(process, philo);
-		ft_addtime(process, philo);
 		ft_isalive(process, philo);
 		if (philo->laststatus == DIED)
 			break ;
@@ -40,8 +39,7 @@ static void	*ft_mainprocess_loop(void *args)
 	if (args == NULL)
 		return (NULL);
 	philo = (t_philo *)args;
-	ft_initprocess(&process, philo, ft_routine);
-	ft_delay(1);
+	ft_initprocess(&process, philo);
 	process->func(process, philo);
 	exit(EXIT_SUCCESS);
 }
@@ -56,11 +54,11 @@ void	ft_run(t_process *process)
 		return ;
 	process->main_loop = ft_mainprocess_loop;
 	process->dropforks = ft_dropforks_sem;
-	process->lock = FALSE;
+	process->lock = TRUE;
+	process->func = ft_routine;
 	ft_open_semaphore(process);
-	ft_marktime(&process->params);
-	ft_apply(process, ft_create_childprocess);
-	ft_apply(process, ft_wait_childprocess);
+	ft_apply(process, ft_create_childprocess, APPLY_NO_LOCK);
+	ft_apply(process, ft_wait_childprocess, APPLY_NO_LOCK);
 	ft_close_semaphore(process);
 }
 //!SECTION

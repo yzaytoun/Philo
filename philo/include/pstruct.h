@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:16:19 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/19 18:06:25 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/24 17:51:13 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 /*Macros*/
 # define TRUE 1
 # define FALSE !TRUE
+# define APPLY_LOCK 1
+# define APPLY_NO_LOCK 0
 # define SEC_PER_DAY 86400
 # define SEC_PER_HOUR 3600
 # define SEC_PER_MIN 60
