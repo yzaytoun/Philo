@@ -32,6 +32,7 @@ static void	ft_routine(t_process *process, t_philo *philo)
 		ft_threadexecute(process, ft_getforks, philo);
 		ft_threadexecute(process, ft_eat, philo);
 		ft_threadexecute(process, ft_sleep, philo);
+		ft_threadexecute(process, ft_think, philo);
 		ft_threadexecute(process, ft_isalive, philo);
 		ft_apply(process, ft_check_deadthread, APPLY_LOCK);
 	}
@@ -67,7 +68,7 @@ void	ft_run(t_process *process)
 	ft_apply(process, ft_createthread, APPLY_NO_LOCK);
 	while (process->lock == TRUE)
 		ft_apply(process, ft_all_threadsactive, APPLY_NO_LOCK);
-	ft_delaymil(process->params.time_to_die * 10);
+	ft_delaymil(process->params.time_to_die * 3000);
 	ft_apply(process, ft_threadjoin, APPLY_NO_LOCK);
 	ft_catch(process);
 	ft_destroy_allmutexes(process);

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 17:19:37 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/24 19:27:07 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/25 18:53:51 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void		ft_destroy_allmutexes(t_process *process);
 void		ft_run(t_process *process);
 
 //STUB - Time
-long		ft_delaymil(int miliseconds);
+void		ft_delaymil(int miliseconds);
 long		ft_gettimeofday(void);
 long		ft_timediff(t_process *process, t_philo *philo);
 
@@ -63,6 +63,7 @@ void		ft_initprocess(t_process **process, t_philo *philo);
 void		ft_eat(t_process *process, t_philo *philo);
 void		ft_sleep(t_process *process, t_philo *philo);
 void		ft_isalive(t_process *process, t_philo *philo);
+void		ft_think(t_process *process, t_philo *philo);
 
 //STUB - Forks
 void		ft_dropforks(t_process *process, t_philo *philo);

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 18:51:14 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/23 17:28:33 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/25 18:57:41 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void	ft_catch(t_process *process)
 	if (process->catch_status == DIED)
 	{
 		ft_freeall(&process);
-		ft_perror("Thread Died");
+		printf("Thread Died");
+		exit(EXIT_SUCCESS);
 	}
 }
 

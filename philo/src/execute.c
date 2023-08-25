@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 17:45:56 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/24 19:26:42 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/25 18:53:00 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	ft_eat(t_process *process, t_philo *philo)
 	{
 		philo->laststatus = EATING;
 		ft_printstatus(*philo, ft_timediff(process, philo));
-		philo->timer = ft_delaymil(process->params.time_to_eat);
+		ft_delaymil(process->params.time_to_eat);
+		philo->timer = ft_gettimeofday();
 		philo->data.eat_count++;
 		process->dropforks(process, philo);
 	}
@@ -30,12 +31,26 @@ void	ft_eat(t_process *process, t_philo *philo)
 //ANCHOR - Sleep
 void	ft_sleep(t_process *process, t_philo *philo)
 {
-	if (philo->laststatus != DIED)
+	if (philo->laststatus == EATING)
 	{
 		philo->laststatus = SLEEPING;
 		ft_printstatus(*philo, ft_timediff(process, philo));
-		philo->timer= ft_delaymil(process->params.time_to_sleep);
+		ft_delaymil(process->params.time_to_sleep);
+		philo->timer = ft_gettimeofday();
 		philo->data.sleep_count++;
+	}
+}
+
+//ANCHOR - Think
+void	ft_think(t_process *process, t_philo *philo)
+{
+	if (philo->laststatus != DIED)
+	{
+		philo->laststatus = THINKING;
+		ft_printstatus(*philo, ft_timediff(process, philo));
+		ft_delaymil(process->params.time_to_sleep);
+		philo->timer = ft_gettimeofday();
+		philo->data.think_count++;
 	}
 }
 
