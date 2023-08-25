@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 17:41:50 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/22 19:10:50 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/25 19:57:12 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_decrement_semaphore(t_process *process)
 void	ft_open_semaphore(t_process *process)
 {
 	((t_semaphor *)process->synchronizer)->main_semaphor
-		= sem_open("/philo_sem", O_CREAT, 0644, 0);
+		= sem_open("/philo_sem", O_CREAT, 0644, 1);
 	if (((t_semaphor *)process->synchronizer)->main_semaphor == SEM_FAILED)
 	{
 		ft_freeall(&process);
