@@ -21,6 +21,9 @@
 # include <fcntl.h>
 # include <signal.h>
 
+# define FORK_SEM 1
+# define MAIN_SEM 2
+
 typedef struct s_semaphor
 {
 	sem_t		*main_semaphor;
@@ -41,8 +44,8 @@ void	ft_getforks_sem(t_process *process, t_philo *philo);
 int		ft_check_allprocesses(t_process *process, int count);
 
 //STUB - Semaphores
-void	ft_increment_semaphore(t_process *process);
-void	ft_decrement_semaphore(t_process *process);
+void	ft_increment_semaphore(t_process *process, int sem_id);
+void	ft_decrement_semaphore(t_process *process, int sem_id);
 void	ft_open_semaphore(t_process *process);
 void	ft_close_semaphore(t_process *process);
 

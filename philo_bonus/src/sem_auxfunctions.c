@@ -14,31 +14,55 @@
 
 //SECTION - Auxiliarly Functions
 //ANCHOR - Increment semaphore
-void	ft_increment_semaphore(t_process *process)
+void	ft_increment_semaphore(t_process *process, int sem_id)
 {
-	if (((t_semaphor *)process->synchronizer)->main_sem_value < SEM_VALUE_MAX)
+	if (sem_id == MAIN_SEM)
 	{
-		((t_semaphor *)process->synchronizer)->main_sem_value++;
-		ft_try(
-			sem_post(
-				((t_semaphor *)process->synchronizer)->main_semaphor));
+		if (((t_semaphor *)process->synchronizer)->main_sem_value < SEM_VALUE_MAX)
+		{
+			((t_semaphor *)process->synchronizer)->main_sem_value++;
+			ft_try(
+				sem_post(
+					((t_semaphor *)process->synchronizer)->main_semaphor));
+		}
+	}
+	else if (sem_id == FORK_SEM)
+	{
+		if (((t_semaphor *)process->synchronizer)->fork_sem_value < SEM_VALUE_MAX)
+		{
+			((t_semaphor *)process->synchronizer)->fork_sem_value++;
+			ft_try(
+				sem_post(((t_semaphor *)process->synchronizer)->forks_semaphor));
+		}
 	}
 }
 
 //ANCHOR - Decrement semaphore
-void	ft_decrement_semaphore(t_process *process)
+void	ft_decrement_semaphore(t_process *process, int sem_id)
 {
-	((t_semaphor *)process->synchronizer)->main_sem_value--;
-	ft_try(
-		sem_wait(
-			((t_semaphor *)process->synchronizer)->main_semaphor));
+	if (sem_id == MAIN_SEM)
+	{
+		((t_semaphor *)process->synchronizer)->main_sem_value--;
+		ft_try(
+			sem_wait(
+				((t_semaphor *)process->synchronizer)->main_semaphor));
+	}
+	else if (sem_id == FORK_SEM)
+	{
+		if (((t_semaphor *)process->synchronizer)->fork_sem_value > 0)
+		{
+			((t_semaphor *)process->synchronizer)->fork_sem_value--;
+			ft_try(sem_wait(
+					((t_semaphor *)process->synchronizer)->forks_semaphor));
+		}
+	}
 }
 
 //ANCHOR - Open semaphores
 void	ft_open_semaphore(t_process *process)
 {
 	((t_semaphor *)process->synchronizer)->main_semaphor
-		= sem_open("/philo_sem", O_CREAT, 0644, 1);
+		= sem_open("/philo_sem", O_CREAT, 0644, 0);
 	if (((t_semaphor *)process->synchronizer)->main_semaphor == SEM_FAILED)
 	{
 		ft_freeall(&process);

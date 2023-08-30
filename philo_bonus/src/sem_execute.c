@@ -26,19 +26,9 @@ int	ft_check_allprocesses(t_process *process, int count)
 //ANCHOR - Drop Forks
 void	ft_dropforks_sem(t_process *process, t_philo *philo)
 {
-	if (((t_semaphor *)process->synchronizer)->fork_sem_value < SEM_VALUE_MAX)
-	{
-		((t_semaphor *)process->synchronizer)->fork_sem_value++;
-		ft_try(
-			sem_post(((t_semaphor *)process->synchronizer)->forks_semaphor));
-	}
+	ft_increment_semaphore(process, FORK_SEM);
 	philo->left_fork.is_used = FALSE;
-	if (((t_semaphor *)process->synchronizer)->fork_sem_value < SEM_VALUE_MAX)
-	{
-		((t_semaphor *)process->synchronizer)->fork_sem_value++;
-		ft_try(
-			sem_post(((t_semaphor *)process->synchronizer)->forks_semaphor));
-	}
+	ft_increment_semaphore(process, FORK_SEM);
 	philo->right_fork.is_used = FALSE;
 }
 
@@ -47,24 +37,14 @@ void	ft_getforks_sem(t_process *process, t_philo *philo)
 {
 	if (philo->left_fork.is_used == FALSE)
 	{
-		if (((t_semaphor *)process->synchronizer)->fork_sem_value > 0)
-		{
-			((t_semaphor *)process->synchronizer)->fork_sem_value--;
-			ft_try(sem_wait(
-					((t_semaphor *)process->synchronizer)->forks_semaphor));
-		}	
+		ft_decrement_semaphore(process, FORK_SEM);		
 		philo->left_fork.is_used = TRUE;
 		philo->laststatus = TAKEN_FORK;
 		ft_printstatus(*philo, ft_timediff(process, philo));
 	}
 	if (philo->right_fork.is_used == FALSE)
 	{
-		if (((t_semaphor *)process->synchronizer)->fork_sem_value > 0)
-		{
-			((t_semaphor *)process->synchronizer)->fork_sem_value--;
-			ft_try(sem_wait(
-					((t_semaphor *)process->synchronizer)->forks_semaphor));
-		}
+		ft_decrement_semaphore(process, FORK_SEM);
 		philo->right_fork.is_used = TRUE;
 		philo->laststatus = TAKEN_FORK;
 		ft_printstatus(*philo, ft_timediff(process, philo));

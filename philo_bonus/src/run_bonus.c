@@ -17,7 +17,7 @@
 static void	ft_routine(t_process *process, t_philo *philo)
 {
 	philo->timer = process->params.start_time;
-	while (ft_timediff(process, philo) < process->params.time_to_die
+	while (ft_timediff(process, philo) + 1 < process->params.time_to_die
 		&& philo->laststatus != DIED
 		&& process->catch_status != DIED
 		&& ft_threadlimit(process, philo) == FALSE)
@@ -40,9 +40,7 @@ static void	*ft_mainprocess_loop(void *args)
 		return (NULL);
 	philo = (t_philo *)args;
 	ft_initprocess(&process, philo);
-	printf("inside the child sem = %d\n", ((t_semaphor *)process->synchronizer)->main_sem_value);
-	ft_decrement_semaphore(process);
-	printf("2 inside the child sem = %d\n", ((t_semaphor *)process->synchronizer)->main_sem_value);
+	ft_decrement_semaphore(process, MAIN_SEM);
 	process->func(process, philo);
 	exit(EXIT_SUCCESS);
 }
@@ -64,9 +62,9 @@ void	ft_run(t_process *process)
 	while (process->lock == TRUE)
 		ft_apply(process, ft_check_allprocesses, APPLY_NO_LOCK);
 	printf("3 outside the child sem = %d\n", ((t_semaphor *)process->synchronizer)->main_sem_value);
-	ft_increment_semaphore(process);
+	ft_increment_semaphore(process, MAIN_SEM);
 	printf("4 outside the child sem = %d\n", ((t_semaphor *)process->synchronizer)->main_sem_value);
-	ft_delaymil(process->params.time_to_die * 3000);
+	ft_delaymil(process->params.time_to_die * process->params.philo_num * 1000);
 	ft_apply(process, ft_wait_childprocess, APPLY_NO_LOCK);
 	ft_close_semaphore(process);
 }
