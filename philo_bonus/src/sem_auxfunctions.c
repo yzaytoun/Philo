@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 17:41:50 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/25 19:57:12 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/31 20:41:25 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	ft_increment_semaphore(t_process *process, int sem_id)
 {
 	if (sem_id == MAIN_SEM)
 	{
-		if (((t_semaphor *)process->synchronizer)->main_sem_value < SEM_VALUE_MAX)
+		if (((t_semaphor *)process->synchronizer)->main_sem_value
+			< SEM_VALUE_MAX)
 		{
 			((t_semaphor *)process->synchronizer)->main_sem_value++;
 			ft_try(
@@ -28,11 +29,13 @@ void	ft_increment_semaphore(t_process *process, int sem_id)
 	}
 	else if (sem_id == FORK_SEM)
 	{
-		if (((t_semaphor *)process->synchronizer)->fork_sem_value < SEM_VALUE_MAX)
+		if (((t_semaphor *)process->synchronizer)->fork_sem_value
+			< SEM_VALUE_MAX)
 		{
 			((t_semaphor *)process->synchronizer)->fork_sem_value++;
 			ft_try(
-				sem_post(((t_semaphor *)process->synchronizer)->forks_semaphor));
+				sem_post(
+					((t_semaphor *)process->synchronizer)->forks_semaphor));
 		}
 	}
 }

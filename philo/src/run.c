@@ -24,8 +24,8 @@ static void	ft_blockthread(t_process *process)
 static void	ft_routine(t_process *process, t_philo *philo)
 {
 	philo->timer = process->params.start_time;
-	while (ft_timediff(process, philo) + 1 < process->params.time_to_die
-		&& philo->laststatus != DIED
+	philo->time_reset = process->params.start_time;
+	while (philo->laststatus != DIED
 		&& process->catch_status != DIED
 		&& ft_threadlimit(process, philo) == FALSE)
 	{
@@ -55,7 +55,7 @@ static void	*ft_mainthread_loop(void *args)
 //ANCHOR - Run
 void	ft_run(t_process *process)
 {
-	if (!process || process->philo == NULL)
+	if (!process || process->params.philo_num <= 0)
 		return ;
 	process->synchronizer = malloc(sizeof(t_mutex));
 	if (!process->synchronizer)
@@ -65,10 +65,11 @@ void	ft_run(t_process *process)
 	process->func = ft_routine;
 	process->lock = TRUE;
 	ft_initmutexes(process);
+	process->params.start_time = ft_current_time();
 	ft_apply(process, ft_createthread, APPLY_NO_LOCK);
 	while (process->lock == TRUE)
 		ft_apply(process, ft_all_threadsactive, APPLY_NO_LOCK);
-	ft_delaymil(process->params.time_to_die * process->params.philo_num * 1000);
+	ft_delaymil(process->params.time_to_die * process->params.philo_num * 10);
 	ft_apply(process, ft_threadjoin, APPLY_NO_LOCK);
 	ft_catch(process);
 	ft_destroy_allmutexes(process);

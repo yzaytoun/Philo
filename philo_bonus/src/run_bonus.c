@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 19:19:47 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/25 19:51:24 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/31 20:50:36 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@
 static void	ft_routine(t_process *process, t_philo *philo)
 {
 	philo->timer = process->params.start_time;
-	while (ft_timediff(process, philo) + 1 < process->params.time_to_die
-		&& philo->laststatus != DIED
+	philo->time_reset = process->params.start_time;
+	while (philo->laststatus != DIED
 		&& process->catch_status != DIED
 		&& ft_threadlimit(process, philo) == FALSE)
 	{
-		ft_getforks_sem(process, philo);
-		//ft_eat(process, philo);
-		//ft_sleep(process, philo);
-		//ft_think(process, philo);
-		ft_isalive(process, philo);
+		ft_semexecute(process, philo, ft_getforks_sem);
+		ft_semexecute(process, philo, ft_eat);
+		ft_semexecute(process, philo, ft_sleep);
+		ft_semexecute(process, philo, ft_think);
+		ft_semexecute(process, philo, ft_isalive);
 	}
 }
 
@@ -58,13 +58,15 @@ void	ft_run(t_process *process)
 	process->lock = TRUE;
 	process->func = ft_routine;
 	ft_open_semaphore(process);
+	process->params.start_time = ft_current_time();
 	ft_apply(process, ft_create_childprocess, APPLY_NO_LOCK);
-	while (process->lock == TRUE)
-		ft_apply(process, ft_check_allprocesses, APPLY_NO_LOCK);
-	printf("3 outside the child sem = %d\n", ((t_semaphor *)process->synchronizer)->main_sem_value);
-	ft_increment_semaphore(process, MAIN_SEM);
-	printf("4 outside the child sem = %d\n", ((t_semaphor *)process->synchronizer)->main_sem_value);
-	ft_delaymil(process->params.time_to_die * process->params.philo_num * 1000);
+	ft_delaymil(process->params.time_to_die * process->params.philo_num);
+	process->counter = 0;
+	while (process->counter < process->params.philo_num)
+	{
+		ft_increment_semaphore(process, MAIN_SEM);
+		++process->counter;
+	}
 	ft_apply(process, ft_wait_childprocess, APPLY_NO_LOCK);
 	ft_close_semaphore(process);
 }

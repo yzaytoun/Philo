@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:51:35 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/25 18:55:49 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/31 20:28:23 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,20 @@
 //ANCHOR - Delay Function
 void	ft_delaymil(int miliseconds)
 {
+	int	count;
+
+	count = 0;
 	if (miliseconds == 0 || !miliseconds)
 		return ;
-	usleep(miliseconds);
+	while (count < miliseconds)
+	{
+		usleep(100);
+		count++;
+	}
 }
 
 //ANCHOR - Set Timer
-long	ft_gettimeofday(void)
+long	ft_current_time(void)
 {
 	struct timeval	time;
 	struct timezone	timezone;
@@ -33,10 +40,10 @@ long	ft_gettimeofday(void)
 }
 
 //ANCHOR - Add current time to time limit
-long	ft_timediff(t_process *process, t_philo *philo)
+long	ft_timediff(t_philo *philo, long currtime)
 {
 	return (
-		philo->timer - process->params.start_time
+		philo->timer - currtime
 	);
 }
 //!SECTION

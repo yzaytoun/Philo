@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 19:49:16 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/24 19:16:38 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/08/31 20:08:01 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,6 @@ void	ft_initprocess(t_process **process, t_philo *philo)
 {
 	(*process) = philo->process;
 	philo->laststatus = STARTED;
-	ft_printstatus(*philo, ft_timediff(*process, philo));
+	ft_printstatus(*philo, ft_timediff(philo, (*process)->params.start_time));
 }
 //!SECTION
