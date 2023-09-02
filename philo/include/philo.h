@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 17:19:37 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/31 20:05:12 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/02 17:25:50 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void		ft_destroy_allmutexes(t_process *process);
 void		ft_run(t_process *process);
 
 //STUB - Time
-void		ft_delaymil(int miliseconds);
+void		ft_delaymil(long miliseconds);
 long		ft_current_time(void);
 long		ft_timediff(t_philo *philo, long currtime);
 

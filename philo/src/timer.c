@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:51:35 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/31 20:28:23 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/02 17:28:29 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,12 @@
 
 //SECTION - Time Functions
 //ANCHOR - Delay Function
-void	ft_delaymil(int miliseconds)
+void	ft_delaymil(long miliseconds)
 {
-	int	count;
+	const long	start = ft_current_time();
 
-	count = 0;
-	if (miliseconds == 0 || !miliseconds)
-		return ;
-	while (count < miliseconds)
-	{
-		usleep(100);
-		count++;
-	}
+	while ((ft_current_time() - start) < miliseconds)
+		usleep(1);
 }
 
 //ANCHOR - Set Timer

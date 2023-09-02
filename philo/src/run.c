@@ -35,6 +35,7 @@ static void	ft_routine(t_process *process, t_philo *philo)
 		ft_threadexecute(process, ft_think, philo);
 		ft_threadexecute(process, ft_isalive, philo);
 		ft_apply(process, ft_check_deadthread, APPLY_LOCK);
+		ft_delaymil(10);
 	}
 }
 
