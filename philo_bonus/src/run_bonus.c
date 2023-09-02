@@ -16,6 +16,8 @@
 //ANCHOR - Routine
 static void	ft_routine(t_process *process, t_philo *philo)
 {
+	if (philo->id % 2 == 0)
+		ft_delaymil(20);
 	philo->timer = process->params.start_time;
 	philo->time_reset = process->params.start_time;
 	while (philo->laststatus != DIED
@@ -26,7 +28,7 @@ static void	ft_routine(t_process *process, t_philo *philo)
 		ft_semexecute(process, philo, ft_sleep);
 		ft_semexecute(process, philo, ft_think);
 		ft_semexecute(process, philo, ft_isalive);
-		ft_delaymil(2);
+		ft_delaymil(20);
 	}
 }
 
@@ -61,14 +63,13 @@ void	ft_run(t_process *process)
 	ft_open_semaphore(process);
 	process->params.start_time = ft_current_time();
 	ft_apply(process, ft_create_childprocess, APPLY_NO_LOCK);
-	ft_delaymil(1);
+	ft_delaymil(20);
 	process->counter = 0;
 	while (process->counter < process->params.philo_num + 1)
 	{
 		ft_increment_semaphore(process, MAIN_SEM);
 		++process->counter;
 	}
-	//ft_delaymil(process->params.time_to_die * process->params.philo_num * 100);
 	ft_apply(process, ft_wait_childprocess, APPLY_NO_LOCK);
 	ft_close_semaphore(process);
 }
