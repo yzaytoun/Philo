@@ -42,6 +42,8 @@ void	ft_apply(t_process *process, int (*f)(t_process *, int), int lock)
 	while (process->counter < process->params.philo_num)
 	{
 		ft_try((*f)(process, process->counter));
+		if (process->catch_status == DIED)
+			break ;
 		++process->counter;
 	}
 	if (lock == APPLY_LOCK)

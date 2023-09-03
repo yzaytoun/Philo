@@ -41,19 +41,11 @@ int	ft_createthread(t_process *process, int count)
 	);
 }
 
-//ANCHOR - Thread join
-int	ft_threadjoin(t_process *process, int count)
-{
-	return (
-		pthread_join(process->philo[count].thread, NULL)
-	);
-}
-
 //ANCHOR - initthread
 void	ft_initprocess(t_process **process, t_philo *philo)
 {
 	(*process) = philo->process;
 	philo->laststatus = STARTED;
-	ft_printstatus(*philo, ft_timediff(philo, (*process)->params.start_time));
+	//ft_printstatus(*philo, ft_timediff(philo, (*process)->params.start_time));
 }
 //!SECTION

@@ -67,7 +67,7 @@ void	ft_getforks(t_process *process, t_philo *philo)
 {
 	process->counter = 0;
 	if (philo->data.eat_count > 0)
-		ft_delaymil(100);
+		ft_delaymil(10);
 	while (process->counter < process->params.philo_num)
 	{
 		if (process->fork[process->counter].is_used == FALSE
