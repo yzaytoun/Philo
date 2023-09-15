@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 19:49:16 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/31 20:16:30 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/15 17:45:58 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,9 @@ void	ft_getforks(t_process *process, t_philo *philo)
 {
 	process->counter = 0;
 	if (philo->data.eat_count > 0)
-		ft_delaymil(10);
-	while (process->counter < process->params.philo_num)
+		ft_delaymil(10, process, philo);
+	while (process->counter < process->params.philo_num
+		&& philo->laststatus != DIED)
 	{
 		if (process->fork[process->counter].is_used == FALSE
 			&& ft_validfork(process, philo->id, process->counter, LEFT) == TRUE)

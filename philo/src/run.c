@@ -17,14 +17,14 @@
 static void	ft_blockthread(t_process *process)
 {
 	while (process->lock == TRUE)
-		ft_delaymil(5);
+		ft_delaymil(5, NULL, NULL);
 }
 
 //ANCHOR - Routine
 static void	ft_routine(t_process *process, t_philo *philo)
 {
 	if (philo->id % 2 == 0)
-		ft_delaymil(5);
+		ft_delaymil(5, process, philo);
 	philo->timer = process->params.start_time;
 	philo->time_reset = process->params.start_time;
 	while (philo->laststatus != DIED
@@ -40,8 +40,7 @@ static void	ft_routine(t_process *process, t_philo *philo)
 		ft_apply(process, ft_check_deadthread, APPLY_LOCK);
 		ft_threadexecute(process, ft_think, philo);
 		ft_apply(process, ft_check_deadthread, APPLY_LOCK);
-		ft_threadexecute(process, ft_isalive, philo);
-		ft_delaymil(20);
+		ft_delaymil(20, process, philo);
 	}
 }
 
@@ -76,7 +75,9 @@ void	ft_run(t_process *process)
 	ft_apply(process, ft_createthread, APPLY_NO_LOCK);
 	while (process->lock == TRUE)
 		ft_apply(process, ft_all_threadsactive, APPLY_NO_LOCK);
-	ft_delaymil(process->params.time_to_die * process->params.philo_num * 5);
+	ft_delaymil(
+		process->params.time_to_die * process->params.philo_num * 5, NULL, NULL
+		);
 	process->counter = 0;
 	while (process->counter < process->params.philo_num)
 	{

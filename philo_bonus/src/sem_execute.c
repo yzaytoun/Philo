@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:54:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/02 16:59:18 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/15 17:35:24 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_dropforks_sem(t_process *process, t_philo *philo)
 void	ft_getforks_sem(t_process *process, t_philo *philo)
 {
 	if (philo->data.eat_count > 0)
-		ft_delaymil(100);
+		ft_delaymil(100, process, philo);
 	if (philo->left_fork.is_used == FALSE)
 	{
 		ft_decrement_semaphore(process, FORK_SEM);

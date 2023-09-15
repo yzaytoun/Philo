@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:51:35 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/02 17:28:29 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/15 17:49:35 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,20 @@
 
 //SECTION - Time Functions
 //ANCHOR - Delay Function
-void	ft_delaymil(long miliseconds)
+void	ft_delaymil(long miliseconds, t_process *process, t_philo *philo)
 {
 	const long	start = ft_current_time();
 
+	if (philo != NULL && philo->laststatus == DIED)
+		return ;
 	while ((ft_current_time() - start) < miliseconds)
+	{
+		if (process != NULL && philo != NULL)
+			ft_isalive(process, philo);
+		if (philo != NULL && philo->laststatus == DIED)
+			break ;
 		usleep(1);
+	}
 }
 
 //ANCHOR - Set Timer
