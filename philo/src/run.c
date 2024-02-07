@@ -23,24 +23,20 @@ static void	ft_blockthread(t_process *process)
 //ANCHOR - Routine
 static void	ft_routine(t_process *process, t_philo *philo)
 {
-	if (philo->id % 2 == 0)
-		ft_delaymil(5, process, philo);
+	//if (philo->id % 2 == 0)
+	//	ft_delaymil(5, process, philo);
 	philo->timer = process->params.start_time;
 	philo->time_reset = process->params.start_time;
 	while (philo->laststatus != DIED
 		&& process->catch_status != DIED
 		&& ft_threadlimit(process, philo) == FALSE)
 	{
+		ft_getforks(process, philo);
+		ft_eat(process, philo);
+		ft_sleep(process, philo);
+		ft_think(process, philo);
 		ft_apply(process, ft_check_deadthread, APPLY_LOCK);
-		ft_threadexecute(process, ft_getforks, philo);
-		ft_apply(process, ft_check_deadthread, APPLY_LOCK);
-		ft_threadexecute(process, ft_eat, philo);
-		ft_apply(process, ft_check_deadthread, APPLY_LOCK);
-		ft_threadexecute(process, ft_sleep, philo);
-		ft_apply(process, ft_check_deadthread, APPLY_LOCK);
-		ft_threadexecute(process, ft_think, philo);
-		ft_apply(process, ft_check_deadthread, APPLY_LOCK);
-		ft_delaymil(20, process, philo);
+		//ft_delaymil(20, process, philo);
 	}
 }
 
@@ -71,7 +67,7 @@ void	ft_run(t_process *process)
 	process->func = ft_routine;
 	process->lock = TRUE;
 	ft_initmutexes(process);
-	process->params.start_time = ft_current_time();
+	process->params.start_time = ft_get_current_time();
 	ft_apply(process, ft_createthread, APPLY_NO_LOCK);
 	while (process->lock == TRUE)
 		ft_apply(process, ft_all_threadsactive, APPLY_NO_LOCK);

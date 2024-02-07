@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 19:19:47 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/15 17:34:01 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/07 18:42:39 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ft_run(t_process *process)
 	process->lock = TRUE;
 	process->func = ft_routine;
 	ft_open_semaphore(process);
-	process->params.start_time = ft_current_time();
+	process->params.start_time = ft_get_current_time();
 	ft_apply(process, ft_create_childprocess, APPLY_NO_LOCK);
 	ft_delaymil(20, NULL, NULL);
 	process->counter = 0;

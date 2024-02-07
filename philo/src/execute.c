@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 17:45:56 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/15 17:46:42 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/07 18:42:39 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	ft_eat(t_process *process, t_philo *philo)
 		philo->laststatus = EATING;
 		ft_printstatus(*philo, ft_timediff(philo, process->params.start_time));
 		philo->timer = 0;
-		philo->time_reset = ft_current_time();
+		philo->time_reset = ft_get_current_time();
 		ft_delaymil(process->params.time_to_eat, process, philo);
-		philo->timer = ft_current_time();
+		philo->timer = ft_get_current_time();
 		philo->data.eat_count++;
 		process->dropforks(process, philo);
 	}
@@ -39,7 +39,7 @@ void	ft_sleep(t_process *process, t_philo *philo)
 		philo->laststatus = SLEEPING;
 		ft_printstatus(*philo, ft_timediff(philo, process->params.start_time));
 		ft_delaymil(process->params.time_to_sleep, process, philo);
-		philo->timer = ft_current_time();
+		philo->timer = ft_get_current_time();
 		philo->data.sleep_count++;
 	}
 }
@@ -52,7 +52,7 @@ void	ft_think(t_process *process, t_philo *philo)
 		philo->laststatus = THINKING;
 		ft_printstatus(*philo, ft_timediff(philo, process->params.start_time));
 		ft_delaymil(process->params.time_to_sleep, process, philo);
-		philo->timer = ft_current_time();
+		philo->timer = ft_get_current_time();
 		philo->data.think_count++;
 	}
 }

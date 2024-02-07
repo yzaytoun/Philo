@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:16:19 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/31 20:22:19 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/07 18:20:23 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@
 # include <errno.h>
 
 /*Macros*/
-# define TRUE 1
-# define FALSE !TRUE
 # define APPLY_LOCK 1
 # define APPLY_NO_LOCK 0
 # define SEC_PER_DAY 86400
@@ -46,6 +44,12 @@ typedef enum s_status
 	THINKING = 4400,
 	DIED = 5500
 }			t_status;
+
+typedef enum e_bool
+{
+	FALSE,
+	TRUE
+}	t_bool;
 
 typedef struct s_meta /*Meta data about the philo*/
 {
@@ -93,7 +97,6 @@ typedef struct s_mutex
 	pthread_mutex_t	mutex;
 	pthread_mutex_t	main_mutex;	
 }				t_mutex;
-
 
 struct s_process
 {

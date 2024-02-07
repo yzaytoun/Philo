@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:52:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/31 20:03:41 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/07 20:21:29 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,12 @@ static void	ft_print_status(int laststatus)
 //ANCHOR - Print laststatus
 void	ft_printstatus(t_philo philo, long time)
 {
-	printf("[\U0001F570 %ld] -> philo %d ", time, philo.id);
+	long	current_time;
+
+	current_time = ft_get_current_time();
+	(void)time;
+	printf("[\U0001F570 %ld] -> philo %d ",
+		current_time - philo.process->params.start_time, philo.id);
 	ft_print_status(philo.laststatus);
 }
 
