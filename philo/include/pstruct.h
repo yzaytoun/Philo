@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:16:19 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/07 18:20:23 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/08 20:09:06 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ typedef struct s_philo
 	long		timer;
 	t_process	*process;
 	pid_t		pid;
-	long		time_reset;
+	long		last_eat_time;
 }				t_philo;
 
 typedef struct s_params

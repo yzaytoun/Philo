@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:51:35 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/07 18:59:24 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/08 20:09:50 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,8 @@ long	ft_get_current_time(void)
 }
 
 //ANCHOR - Add current time to time limit
-long	ft_timediff(t_philo *philo, long currtime)
+long	ft_timediff(long starttime, long currtime)
 {
-	return (
-		philo->timer - currtime
-	);
+	return (starttime - currtime);
 }
 //!SECTION

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 19:49:16 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/07 18:20:41 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/08 20:26:45 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,11 @@ int	ft_threadlimit(t_process *process, t_philo *philo)
 int	ft_createthread(t_process *process, int count)
 {
 	process->philo[count].process = process;
-	return (
+	ft_try(
 		pthread_create(&process->philo[count].thread, NULL,
 			process->main_loop, &process->philo[count])
-	);
+		);
+	return (EXIT_SUCCESS);
 }
 
 //ANCHOR - initthread

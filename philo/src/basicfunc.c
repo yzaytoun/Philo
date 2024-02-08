@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 16:48:34 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/31 19:54:39 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/08 19:41:07 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ t_params	ft_getarguments(int argc, char *argv[])
 			ft_perror("Wrong number format");
 		input = ft_atoi(argv[count]);
 		if (input > INT_MAX || input < INT_MIN || input < 0)
-			ft_perror("Cannot handle a very Large number");
+			ft_perror("Cannot handle Large numbers");
 		else
 			ft_assign_params(&params, count, input);
 		++count;

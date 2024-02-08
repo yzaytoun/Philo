@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 19:49:16 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/07 19:12:52 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/08 19:54:13 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ static int
 void	ft_getforks(t_process *process, t_philo *philo)
 {
 	process->counter = 0;
-	if (philo->data.eat_count > 0)
-		ft_delaymil(10, process, philo);
 	while (process->counter < process->params.philo_num
 		&& philo->laststatus != DIED)
 	{
@@ -76,8 +74,7 @@ void	ft_getforks(t_process *process, t_philo *philo)
 		{
 			ft_takefork(process, philo, LEFT);
 			ft_try(pthread_mutex_lock(&process->fork[process->counter].mutex));
-			ft_printstatus(
-				*philo, ft_timediff(philo, process->params.start_time));
+			ft_threadexecute(process, ft_printstatus, philo);
 		}
 		else if (process->fork[process->counter].is_used == FALSE
 			&& ft_validfork(process, philo->id, process->counter, RIGHT)
@@ -85,8 +82,7 @@ void	ft_getforks(t_process *process, t_philo *philo)
 		{
 			ft_takefork(process, philo, RIGHT);
 			ft_try(pthread_mutex_lock(&process->fork[process->counter].mutex));
-			ft_printstatus(
-				*philo, ft_timediff(philo, process->params.start_time));
+			ft_threadexecute(process, ft_printstatus, philo);
 		}
 		process->counter++;
 	}

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 17:19:37 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/07 18:42:39 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/08 20:00:40 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void		ft_apply(t_process *process, int (*f)(t_process *, int), int lock);
 
 //STUB - Printer
 void		ft_perror(const char *string);
-void		ft_printstatus(t_philo philo, long time);
+void		ft_printstatus(t_process *process, t_philo *philo);
 
 //STUB - Philo
 t_process	*ft_createprocess(t_params params);
@@ -51,7 +51,7 @@ void		ft_run(t_process *process);
 //STUB - Time
 void		ft_delaymil(long miliseconds, t_process *process, t_philo *philo);
 long		ft_get_current_time(void);
-long		ft_timediff(t_philo *philo, long currtime);
+long		ft_timediff(long starttime, long currtime);
 
 //STUB - Threads
 void		ft_threadexecute(t_process *process,
