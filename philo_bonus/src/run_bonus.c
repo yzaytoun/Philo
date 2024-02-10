@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 19:19:47 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/07 18:42:39 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/10 18:12:07 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 static void	ft_routine(t_process *process, t_philo *philo)
 {
 	if (philo->id % 2 == 0)
-		ft_delaymil(20, process, philo);
+		ft_msleep(20, process, philo);
 	philo->timer = process->params.start_time;
-	philo->time_reset = process->params.start_time;
+	philo->last_eat_time = process->params.start_time;
 	while (philo->laststatus != DIED
 		&& ft_threadlimit(process, philo) == FALSE)
 	{
@@ -27,7 +27,7 @@ static void	ft_routine(t_process *process, t_philo *philo)
 		ft_semexecute(process, philo, ft_eat);
 		ft_semexecute(process, philo, ft_sleep);
 		ft_semexecute(process, philo, ft_think);
-		ft_delaymil(20, process, philo);
+		ft_msleep(20, process, philo);
 	}
 }
 
@@ -62,7 +62,7 @@ void	ft_run(t_process *process)
 	ft_open_semaphore(process);
 	process->params.start_time = ft_get_current_time();
 	ft_apply(process, ft_create_childprocess, APPLY_NO_LOCK);
-	ft_delaymil(20, NULL, NULL);
+	ft_msleep(20, NULL, NULL);
 	process->counter = 0;
 	while (process->counter < process->params.philo_num + 1)
 	{
