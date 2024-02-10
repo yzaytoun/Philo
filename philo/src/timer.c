@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:51:35 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/08 20:09:50 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/10 19:04:37 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,23 @@
 
 //SECTION - Time Functions
 //ANCHOR - Delay Function
-void	ft_delaymil(long miliseconds, t_process *process, t_philo *philo)
+void	ft_msleep(long miliseconds, t_process *process, t_philo *philo)
 {
-	const long	start = ft_get_current_time();
+	const long	starttime = ft_get_current_time();
 
 	if (philo != NULL && philo->laststatus == DIED)
 		return ;
-	while ((ft_get_current_time() - start) < miliseconds)
+	if (process != NULL && philo != NULL)
 	{
-		if (process != NULL && philo != NULL)
-			ft_isalive(process, philo);
-		if (philo != NULL && philo->laststatus == DIED)
-			break ;
-		usleep(1);
+		while (ft_isalive(process, philo) == TRUE)
+		{
+			if (ft_timediff(ft_get_current_time(), starttime) == miliseconds)
+				break ;
+			usleep(50);
+		}
 	}
+	else
+		usleep(miliseconds * 1000);
 }
 
 //ANCHOR - Set Timer
@@ -44,8 +47,8 @@ long	ft_get_current_time(void)
 }
 
 //ANCHOR - Add current time to time limit
-long	ft_timediff(long starttime, long currtime)
+long	ft_timediff(long currtime, long starttime)
 {
-	return (starttime - currtime);
+	return (currtime - starttime);
 }
 //!SECTION

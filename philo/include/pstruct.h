@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:16:19 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/08 20:09:06 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/10 19:09:07 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ typedef enum s_status
 	TAKEN_FORK = 2200,
 	SLEEPING = 3300,
 	THINKING = 4400,
-	DIED = 5500
+	DIED = 5500,
+	FINISHED
 }			t_status;
 
 typedef enum e_bool
@@ -90,6 +91,7 @@ typedef struct s_params
 	int			repetition_num;
 	long		start_time;
 	int			philo_status_counter;
+	t_bool		all_ate;
 }				t_params;
 
 typedef struct s_mutex

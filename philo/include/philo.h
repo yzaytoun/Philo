@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 17:19:37 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/08 20:00:40 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/10 19:32:22 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,21 @@ void		ft_destroy_allmutexes(t_process *process);
 void		ft_run(t_process *process);
 
 //STUB - Time
-void		ft_delaymil(long miliseconds, t_process *process, t_philo *philo);
+void		ft_msleep(long miliseconds, t_process *process, t_philo *philo);
 long		ft_get_current_time(void);
-long		ft_timediff(long starttime, long currtime);
+long		ft_timediff(long currtime, long starttime);
 
 //STUB - Threads
+int			ft_jointhread(t_process *process, int count);
 void		ft_threadexecute(t_process *process,
 				void (*f)(t_process *, t_philo *), t_philo *philo);
 int			ft_threadlimit(t_process *process, t_philo *philo);
 void		ft_initprocess(t_process **process, t_philo *philo);
+
 //STUB - Execute
 void		ft_eat(t_process *process, t_philo *philo);
 void		ft_sleep(t_process *process, t_philo *philo);
-void		ft_isalive(t_process *process, t_philo *philo);
+t_bool		ft_isalive(t_process *process, t_philo *philo);
 void		ft_think(t_process *process, t_philo *philo);
 
 //STUB - Forks
@@ -72,4 +74,5 @@ void		ft_getforks(t_process *process, t_philo *philo);
 int			ft_check_deadthread(t_process *process, int counter);
 int			ft_all_threadsactive(t_process *process, int counter);
 int			ft_check_forklocks(t_process *process, int counter);
+int			ft_all_threadsfinished(t_process *process, int counter);
 #endif		/*End Philo.h*/
