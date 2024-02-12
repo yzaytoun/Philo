@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:52:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/08 19:55:33 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/12 19:01:29 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,25 @@ void	ft_printstatus(t_process *process, t_philo *philo)
 	printf("[\U0001F570 %ld] -> philo %d ",
 		current_time - process->params.start_time, philo->id);
 	ft_print_status(philo->laststatus);
+}
+
+//ANCHOR - Print Philo
+void	print_philo(t_philo philo)
+{
+	printf("Summary \n------------ \n");
+	printf("philo.id = %d\n", philo.id);
+	printf("philo.timer = %lu\n", philo.timer);
+	printf("philo.last_eat_time = %lu\n", philo.last_eat_time);
+	ft_print_status(philo.laststatus);
+	printf("philo.leftfork.id = %d\n", philo.left_fork.id);
+	printf("philo.leftfork.is_used = %d\n", philo.left_fork.is_used);
+	printf("philo.rightfork.id = %d\n", philo.right_fork.id);
+	printf("philo.rightfork.is_used = %d\n", philo.right_fork.is_used);
+
+	printf("Data \n------------ \n");
+	printf("philo.data.eat_count = %d\n", philo.data.eat_count);
+	printf("philo.data.sleep_count = %d\n", philo.data.sleep_count);
+	printf("philo.data.think_count = %d\n", philo.data.think_count);
 }
 
 //!SECTION

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 17:19:37 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/10 19:32:22 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/12 19:00:50 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,6 @@ int			ft_check_deadthread(t_process *process, int counter);
 int			ft_all_threadsactive(t_process *process, int counter);
 int			ft_check_forklocks(t_process *process, int counter);
 int			ft_all_threadsfinished(t_process *process, int counter);
+
+void	print_philo(t_philo philo);
 #endif		/*End Philo.h*/
