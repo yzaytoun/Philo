@@ -24,7 +24,7 @@ void		ft_apply(t_process *process, int (*f)(t_process *, int), int lock);
 
 //STUB - Printer
 void		ft_perror(const char *string);
-void		ft_printstatus(t_process *process, t_philo *philo);
+void		ft_print_log(t_process *process, t_philo *philo);
 
 //STUB - Philo
 t_process	*ft_createprocess(t_params params);
@@ -51,7 +51,7 @@ void		ft_run(t_process *process);
 //STUB - Time
 void		ft_msleep(long miliseconds, t_process *process, t_philo *philo);
 long		ft_get_current_time(void);
-long		ft_timediff(long currtime, long starttime);
+long		ft_time_diff(long currtime, long starttime);
 
 //STUB - Threads
 int			ft_jointhread(t_process *process, int count);

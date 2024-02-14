@@ -16,21 +16,13 @@
 //ANCHOR - Delay Function
 void	ft_msleep(long miliseconds, t_process *process, t_philo *philo)
 {
-	const long	starttime = ft_get_current_time();
-
 	if (philo != NULL && philo->laststatus == DIED)
 		return ;
 	if (process != NULL && philo != NULL)
 	{
-		while (ft_isalive(process, philo) == TRUE)
-		{
-			if (ft_timediff(ft_get_current_time(), starttime) == miliseconds)
-			{
-				ft_threadexecute(process, ft_printstatus, philo);
-				break ;
-			}
-			usleep(50);
-		}
+		//time add(philo->timer + miliseconds) is more than time_to_die
+		// break; AND log dead
+		if (miliseconds)
 	}
 	else
 		usleep(miliseconds * 1000);
@@ -50,8 +42,14 @@ long	ft_get_current_time(void)
 }
 
 //ANCHOR - Add current time to time limit
-long	ft_timediff(long currtime, long starttime)
+long	ft_time_add(long first_time, long second_time)
 {
-	return (currtime - starttime);
+	return (first_time + second_time);
+}
+
+//ANCHOR - current time to time limit
+long	ft_time_diff(long first_time, long second_time)
+{
+	return (first_time - second_time);
 }
 //!SECTION

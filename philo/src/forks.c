@@ -66,17 +66,15 @@ static int
 void	ft_getforks(t_process *process, t_philo *philo)
 {
 	process->counter = 0;
-	print_philo(*philo);
 	while (process->counter < process->params.philo_num
 		&& philo->laststatus != DIED)
 	{
-		ft_printstatus(process, philo);
 		if (process->fork[process->counter].is_used == FALSE
 			&& ft_validfork(process, philo->id, process->counter, LEFT) == TRUE)
 		{
 			ft_takefork(process, philo, LEFT);
 			ft_try(pthread_mutex_lock(&process->fork[process->counter].mutex));
-			ft_printstatus(process, philo);
+			ft_print_log(process, philo);
 		}
 		else if (process->fork[process->counter].is_used == FALSE
 			&& ft_validfork(process, philo->id, process->counter, RIGHT)
@@ -84,7 +82,7 @@ void	ft_getforks(t_process *process, t_philo *philo)
 		{
 			ft_takefork(process, philo, RIGHT);
 			ft_try(pthread_mutex_lock(&process->fork[process->counter].mutex));
-			ft_printstatus(process, philo);
+			ft_print_log(process, philo);
 		}
 		process->counter++;
 	}

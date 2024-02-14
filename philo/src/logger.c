@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printer.c                                          :+:      :+:    :+:   */
+/*   logger.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,8 +12,8 @@
 
 #include "philo.h"
 
-//SECTION - Printer
-//ANCHOR - Aux error printer
+//SECTION - Logger
+//ANCHOR - Aux error Log
 void	ft_perror(const char *string)
 {
 	ft_putstr_fd(string, STDERR_FILENO);
@@ -21,7 +21,6 @@ void	ft_perror(const char *string)
 	exit(EXIT_FAILURE);
 }
 
-//ANCHOR - Print Action
 static void	ft_print_status(int laststatus)
 {
 	if (laststatus == 0)
@@ -40,8 +39,8 @@ static void	ft_print_status(int laststatus)
 		printf("Thread Started !!! \n");
 }
 
-//ANCHOR - Print laststatus
-void	ft_printstatus(t_process *process, t_philo *philo)
+//ANCHOR - print_log
+void	ft_print_log(t_process *process, t_philo *philo)
 {
 	long	current_time;
 
