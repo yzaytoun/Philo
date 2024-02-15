@@ -35,13 +35,13 @@ void	ft_apply(t_process *process, int (*f)(t_process *, int), int lock)
 	{
 		ft_try(
 			pthread_mutex_lock(
-				&((t_mutex *)process->synchronizer)->main_mutex));
+				&((t_mutex *)process->synchronizer)->main_mutex), FUNC);
 	}
 	process->counter = 0;
 	process->params.philo_status_counter = 0;
 	while (process->counter < process->params.philo_num)
 	{
-		ft_try((*f)(process, process->counter));
+		ft_try((*f)(process, process->counter), FUNC);
 		if (process->catch_status == DIED)
 			break ;
 		++process->counter;
@@ -50,7 +50,7 @@ void	ft_apply(t_process *process, int (*f)(t_process *, int), int lock)
 	{
 		ft_try(
 			pthread_mutex_unlock(
-				&((t_mutex *)process->synchronizer)->main_mutex));
+				&((t_mutex *)process->synchronizer)->main_mutex), FUNC);
 	}
 }
 

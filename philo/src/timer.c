@@ -20,12 +20,10 @@ void	ft_msleep(long miliseconds, t_process *process, t_philo *philo)
 		return ;
 	if (process != NULL && philo != NULL)
 	{
-		//time add(philo->timer + miliseconds) is more than time_to_die
-		// break; AND log dead
-		if (miliseconds)
+		if (ft_time_add(philo->timer, miliseconds) >= process->params.time_to_die)
+			return ;
 	}
-	else
-		usleep(miliseconds * 1000);
+	usleep(miliseconds * 1000);
 }
 
 //ANCHOR - Set Timer
@@ -33,12 +31,10 @@ long	ft_get_current_time(void)
 {
 	struct timeval	time;
 	struct timezone	timezone;
-	static long		current_time;
 
 	if (gettimeofday(&time, &timezone) != 0)
-		ft_perror("Get time of day");
-	current_time = time.tv_sec * 1000 + time.tv_usec / 1000;
-	return (current_time);
+		ft_perror("Get time of day", FUNC);
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
 //ANCHOR - Add current time to time limit

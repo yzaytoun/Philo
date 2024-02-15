@@ -26,6 +26,8 @@ static void	ft_routine(t_process *process, t_philo *philo)
 {
 	if ((philo->id % 2) == 0)
 		ft_msleep(500, NULL, NULL);
+	philo->timer = ft_get_current_time();
+	philo->last_eat_time = ft_get_current_time();
 	while (philo->laststatus != DIED
 		&& process->catch_status != DIED
 		&& ft_threadlimit(process, philo) == FALSE)
@@ -50,8 +52,6 @@ static void	*ft_mainthread_loop(void *args)
 	process = philo->process;
 	ft_initprocess(&process, philo);
 	ft_blockthread(process);
-	philo->timer = ft_get_current_time();
-	philo->last_eat_time = ft_get_current_time();
 	process->func(process, philo);
 	return (NULL);
 }
@@ -67,7 +67,7 @@ static void	init_mainprocess(t_process **process)
 	(*process)->func = ft_routine;
 	(*process)->lock = TRUE;
 	(*process)->params.start_time = ft_get_current_time();
-	ft_initmutexes(*process);
+	ft_initmutexes(process);
 }
 
 //ANCHOR - Run
@@ -82,7 +82,9 @@ void	ft_run(t_process *process)
 	while (process->params.all_ate == FALSE
 		&& process->catch_status != DIED)
 		ft_apply(process, ft_all_threadsfinished, APPLY_LOCK);
+	printf("asdasd2\n");
 	process->params.philo_status_counter = 0;
 	ft_apply(process, ft_jointhread, APPLY_NO_LOCK);
+	printf("asdasd3\n");
 }
 //!SECTION

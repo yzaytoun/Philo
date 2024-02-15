@@ -80,10 +80,10 @@ t_params	ft_getarguments(int argc, char *argv[])
 	while (count < argc)
 	{
 		if (ft_isstrdigit(argv[count]) == FALSE)
-			ft_perror("Wrong number format");
+			ft_perror("Wrong number format", FUNC);
 		input = ft_atoi(argv[count]);
 		if (input > INT_MAX || input < INT_MIN || input < 0)
-			ft_perror("Cannot handle Large numbers");
+			ft_perror("Cannot handle Large numbers", FUNC);
 		else
 			ft_assign_params(&params, count, input);
 		++count;

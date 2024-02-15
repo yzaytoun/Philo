@@ -22,7 +22,7 @@ static t_philo	*ft_createphilo(size_t size)
 		return (NULL);
 	philo = malloc(sizeof(t_philo) * size);
 	if (!philo)
-		ft_perror("Philos");
+		ft_perror("Philos", FUNC);
 	memset(philo, 0, sizeof(t_philo) * size);
 	return (philo);
 }
@@ -36,7 +36,7 @@ static t_fork	*ft_createforks(size_t size)
 		return (NULL);
 	fork = malloc(sizeof(t_fork) * size);
 	if (!fork)
-		ft_perror("Forks");
+		ft_perror("Forks", FUNC);
 	memset(fork, 0, sizeof(t_fork) * size);
 	return (fork);
 }
@@ -50,7 +50,7 @@ t_process	*ft_createprocess(t_params params)
 		return (NULL);
 	process = malloc(sizeof(t_process));
 	if (!process)
-		ft_perror("Process structure");
+		ft_perror("Process structure", FUNC);
 	memset(process, 0, sizeof(t_process));
 	process->params = params;
 	process->philo = ft_createphilo(params.philo_num);

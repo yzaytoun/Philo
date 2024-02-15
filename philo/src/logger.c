@@ -14,10 +14,16 @@
 
 //SECTION - Logger
 //ANCHOR - Aux error Log
-void	ft_perror(const char *string)
+void	ft_perror(const char *string, const char *func)
 {
 	ft_putstr_fd(string, STDERR_FILENO);
 	write(1, "\n", 1);
+	if (func != NULL)
+	{
+		ft_putstr_fd("Function = ", STDERR_FILENO);
+		ft_putstr_fd(func, STDERR_FILENO);
+		write(1, "\n", 1);
+	}
 	exit(EXIT_FAILURE);
 }
 
@@ -46,7 +52,7 @@ void	ft_print_log(t_process *process, t_philo *philo)
 
 	current_time = ft_get_current_time();
 	printf("[\U0001F570 %ld] -> philo %d ",
-		current_time - process->params.start_time, philo->id);
+		ft_time_diff(current_time, process->params.start_time), philo->id);
 	ft_print_status(philo->laststatus);
 }
 

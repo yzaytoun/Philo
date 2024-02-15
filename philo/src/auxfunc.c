@@ -14,7 +14,7 @@
 
 //SECTION - Auxiliary functions
 //ANCHOR - check return value
-void	ft_try(int status)
+void	ft_try(int status, const char *func)
 {
 	const int	errornum = errno;
 
@@ -22,23 +22,23 @@ void	ft_try(int status)
 	{
 		printf("status = %d\n", status);
 		if (status == 16)
-			ft_perror("Resource busy");
+			ft_perror("Resource busy", func);
 		else if (status == 11)
-			ft_perror("Resource deadlock avoided");
+			ft_perror("Resource deadlock avoided", func);
 		else if (status == 22)
-			ft_perror("Invalid argument");
+			ft_perror("Invalid argument", func);
 		else if (status == 3)
-			ft_perror("No such process");
+			ft_perror("No such process", func);
 		else if (status == SEM_FAILED)
 		{
 			printf("errno = %d\n", errornum);
 			if (errornum == 9)
-				ft_perror("No such device or address");
+				ft_perror("No such device or address", func);
 			else
-				ft_perror("Semaphore Error");
+				ft_perror("Semaphore Error", func);
 		}
 		else
-			ft_perror("Error");
+			ft_perror("Error", func);
 	}
 }
 

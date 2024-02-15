@@ -25,6 +25,6 @@ int	main(int argc, char *argv[])
 		ft_freeall(&process);
 	}
 	else
-		ft_perror("Wrong Number of Arguments \U0001F92F, 4 minimum");
+		ft_perror("Wrong Number of Arguments \U0001F92F, 4 minimum", NULL);
 	return (EXIT_SUCCESS);
 }

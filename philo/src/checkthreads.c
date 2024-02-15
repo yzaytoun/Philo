@@ -51,7 +51,7 @@ int	ft_check_forklocks(t_process *process, int counter)
 	if (process->fork[counter].is_used == TRUE)
 	{
 		process->fork[counter].is_used = FALSE;
-		ft_try(pthread_mutex_unlock(&process->fork[counter].mutex));
+		ft_try(pthread_mutex_unlock(&process->fork[counter].mutex), FUNC);
 	}
 	return (EXIT_SUCCESS);
 }

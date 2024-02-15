@@ -23,7 +23,7 @@ t_params	ft_getarguments(int argc, char *argv[]);
 void		ft_apply(t_process *process, int (*f)(t_process *, int), int lock);
 
 //STUB - Printer
-void		ft_perror(const char *string);
+void		ft_perror(const char *string, const char *func);
 void		ft_print_log(t_process *process, t_philo *philo);
 
 //STUB - Philo
@@ -31,7 +31,7 @@ t_process	*ft_createprocess(t_params params);
 void		ft_freeall(t_process **process);
 
 //STUB - AUX functions
-void		ft_try(int status);
+void		ft_try(int status, const char *func);
 void		ft_assign_params(t_params *params, int count, long input);
 void		ft_catch(t_process *process);
 
@@ -42,7 +42,7 @@ int			ft_destroyforkmutex(t_process *process, int count);
 int			ft_createthread(t_process *process, int philo_id);
 
 //STUB - Mutexes
-void		ft_initmutexes(t_process *process);
+void		ft_initmutexes(t_process **process);
 void		ft_destroy_allmutexes(t_process *process);
 
 //STUB - Routine
@@ -51,7 +51,8 @@ void		ft_run(t_process *process);
 //STUB - Time
 void		ft_msleep(long miliseconds, t_process *process, t_philo *philo);
 long		ft_get_current_time(void);
-long		ft_time_diff(long currtime, long starttime);
+long		ft_time_diff(long first_time, long second_time);
+long		ft_time_add(long first_time, long second_time);
 
 //STUB - Threads
 int			ft_jointhread(t_process *process, int count);
@@ -76,5 +77,5 @@ int			ft_all_threadsactive(t_process *process, int counter);
 int			ft_check_forklocks(t_process *process, int counter);
 int			ft_all_threadsfinished(t_process *process, int counter);
 
-void	print_philo(t_philo philo);
+void		print_philo(t_philo philo);
 #endif		/*End Philo.h*/

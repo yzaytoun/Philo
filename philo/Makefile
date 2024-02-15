@@ -56,7 +56,7 @@ SANITIAZE = -fsanitize=thread -g
 PTHREAD = -lpthread
 RM = rm -fr
 # ------------------------ philo ------------------------------
-SRC = main.c basicfunc.c philo.c printer.c timer.c threads.c mutex.c\
+SRC = main.c basicfunc.c philo.c logger.c timer.c threads.c mutex.c\
 		apply.c execute.c auxfunc.c forks.c checkthreads.c run.c
 
 OBJDIR = obj

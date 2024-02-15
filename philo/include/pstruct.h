@@ -30,6 +30,7 @@
 # define SEC_PER_MIN 60
 # define LEFT 0
 # define RIGHT 1
+# define FUNC __func__
 # ifndef SEM_FAILED
 #  define SEM_FAILED -1
 # endif
@@ -62,7 +63,7 @@ typedef struct s_meta /*Meta data about the philo*/
 typedef struct s_fork
 {
 	int				id;
-	int				is_used;
+	t_bool			is_used;
 	pthread_mutex_t	mutex;
 }			t_fork;
 
