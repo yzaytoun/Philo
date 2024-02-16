@@ -16,14 +16,19 @@
 //ANCHOR - Delay Function
 void	ft_msleep(long miliseconds, t_process *process, t_philo *philo)
 {
+	long	starttime = ft_get_current_time();
+
 	if (philo != NULL && philo->laststatus == DIED)
 		return ;
 	if (process != NULL && philo != NULL)
 	{
 		if (ft_time_add(philo->timer, miliseconds) >= process->params.time_to_die)
 			return ;
+		while (ft_time_diff(ft_get_current_time(), starttime) < miliseconds)
+			usleep(50);	
 	}
-	usleep(miliseconds * 1000);
+	else
+		usleep(miliseconds * 1000);
 }
 
 //ANCHOR - Set Timer

@@ -109,7 +109,7 @@ struct s_process
 	t_fork			*fork;
 	int				counter;
 	size_t			catch_status;
-	int				lock;
+	t_bool			lock;
 	void			(*func)(t_process *, t_philo *);
 	void			*(*main_loop)(void *);
 	void			(*dropforks)(t_process *, t_philo *);

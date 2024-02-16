@@ -21,11 +21,9 @@ void	ft_eat(t_process *process, t_philo *philo)
 		&& philo->laststatus != DIED)
 	{
 		philo->laststatus = EATING;
-		philo->timer = ft_get_current_time();
 		ft_threadexecute(process, ft_print_log, philo);
 		ft_msleep(process->params.time_to_eat, process, philo);
 		philo->last_eat_time = ft_get_current_time();
-		philo->timer = ft_get_current_time();
 		philo->data.eat_count++;
 		process->dropforks(process, philo);
 	}
@@ -37,10 +35,8 @@ void	ft_sleep(t_process *process, t_philo *philo)
 	if (philo->laststatus == EATING && philo->laststatus != DIED)
 	{
 		philo->laststatus = SLEEPING;
-		philo->timer = ft_get_current_time();
 		ft_threadexecute(process, ft_print_log, philo);
 		ft_msleep(process->params.time_to_sleep, process, philo);
-		philo->timer = ft_get_current_time();
 		philo->data.sleep_count++;
 	}
 }
@@ -51,10 +47,8 @@ void	ft_think(t_process *process, t_philo *philo)
 	if (philo->laststatus != DIED)
 	{
 		philo->laststatus = THINKING;
-		philo->timer = ft_get_current_time();
 		ft_threadexecute(process, ft_print_log, philo);
 		ft_msleep(process->params.time_to_sleep, process, philo);
-		philo->timer = ft_get_current_time();
 		philo->data.think_count++;
 	}
 }
@@ -63,7 +57,7 @@ void	ft_think(t_process *process, t_philo *philo)
 t_bool	ft_isalive(t_process *process, t_philo *philo)
 {
 	if (ft_time_diff(
-			philo->timer,
+			ft_get_current_time(),
 			philo->last_eat_time) >= process->params.time_to_die)
 	{
 		ft_threadexecute(process, ft_print_log, philo);

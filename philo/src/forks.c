@@ -66,28 +66,27 @@ static int
 //ANCHOR - Get forks
 void	ft_getforks(t_process *process, t_philo *philo)
 {
-	process->counter = 0;
-	while (process->counter < process->params.philo_num
-		&& philo->laststatus != DIED)
+	int	counter;
+
+	counter = 0;
+	while (counter < process->params.philo_num)
 	{
-		if (process->fork[process->counter].is_used == FALSE
-			&& ft_validfork(process, philo->id, process->counter, LEFT) == TRUE)
+		if (process->fork[counter].is_used == FALSE
+			&& ft_validfork(process, philo->id, counter, LEFT) == TRUE)
 		{
-			philo->timer = ft_get_current_time();
-			ft_try(pthread_mutex_lock(&process->fork[process->counter].mutex), FUNC);
-			ft_takefork(&process, &philo, LEFT, process->counter);
+			ft_try(pthread_mutex_lock(&process->fork[counter].mutex), FUNC);
+			ft_takefork(&process, &philo, LEFT, counter);
 			ft_print_log(process, philo);
 		}
-		else if (process->fork[process->counter].is_used == FALSE
-			&& ft_validfork(process, philo->id, process->counter, RIGHT)
+		else if (process->fork[counter].is_used == FALSE
+			&& ft_validfork(process, philo->id, counter, RIGHT)
 			== TRUE)
 		{
-			philo->timer = ft_get_current_time();
-			ft_try(pthread_mutex_lock(&process->fork[process->counter].mutex), FUNC);
-			ft_takefork(&process, &philo, RIGHT, process->counter);
+			ft_try(pthread_mutex_lock(&process->fork[counter].mutex), FUNC);
+			ft_takefork(&process, &philo, RIGHT, counter);
 			ft_print_log(process, philo);
 		}
-		process->counter++;
+		counter++;
 	}
 }
 //!SECTION

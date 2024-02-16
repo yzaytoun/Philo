@@ -36,7 +36,9 @@ static void	ft_routine(t_process *process, t_philo *philo)
 		ft_eat(process, philo);
 		ft_sleep(process, philo);
 		ft_think(process, philo);
+		ft_isalive(process, philo);
 		ft_apply(process, ft_check_deadthread, APPLY_LOCK);
+		ft_msleep(500, process, philo);
 	}
 	if (philo->laststatus != DIED)
 		philo->laststatus = FINISHED;
@@ -82,9 +84,6 @@ void	ft_run(t_process *process)
 	while (process->params.all_ate == FALSE
 		&& process->catch_status != DIED)
 		ft_apply(process, ft_all_threadsfinished, APPLY_LOCK);
-	printf("asdasd2\n");
-	process->params.philo_status_counter = 0;
 	ft_apply(process, ft_jointhread, APPLY_NO_LOCK);
-	printf("asdasd3\n");
 }
 //!SECTION

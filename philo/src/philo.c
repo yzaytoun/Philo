@@ -34,7 +34,7 @@ static t_fork	*ft_createforks(size_t size)
 
 	if (!size || size == 0)
 		return (NULL);
-	fork = malloc(sizeof(t_fork) * size);
+	fork = malloc(sizeof(t_fork *) * size);
 	if (!fork)
 		ft_perror("Forks", FUNC);
 	memset(fork, 0, sizeof(t_fork) * size);
