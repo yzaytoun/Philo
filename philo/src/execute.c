@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 17:45:56 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/10 18:51:59 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/17 12:47:17 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,13 @@ void	ft_eat(t_process *process, t_philo *philo)
 	{
 		philo->laststatus = EATING;
 		ft_threadexecute(process, ft_print_log, philo);
-		ft_msleep(process->params.time_to_eat, process, philo);
 		philo->last_eat_time = ft_get_current_time();
+		ft_msleep(process->params.time_to_eat, NULL, NULL);
 		philo->data.eat_count++;
 		process->dropforks(process, philo);
 	}
+	philo->timer = ft_get_current_time();
+	ft_isalive(process, philo);
 }
 
 //ANCHOR - Sleep
@@ -36,9 +38,11 @@ void	ft_sleep(t_process *process, t_philo *philo)
 	{
 		philo->laststatus = SLEEPING;
 		ft_threadexecute(process, ft_print_log, philo);
-		ft_msleep(process->params.time_to_sleep, process, philo);
+		ft_msleep(process->params.time_to_sleep, NULL, NULL);
 		philo->data.sleep_count++;
 	}
+	philo->timer = ft_get_current_time();
+	ft_isalive(process, philo);
 }
 
 //ANCHOR - Think
@@ -48,8 +52,6 @@ void	ft_think(t_process *process, t_philo *philo)
 	{
 		philo->laststatus = THINKING;
 		ft_threadexecute(process, ft_print_log, philo);
-		ft_msleep(process->params.time_to_sleep, process, philo);
-		philo->data.think_count++;
 	}
 }
 
@@ -60,7 +62,6 @@ t_bool	ft_isalive(t_process *process, t_philo *philo)
 			ft_get_current_time(),
 			philo->last_eat_time) >= process->params.time_to_die)
 	{
-		ft_threadexecute(process, ft_print_log, philo);
 		philo->laststatus = DIED;
 		return (FALSE);
 	}

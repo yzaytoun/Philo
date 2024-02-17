@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 17:25:16 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/07 18:18:54 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/17 09:38:10 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,11 @@ void	ft_destroy_allmutexes(t_process *process)
 {
 	ft_apply(process, ft_check_forklocks, APPLY_LOCK);
 	ft_try(
-		pthread_mutex_destroy(&((t_mutex *)process->synchronizer)->mutex), FUNC);
+		pthread_mutex_destroy(
+			&((t_mutex *)process->synchronizer)->mutex), FUNC);
 	ft_try(
-		pthread_mutex_destroy(&((t_mutex *)process->synchronizer)->main_mutex), FUNC);
+		pthread_mutex_destroy(
+			&((t_mutex *)process->synchronizer)->main_mutex), FUNC);
 	ft_apply(process, ft_destroyforkmutex, APPLY_NO_LOCK);
 }
 

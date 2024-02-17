@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 19:49:16 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/12 19:00:58 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/17 10:29:41 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 void	ft_dropforks(t_process *process, t_philo *philo)
 {
 	ft_try(
-		pthread_mutex_unlock(&process->fork[philo->left_fork.id - 1].mutex)
-		, FUNC);
+		pthread_mutex_unlock(
+			&process->fork[philo->left_fork.id - 1].mutex), FUNC);
 	ft_try(
-		pthread_mutex_unlock(&process->fork[philo->right_fork.id - 1].mutex)
-		, FUNC);
+		pthread_mutex_unlock(
+			&process->fork[philo->right_fork.id - 1].mutex), FUNC);
 	process->fork[philo->left_fork.id - 1].is_used = FALSE;
 	process->fork[philo->right_fork.id - 1].is_used = FALSE;
 	philo->left_fork.is_used = FALSE;

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:52:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/12 19:01:29 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/17 12:30:29 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	print_philo(t_philo philo)
 	printf("philo.leftfork.is_used = %d\n", philo.left_fork.is_used);
 	printf("philo.rightfork.id = %d\n", philo.right_fork.id);
 	printf("philo.rightfork.is_used = %d\n", philo.right_fork.is_used);
-
 	printf("Data \n------------ \n");
 	printf("philo.data.eat_count = %d\n", philo.data.eat_count);
 	printf("philo.data.sleep_count = %d\n", philo.data.sleep_count);

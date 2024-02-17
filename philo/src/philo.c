@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 16:56:07 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/08/24 18:50:26 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/17 11:48:38 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static t_fork	*ft_createforks(size_t size)
 
 	if (!size || size == 0)
 		return (NULL);
-	fork = malloc(sizeof(t_fork *) * size);
+	fork = malloc(sizeof(t_fork) * size);
 	if (!fork)
 		ft_perror("Forks", FUNC);
 	memset(fork, 0, sizeof(t_fork) * size);
@@ -62,6 +62,8 @@ t_process	*ft_createprocess(t_params params)
 //ANCHOR - Free All
 void	ft_freeall(t_process **process)
 {
+	if (process == NULL || *process == NULL)
+		return ;
 	free((*process)->philo);
 	free((*process)->fork);
 	free((*process)->synchronizer);

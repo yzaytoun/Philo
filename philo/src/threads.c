@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 19:49:16 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/10 17:44:26 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/17 09:58:23 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@
 void	ft_threadexecute(t_process *process,
 	void (*f)(t_process *, t_philo *), t_philo *philo)
 {
-	ft_try(pthread_mutex_lock(&((t_mutex *)process->synchronizer)->mutex), FUNC);
+	ft_try(
+		pthread_mutex_lock(&((t_mutex *)process->synchronizer)->mutex), FUNC);
 	(*f)(process, philo);
-	ft_try(pthread_mutex_unlock(&((t_mutex *)process->synchronizer)->mutex), FUNC);
+	ft_try(
+		pthread_mutex_unlock(&((t_mutex *)process->synchronizer)->mutex), FUNC);
 }
 
 //ANCHOR - Thread limit
@@ -36,9 +38,9 @@ int	ft_createthread(t_process *process, int count)
 {
 	process->philo[count].process = process;
 	ft_try(
-		pthread_create(&process->philo[count].thread, NULL,
-			process->main_loop, &process->philo[count])
-		, FUNC);
+		pthread_create(
+			&process->philo[count].thread, NULL,
+			process->main_loop, &process->philo[count]), FUNC);
 	return (EXIT_SUCCESS);
 }
 
@@ -46,8 +48,7 @@ int	ft_createthread(t_process *process, int count)
 int	ft_jointhread(t_process *process, int count)
 {
 	ft_try(
-		pthread_join(process->philo[count].thread, NULL)
-		, FUNC);
+		pthread_join(process->philo[count].thread, NULL), FUNC);
 	return (EXIT_SUCCESS);
 }
 
