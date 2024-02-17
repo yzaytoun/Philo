@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 19:54:58 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/10 19:14:09 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/17 17:40:33 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ int	ft_all_threadsactive(t_process *process, int counter)
 //ANCHOR - Check if all threads are Finished
 int	ft_all_threadsfinished(t_process *process, int counter)
 {
-	if (process->philo[counter].laststatus == FINISHED)
-		process->params.philo_status_counter++;
-	else if (process->philo[counter].laststatus == DIED)
+	if (process->philo[counter].laststatus == DIED)
 		process->catch_status = DIED;
+	else if (process->philo[counter].laststatus == FINISHED)
+		process->params.philo_status_counter++;
 	if (process->params.philo_status_counter == process->params.philo_num)
 		process->params.all_ate = TRUE;
 	return (EXIT_SUCCESS);
@@ -56,4 +56,10 @@ int	ft_check_forklocks(t_process *process, int counter)
 	return (EXIT_SUCCESS);
 }
 
+//ANCHOR - Check fork locks
+int	ft_kill_threads(t_process *process, int counter)
+{
+	process->philo[counter].laststatus = FINISHED;
+	return (EXIT_SUCCESS);
+}
 //!SECTION

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:13:03 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/17 09:58:52 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/17 17:06:31 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	ft_assign_ids(t_process *process, int count)
 		process->philo[count].right_fork.id
 			= (process->params.philo_num + count)
 			- process->params.philo_num;
+	process->philo[count].params = process->params;
 	return (EXIT_SUCCESS);
 }
 
@@ -42,6 +43,9 @@ void	ft_apply(t_process *process, int (*f)(t_process *, int), int lock)
 	while (count < process->params.philo_num)
 	{
 		ft_try((*f)(process, count), FUNC);
+		if (f != NULL && ((*f) == ft_check_deadthread)
+			&& process->catch_status == DIED)
+			break ;
 		++count;
 	}
 	if (lock == APPLY_LOCK)

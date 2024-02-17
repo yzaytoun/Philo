@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 19:49:16 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/17 10:29:41 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/17 15:10:54 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	ft_getforks(t_process *process, t_philo *philo)
 	int	counter;
 
 	counter = 0;
-	while (counter < process->params.philo_num)
+	while (counter < process->params.philo_num && philo->laststatus != DIED)
 	{
 		if (process->fork[counter].is_used == FALSE
 			&& ft_validfork(process, philo->id, counter, LEFT) == TRUE)
@@ -86,6 +86,7 @@ void	ft_getforks(t_process *process, t_philo *philo)
 			ft_takefork(&process, &philo, RIGHT, counter);
 			ft_print_log(process, philo);
 		}
+		ft_isalive(process, philo);
 		counter++;
 	}
 }

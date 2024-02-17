@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:16:19 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/10 19:09:07 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/17 17:09:00 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@
 # endif
 
 /*Structs*/
+typedef struct s_process	t_process;
+
 typedef enum s_status
 {
 	STARTED = 1000,
@@ -53,6 +55,18 @@ typedef enum e_bool
 	TRUE
 }	t_bool;
 
+typedef struct s_params
+{
+	int			philo_num;
+	long		time_to_die;
+	long		time_to_eat;
+	long		time_to_sleep;
+	int			repetition_num;
+	long		start_time;
+	int			philo_status_counter;
+	t_bool		all_ate;
+}	t_params;
+
 typedef struct s_meta /*Meta data about the philo*/
 {
 	int	eat_count;
@@ -67,8 +81,6 @@ typedef struct s_fork
 	pthread_mutex_t	mutex;
 }			t_fork;
 
-typedef struct s_process	t_process;
-
 typedef struct s_philo
 {
 	int			id;
@@ -81,19 +93,8 @@ typedef struct s_philo
 	t_process	*process;
 	pid_t		pid;
 	long		last_eat_time;
+	t_params	params;
 }				t_philo;
-
-typedef struct s_params
-{
-	int			philo_num;
-	long		time_to_die;
-	long		time_to_eat;
-	long		time_to_sleep;
-	int			repetition_num;
-	long		start_time;
-	int			philo_status_counter;
-	t_bool		all_ate;
-}				t_params;
 
 typedef struct s_mutex
 {

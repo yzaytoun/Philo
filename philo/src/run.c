@@ -18,15 +18,14 @@
 static void	ft_blockthread(t_process *process)
 {
 	while (process->lock == TRUE)
-		ft_msleep(5, NULL, NULL);
+		ft_msleep(1, NULL, NULL);
 }
 
 //ANCHOR - Routine
 static void	ft_routine(t_process *process, t_philo *philo)
 {
 	if ((philo->id % 2) == 0)
-		ft_msleep(500, NULL, NULL);
-	philo->timer = ft_get_current_time();
+		ft_msleep(10, NULL, NULL);
 	philo->last_eat_time = ft_get_current_time();
 	while (philo->laststatus != DIED
 		&& process->catch_status != DIED
@@ -37,12 +36,13 @@ static void	ft_routine(t_process *process, t_philo *philo)
 		ft_sleep(process, philo);
 		ft_think(process, philo);
 		ft_apply(process, ft_check_deadthread, APPLY_LOCK);
-		philo->timer = ft_get_current_time();
-		ft_msleep(100, NULL, NULL);
+		if (philo->laststatus == DIED || ft_isalive(process, philo) == FALSE)
+		{
+			ft_threadexecute(process, ft_print_log, philo);
+			break ;
+		}
 	}
-	if (philo->laststatus == DIED)
-		ft_threadexecute(process, ft_print_log, philo);
-	else
+	if (philo->laststatus != DIED)
 		philo->laststatus = FINISHED;
 }
 
@@ -70,8 +70,8 @@ static void	init_mainprocess(t_process **process)
 	(*process)->dropforks = ft_dropforks;
 	(*process)->func = ft_routine;
 	(*process)->lock = TRUE;
-	(*process)->params.start_time = ft_get_current_time();
 	ft_initmutexes(process);
+	(*process)->params.start_time = ft_get_current_time();
 }
 
 //ANCHOR - Run

@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 17:16:01 by yzaytoun          #+#    #+#              #
-#    Updated: 2023/08/23 17:27:31 by yzaytoun         ###   ########.fr        #
+#    Updated: 2024/02/17 17:37:35 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ endif
 # --------------------- Definitions ------------------------------------
 CC = gcc
 INC = include
-CFLAGS = -Wall -Wextra -Werror -I $(INC) -g
+CFLAGS = -Wall -Wextra -Werror -I $(INC) -O3
 SANITIAZE_ADD = -fsanitize=address -g
 SANITIAZE = -fsanitize=thread -g
 PTHREAD = -lpthread
@@ -71,7 +71,7 @@ all: $(NAME)
 
 $(NAME): $(BANNER) $(PHILO_OBJ)
 	@echo "$(LIGHTPURPLE)Creating Object Files"
-	@$(CC) $(PHILO_OBJ) -o $@ $(PTHREAD) $(SANITIAZE)
+	@$(CC) $(PHILO_OBJ) -o $@ $(PTHREAD)
 	@echo "$(WHITE)Compiling" $@
 	@chmod +x $@
 	@echo "$(PURPLE)************ 	DONE	 ****************\n"

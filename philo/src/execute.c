@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 17:45:56 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/17 12:47:17 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/17 17:45:07 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 //ANCHOR - Eat
 void	ft_eat(t_process *process, t_philo *philo)
 {
+	ft_isalive(process, philo);
 	if (philo->left_fork.is_used == TRUE
 		&& philo->right_fork.is_used == TRUE
 		&& philo->laststatus != DIED)
@@ -23,11 +24,10 @@ void	ft_eat(t_process *process, t_philo *philo)
 		philo->laststatus = EATING;
 		ft_threadexecute(process, ft_print_log, philo);
 		philo->last_eat_time = ft_get_current_time();
-		ft_msleep(process->params.time_to_eat, NULL, NULL);
+		ft_msleep(philo->params.time_to_eat, process, philo);
 		philo->data.eat_count++;
 		process->dropforks(process, philo);
 	}
-	philo->timer = ft_get_current_time();
 	ft_isalive(process, philo);
 }
 
@@ -38,26 +38,28 @@ void	ft_sleep(t_process *process, t_philo *philo)
 	{
 		philo->laststatus = SLEEPING;
 		ft_threadexecute(process, ft_print_log, philo);
-		ft_msleep(process->params.time_to_sleep, NULL, NULL);
+		ft_msleep(philo->params.time_to_sleep, process, philo);
 		philo->data.sleep_count++;
 	}
-	philo->timer = ft_get_current_time();
 	ft_isalive(process, philo);
 }
 
 //ANCHOR - Think
 void	ft_think(t_process *process, t_philo *philo)
 {
-	if (philo->laststatus != DIED)
+	if (philo->laststatus == SLEEPING)
 	{
 		philo->laststatus = THINKING;
 		ft_threadexecute(process, ft_print_log, philo);
 	}
+	ft_isalive(process, philo);
 }
 
 //ANCHOR - Is alive
 t_bool	ft_isalive(t_process *process, t_philo *philo)
 {
+	if (philo->laststatus == DIED)
+		return (FALSE);
 	if (ft_time_diff(
 			ft_get_current_time(),
 			philo->last_eat_time) >= process->params.time_to_die)
