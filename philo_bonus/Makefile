@@ -6,13 +6,13 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 17:16:01 by yzaytoun          #+#    #+#              #
-#    Updated: 2023/08/21 20:18:08 by yzaytoun         ###   ########.fr        #
+#    Updated: 2024/02/17 19:21:27 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo_bonus
 
-vpath %.c src:../philo/src
+vpath %.c src
 vpath %.h include
 vpath %.o obj
 
@@ -63,14 +63,12 @@ endif
 # --------------------- Definitions ------------------------------------
 CC = gcc
 INC = include
-INC_philo = ../philo/include
-CFLAGS = -Wall -Wextra -Werror -I$(INC) -I$(INC_philo) -g
+CFLAGS = -Wall -Wextra -Werror -I$(INC) -O3
 SANITIAZE_ADD = -fsanitize=address -g3
-SANITIAZE = -fsanitize=thread -g3
 PTHREAD = -lpthread
 RM = rm -fr
 # ------------------------ philo ------------------------------
-SRC = main.c apply.c basicfunc.c auxfunc.c philo.c printer.c timer.c threads.c\
+SRC = main.c apply.c basicfunc.c auxfunc.c philo.c logger.c timer.c threads.c\
 	run_bonus.c child_process.c sem_execute.c sem_auxfunctions.c execute.c
 
 OBJDIR = obj
