@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:51:35 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/17 19:25:34 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/19 18:30:56 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,6 @@ long	ft_get_current_time(void)
 	if (gettimeofday(&time, &timezone) != 0)
 		ft_perror("Get time of day", FUNC);
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
-}
-
-//ANCHOR - Add current time to time limit
-long	ft_time_add(long first_time, long second_time)
-{
-	return (first_time + second_time);
 }
 
 //ANCHOR - current time to time limit

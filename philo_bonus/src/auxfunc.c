@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 18:51:14 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/17 19:25:01 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/19 18:43:33 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_try(int status, const char *func)
 			ft_perror("Invalid argument", func);
 		else if (status == 3)
 			ft_perror("No such process", func);
-		else if (status == SEM_FAILED)
+		else if (status == (int)SEM_FAILED)
 		{
 			printf("errno = %d\n", errornum);
 			if (errornum == 9)

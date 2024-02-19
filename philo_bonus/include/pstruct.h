@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:16:19 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/17 19:24:47 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/19 19:05:22 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # include <signal.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <limits.h>
+# include <errno.h>
+# include <string.h>
 
 /*Macros*/
 # define APPLY_LOCK 1
@@ -80,7 +83,6 @@ typedef struct s_fork
 {
 	int				id;
 	t_bool			is_used;
-	pthread_mutex_t	mutex;
 }			t_fork;
 
 typedef struct s_philo
@@ -88,14 +90,12 @@ typedef struct s_philo
 	int			id;
 	t_meta		data;
 	t_status	laststatus;
-	pthread_t	thread;
 	t_fork		left_fork;
 	t_fork		right_fork;
 	long		timer;
 	t_process	*process;
 	pid_t		pid;
 	long		last_eat_time;
-	t_params	params;
 }				t_philo;
 
 typedef struct s_semaphor
@@ -113,7 +113,7 @@ struct s_process
 	t_params		params;
 	t_fork			*fork;
 	int				counter;
-	size_t			catch_status;
+	int				catch_status;
 	t_bool			lock;
 	void			(*func)(t_process *, t_philo *);
 	void			*(*main_loop)(void *);
