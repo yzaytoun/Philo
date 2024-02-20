@@ -40,7 +40,6 @@ static void	ft_routine(t_process *process, t_philo *philo)
 			break ;
 		}
 	}
-	ft_increment_semaphore(process, MAIN_SEM);
 }
 
 //ANCHOR - Mainthread loop
@@ -85,15 +84,7 @@ void	ft_run(t_process *process)
 		ft_increment_semaphore(process, MAIN_SEM);
 		++process->counter;
 	}
-	ft_msleep(500, NULL, NULL);
-	process->counter = 0;
-	while (process->counter < process->params.philo_num)
-	{
-		ft_decrement_semaphore(process, MAIN_SEM);
-		++process->counter;
-	}
-	ft_apply(process, ft_killprocess);
-	//ft_apply(process, ft_wait_childprocess);
+	ft_apply(process, ft_wait_childprocess);
 	ft_close_semaphore(process);
 }
 //!SECTION

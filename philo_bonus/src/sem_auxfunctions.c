@@ -64,6 +64,8 @@ void	ft_decrement_semaphore(t_process *process, int sem_id)
 //ANCHOR - Open semaphores
 void	ft_open_semaphore(t_process *process)
 {
+	ft_try(sem_unlink("/philo_sem"), FUNC);
+	ft_try(sem_unlink("/forks_sem"), FUNC);
 	((t_semaphor *)process->synchronizer)->main_semaphor
 		= sem_open("/philo_sem", O_CREAT, 0644, 1);
 	if (((t_semaphor *)process->synchronizer)->main_semaphor == SEM_FAILED)
@@ -78,8 +80,6 @@ void	ft_open_semaphore(t_process *process)
 		ft_freeall(&process);
 		ft_perror("Open forks Semaphores", FUNC);
 	}
-	ft_try(sem_unlink("/philo_sem"), FUNC);
-	ft_try(sem_unlink("/forks_sem"), FUNC);
 }
 
 //ANCHOR - Close semaphores
@@ -89,5 +89,7 @@ void	ft_close_semaphore(t_process *process)
 		FUNC);
 	ft_try(sem_close(((t_semaphor *)process->synchronizer)->forks_semaphor),
 		FUNC);
+	ft_try(sem_unlink("/philo_sem"), FUNC);
+	ft_try(sem_unlink("/forks_sem"), FUNC);
 }
 //!SECTION

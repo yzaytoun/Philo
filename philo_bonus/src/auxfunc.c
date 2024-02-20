@@ -29,7 +29,7 @@ void	ft_try(int status, const char *func)
 			ft_perror("Invalid argument", func);
 		else if (status == 3)
 			ft_perror("No such process", func);
-		else if (status == (int)SEM_FAILED)
+		else if (status == -1)
 		{
 			printf("errno = %d\n", errornum);
 			if (errornum == 9)
