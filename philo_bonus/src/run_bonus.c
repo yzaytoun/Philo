@@ -25,12 +25,12 @@ int	ft_processlimit(t_process *process, t_philo *philo)
 static void	ft_routine(t_process *process, t_philo *philo)
 {
 	if (philo->id % 2 == 0)
-		ft_msleep(1, NULL, NULL);
+		ft_msleep(5, NULL, NULL);
 	philo->last_eat_time = ft_get_current_time();
 	while (philo->laststatus != DIED
 		&& ft_processlimit(process, philo) == FALSE)
 	{
-		ft_semexecute(process, philo, ft_getforks_sem);
+		ft_getforks_sem(process, philo);
 		ft_eat(process, philo);
 		ft_sleep(process, philo);
 		ft_think(process, philo);
@@ -84,7 +84,6 @@ void	ft_run(t_process *process)
 		ft_increment_semaphore(process, MAIN_SEM);
 		++process->counter;
 	}
-	ft_msleep(100000, process, process->philo);
 	ft_apply(process, ft_wait_childprocess);
 	ft_close_semaphore(process);
 }

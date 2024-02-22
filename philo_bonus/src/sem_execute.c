@@ -40,14 +40,14 @@ void	ft_getforks_sem(t_process *process, t_philo *philo)
 		ft_decrement_semaphore(process, FORK_SEM);
 		philo->left_fork.is_used = TRUE;
 		philo->laststatus = TAKEN_FORK;
-		ft_print_log(process, philo);
+		ft_semexecute(process, philo, ft_print_log);
 	}
 	if (philo->right_fork.is_used == FALSE && process->params.philo_num > 1)
 	{
 		ft_decrement_semaphore(process, FORK_SEM);
 		philo->right_fork.is_used = TRUE;
 		philo->laststatus = TAKEN_FORK;
-		ft_print_log(process, philo);
+		ft_semexecute(process, philo, ft_print_log);
 	}
 }
 
