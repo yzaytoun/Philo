@@ -80,16 +80,17 @@ void	ft_open_semaphore(t_process *process)
 		ft_freeall(&process);
 		ft_perror("Open forks Semaphores", FUNC);
 	}
+
 }
 
 //ANCHOR - Close semaphores
 void	ft_close_semaphore(t_process *process)
 {
+	ft_try(sem_unlink("/philo_sem"), FUNC);
+	ft_try(sem_unlink("/forks_sem"), FUNC);
 	ft_try(sem_close(((t_semaphor *)process->synchronizer)->main_semaphor),
 		FUNC);
 	ft_try(sem_close(((t_semaphor *)process->synchronizer)->forks_semaphor),
 		FUNC);
-	ft_try(sem_unlink("/philo_sem"), FUNC);
-	ft_try(sem_unlink("/forks_sem"), FUNC);
 }
 //!SECTION

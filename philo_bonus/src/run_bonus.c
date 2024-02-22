@@ -84,6 +84,7 @@ void	ft_run(t_process *process)
 		ft_increment_semaphore(process, MAIN_SEM);
 		++process->counter;
 	}
+	ft_msleep(100000, process, process->philo);
 	ft_apply(process, ft_wait_childprocess);
 	ft_close_semaphore(process);
 }
