@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 19:49:16 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/17 15:10:54 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/24 10:54:02 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ void	ft_getforks(t_process *process, t_philo *philo)
 	int	counter;
 
 	counter = 0;
-	while (counter < process->params.philo_num && philo->laststatus != DIED)
+	while (counter < process->params.philo_num
+		&& philo->laststatus != DIED && process->catch_status != DIED)
 	{
 		if (process->fork[counter].is_used == FALSE
 			&& ft_validfork(process, philo->id, counter, LEFT) == TRUE)
@@ -79,14 +80,15 @@ void	ft_getforks(t_process *process, t_philo *philo)
 			ft_print_log(process, philo);
 		}
 		else if (process->fork[counter].is_used == FALSE
-			&& ft_validfork(process, philo->id, counter, RIGHT)
-			== TRUE)
+			&& ft_validfork(process, philo->id, counter, RIGHT) == TRUE)
 		{
 			ft_try(pthread_mutex_lock(&process->fork[counter].mutex), FUNC);
 			ft_takefork(&process, &philo, RIGHT, counter);
 			ft_print_log(process, philo);
 		}
 		ft_isalive(process, philo);
+		if (philo->laststatus == DIED)
+			process->catch_status = DIED;
 		counter++;
 	}
 }

@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 17:16:01 by yzaytoun          #+#    #+#              #
-#    Updated: 2024/02/19 19:07:48 by yzaytoun         ###   ########.fr        #
+#    Updated: 2024/02/23 20:58:44 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,7 @@ CC = gcc
 INC = include
 CFLAGS = -Wall -Wextra -Werror -I$(INC) -O3 -g
 SANITIAZE_ADD = -fsanitize=address -g3
+SANITIAZE = -fsanitize=thread -g
 PTHREAD = -lpthread
 RM = rm -fr
 # ------------------------ philo ------------------------------

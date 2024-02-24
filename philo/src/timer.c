@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:51:35 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/17 17:47:08 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/24 10:58:37 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ void	ft_msleep(long miliseconds, t_process *process, t_philo *philo)
 		while (ft_time_diff(ft_get_current_time(), start_time) < miliseconds)
 		{
 			if (ft_isalive(process, philo) == FALSE)
+			{
+				ft_threadexecute(process, ft_update_status, philo);
 				break ;
+			}
 			usleep(10);
 		}
 	}

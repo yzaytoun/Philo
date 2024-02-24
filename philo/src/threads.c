@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 19:49:16 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/17 09:58:23 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/24 11:16:01 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ int	ft_threadlimit(t_process *process, t_philo *philo)
 {
 	if (philo->data.eat_count == process->params.repetition_num
 		&& process->params.repetition_num > 0)
+	{
+		philo->laststatus = FINISHED;
 		return (TRUE);
+	}
 	return (FALSE);
 }
 

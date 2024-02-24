@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:13:03 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/17 17:06:31 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/24 10:38:04 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_apply(t_process *process, int (*f)(t_process *, int), int lock)
 	while (count < process->params.philo_num)
 	{
 		ft_try((*f)(process, count), FUNC);
-		if (f != NULL && ((*f) == ft_check_deadthread)
+		if (f != NULL && ((*f) == ft_forcestop)
 			&& process->catch_status == DIED)
 			break ;
 		++count;

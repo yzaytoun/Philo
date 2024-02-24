@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 18:59:32 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/19 18:34:57 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/23 20:42:53 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,6 @@
 # define PHILO_BONUS_H
 
 # include "pstruct.h"
-
-typedef enum e_semtype
-{
-	FORK_SEM,
-	MAIN_SEM
-}	t_semtype;
 
 /*Functions*/
 //STUB - Basic Functions
@@ -66,6 +60,7 @@ void		print_philo(t_philo philo);
 int			ft_create_childprocess(t_process *process, int count);
 int			ft_wait_childprocess(t_process *process, int count);
 int			ft_killprocess(t_process *process, int count);
+void		*ft_checkdead(void *arg);
 
 //STUB - Semaphore execution
 void		ft_semexecute(t_process *process, t_philo *philo,

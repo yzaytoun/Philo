@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 13:52:29 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/19 19:18:00 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/23 20:10:18 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,12 @@ int	ft_killprocess(t_process *process, int count)
 //ANCHOR - Wait child process
 int	ft_wait_childprocess(t_process *process, int count)
 {
-	waitpid(process->philo[count].pid, &process->catch_status, EXIT_SUCCESS);
+	int	status;
+
+	status = 0;
+	waitpid(process->philo[count].pid, &status, EXIT_SUCCESS);
+	if (WIFEXITED(status))
+		process->catch_status = WEXITSTATUS(status);
 	return (EXIT_SUCCESS);
 }
 

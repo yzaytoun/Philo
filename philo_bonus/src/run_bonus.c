@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 19:19:47 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/19 20:16:30 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/23 20:52:34 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_processlimit(t_process *process, t_philo *philo)
 static void	ft_routine(t_process *process, t_philo *philo)
 {
 	if (philo->id % 2 == 0)
-		ft_msleep(5, NULL, NULL);
+		ft_msleep(2, NULL, NULL);
 	philo->last_eat_time = ft_get_current_time();
 	while (philo->laststatus != DIED
 		&& ft_processlimit(process, philo) == FALSE)
@@ -53,9 +53,14 @@ static void	*ft_mainprocess_loop(void *args)
 	philo = (t_philo *)args;
 	process = philo->process;
 	ft_decrement_semaphore(process, MAIN_SEM);
+	ft_try(
+		pthread_create(&philo->thread, NULL, ft_checkdead, philo), FUNC);
+	pthread_detach(philo->thread);
 	process->func(process, philo);
 	ft_close_semaphore(process);
-	exit(EXIT_SUCCESS);
+	if (philo->laststatus != DIED)
+		philo->laststatus = FINISHED;
+	exit(philo->laststatus);
 }
 
 void	ft_init_mainprocess(t_process **process)
@@ -85,6 +90,11 @@ void	ft_run(t_process *process)
 		++process->counter;
 	}
 	ft_apply(process, ft_wait_childprocess);
+	if (process->catch_status == DIED)
+	{
+		process->catch_status = FINISHED;
+		ft_apply(process, ft_killprocess);
+	}
 	ft_close_semaphore(process);
 }
 //!SECTION

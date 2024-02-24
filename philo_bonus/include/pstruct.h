@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:16:19 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/19 19:05:22 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/24 11:24:40 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <limits.h>
 # include <errno.h>
 # include <string.h>
+# include <pthread.h>
 
 /*Macros*/
 # define APPLY_LOCK 1
@@ -45,12 +46,12 @@ typedef struct s_process	t_process;
 
 typedef enum s_status
 {
-	STARTED = 1000,
-	EATING = 1100,
-	TAKEN_FORK = 2200,
-	SLEEPING = 3300,
-	THINKING = 4400,
-	DIED = 5500,
+	STARTED,
+	EATING,
+	TAKEN_FORK,
+	SLEEPING,
+	THINKING,
+	DIED,
 	FINISHED
 }			t_status;
 
@@ -59,6 +60,13 @@ typedef enum e_bool
 	FALSE,
 	TRUE
 }	t_bool;
+
+typedef enum e_semtype
+{
+	FORK_SEM,
+	MAIN_SEM,
+	CHECK_DEAD_SEM
+}	t_semtype;
 
 typedef struct s_params
 {
@@ -94,6 +102,7 @@ typedef struct s_philo
 	t_fork		right_fork;
 	long		timer;
 	t_process	*process;
+	pthread_t	thread;
 	pid_t		pid;
 	long		last_eat_time;
 }				t_philo;
@@ -104,6 +113,8 @@ typedef struct s_semaphor
 	int			main_sem_value;
 	sem_t		*forks_semaphor;
 	int			fork_sem_value;
+	sem_t		*check_dead_semaphor;
+	int			check_dead_sem_value;
 }				t_semaphor;
 
 struct s_process
@@ -113,7 +124,7 @@ struct s_process
 	t_params		params;
 	t_fork			*fork;
 	int				counter;
-	int				catch_status;
+	t_status		catch_status;
 	t_bool			lock;
 	void			(*func)(t_process *, t_philo *);
 	void			*(*main_loop)(void *);

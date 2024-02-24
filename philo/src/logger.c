@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:52:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/17 16:23:00 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/24 11:15:31 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ static void	ft_print_status(int laststatus)
 		printf("died \U0001F480 \n");
 	else if (laststatus == STARTED)
 		printf("Thread Started !!! \n");
+	else if (laststatus == FINISHED)
+		printf("Thread Finished !!! \n");
 }
 
 //ANCHOR - print_log

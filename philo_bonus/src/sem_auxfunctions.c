@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 17:41:50 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/19 19:52:18 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/23 20:44:18 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,27 +19,25 @@ void	ft_increment_semaphore(t_process *process, int sem_id)
 {
 	if (sem_id == MAIN_SEM)
 	{
-		if (((t_semaphor *)process->synchronizer)->main_sem_value
-			< SEM_VALUE_MAX)
-		{
-			ft_try(
-				sem_post(
-					((t_semaphor *)process->synchronizer)->main_semaphor),
-				FUNC);
-			((t_semaphor *)process->synchronizer)->main_sem_value++;
-		}
+		ft_try(
+			sem_post(((t_semaphor *)process->synchronizer)->main_semaphor),
+			FUNC);
+		((t_semaphor *)process->synchronizer)->main_sem_value++;
 	}
 	else if (sem_id == FORK_SEM)
 	{
-		if (((t_semaphor *)process->synchronizer)->fork_sem_value
-			< SEM_VALUE_MAX)
-		{
-			ft_try(
-				sem_post(
-					((t_semaphor *)process->synchronizer)->forks_semaphor),
-				FUNC);
-			((t_semaphor *)process->synchronizer)->fork_sem_value++;
-		}
+		ft_try(
+			sem_post(((t_semaphor *)process->synchronizer)->forks_semaphor),
+			FUNC);
+		((t_semaphor *)process->synchronizer)->fork_sem_value++;
+	}
+	else if (sem_id == CHECK_DEAD_SEM)
+	{
+		ft_try(
+			sem_post(
+				((t_semaphor *)process->synchronizer)->check_dead_semaphor),
+			FUNC);
+		((t_semaphor *)process->synchronizer)->check_dead_sem_value++;
 	}
 }
 
@@ -58,6 +56,14 @@ void	ft_decrement_semaphore(t_process *process, int sem_id)
 		ft_try(sem_wait(
 				((t_semaphor *)process->synchronizer)->forks_semaphor), FUNC);
 		((t_semaphor *)process->synchronizer)->fork_sem_value--;
+	}
+	else if (sem_id == CHECK_DEAD_SEM)
+	{
+		ft_try(
+			sem_wait(
+				((t_semaphor *)process->synchronizer)->check_dead_semaphor),
+			FUNC);
+		((t_semaphor *)process->synchronizer)->check_dead_sem_value--;
 	}
 }
 
@@ -78,8 +84,17 @@ void	ft_open_semaphore(t_process *process)
 		ft_freeall(&process);
 		ft_perror("Open forks Semaphores", FUNC);
 	}
+	((t_semaphor *)process->synchronizer)->check_dead_semaphor
+		= sem_open("/check_dead_sem", O_CREAT, 0644, 1);
+	if (((t_semaphor *)process->synchronizer)->check_dead_semaphor
+		== SEM_FAILED)
+	{
+		ft_freeall(&process);
+		ft_perror("Open forks Semaphores", FUNC);
+	}
 	ft_try(sem_unlink("/philo_sem"), FUNC);
 	ft_try(sem_unlink("/forks_sem"), FUNC);
+	ft_try(sem_unlink("/check_dead_sem"), FUNC);
 }
 
 //ANCHOR - Close semaphores
@@ -88,6 +103,9 @@ void	ft_close_semaphore(t_process *process)
 	ft_try(sem_close(((t_semaphor *)process->synchronizer)->main_semaphor),
 		FUNC);
 	ft_try(sem_close(((t_semaphor *)process->synchronizer)->forks_semaphor),
+		FUNC);
+	ft_try(
+		sem_close(((t_semaphor *)process->synchronizer)->check_dead_semaphor),
 		FUNC);
 }
 //!SECTION

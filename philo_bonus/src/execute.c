@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 17:45:56 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/19 18:40:27 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/23 20:04:14 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ t_bool	ft_isalive(t_process *process, t_philo *philo)
 			ft_get_current_time(),
 			philo->last_eat_time) >= process->params.time_to_die)
 	{
+		process->dropforks(process, philo);
 		philo->laststatus = DIED;
 		return (FALSE);
 	}
