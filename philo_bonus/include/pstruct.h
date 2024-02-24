@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:16:19 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/24 11:24:40 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/24 14:01:59 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ typedef struct s_philo
 	pthread_t	thread;
 	pid_t		pid;
 	long		last_eat_time;
+	int			deadlock;
 }				t_philo;
 
 typedef struct s_semaphor
@@ -129,6 +130,7 @@ struct s_process
 	void			(*func)(t_process *, t_philo *);
 	void			*(*main_loop)(void *);
 	void			(*dropforks)(t_process *, t_philo *);
+	int				deadcounter;
 };
 
 #endif		/* pstruct header */

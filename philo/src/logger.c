@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:52:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/24 11:15:31 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/24 13:57:18 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,21 @@ void	ft_print_log(t_process *process, t_philo *philo)
 {
 	long	current_time;
 
-	current_time = ft_get_current_time();
-	printf("[\U0001F570 %ld] -> philo %d ",
-		ft_time_diff(current_time, process->params.start_time), philo->id);
-	ft_print_status(philo->laststatus);
+	if (philo->reportdead == FALSE && process->catch_status != DIED)
+	{
+		current_time = ft_get_current_time();
+		printf("[\U0001F570 %ld] -> philo %d ",
+			ft_time_diff(current_time, process->params.start_time), philo->id);
+		ft_print_status(philo->laststatus);
+	}
+	else if (philo->reportdead == TRUE)
+	{
+		philo->laststatus = DIED;
+		current_time = ft_get_current_time();
+		printf("[\U0001F570 %ld] -> philo %d ",
+			ft_time_diff(current_time, process->params.start_time), philo->id);
+		ft_print_status(philo->laststatus);
+	}
 }
 
 //ANCHOR - Print Philo

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 18:51:14 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/23 20:55:51 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/24 15:14:26 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	*ft_checkdead(void *arg)
 				philo->last_eat_time) >= process->params.time_to_die)
 		{
 			philo->laststatus = DIED;
+			philo->deadlock = TRUE;
 			ft_semexecute(process, philo, ft_print_log);
 			exit(philo->laststatus);
 		}

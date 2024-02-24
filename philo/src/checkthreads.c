@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 19:54:58 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/24 11:19:36 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/24 13:45:32 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ int	ft_all_threadsactive(t_process *process, int counter)
 int	ft_all_threadsfinished(t_process *process, int counter)
 {
 	if (process->philo[counter].laststatus == DIED)
+	{
 		process->catch_status = DIED;
+		process->deadcounter = counter;
+	}
 	else if (process->philo[counter].laststatus == FINISHED)
 		process->params.philo_status_counter++;
 	if (process->params.philo_status_counter == process->params.philo_num)

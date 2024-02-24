@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:16:19 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/17 17:09:00 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/24 13:51:12 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ typedef struct s_philo
 	pid_t		pid;
 	long		last_eat_time;
 	t_params	params;
+	t_bool		reportdead;
 }				t_philo;
 
 typedef struct s_mutex
@@ -109,6 +110,7 @@ struct s_process
 	t_params		params;
 	t_fork			*fork;
 	int				counter;
+	int				deadcounter;
 	size_t			catch_status;
 	t_bool			lock;
 	void			(*func)(t_process *, t_philo *);
